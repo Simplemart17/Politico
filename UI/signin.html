@@ -7,7 +7,7 @@
     <meta name="description" content="Politico is a platform designed for politicans and citizens">
     <meta name="keywords" content="election, mandate, vote, government">
     <meta name="author" content="Martins Aloba">
-    <title>Politico|Signup</title>
+    <title>Politico|Signin</title>
     <link rel="shortcut icon" href="./UI/assets/images/favicon.ico">
     <link rel="stylesheet" href="../UI/assets/css/style.css">
 </head>
@@ -36,51 +36,27 @@
     </div>
       
     <section>
-    <!-- Registeration form Section -->
+    <!-- form Section -->
       <div class="form-wrapper">
-        <div class="form-header center">
-            <h1>Sign Up Form</h1>
-            <small class="small-text">All fields are required!</small>
+        <div class="form-header">
+            <ul>
+                <li>
+                    <a href="politician.html"><b>POLITICIAN</b></a>
+                </li>
+                <li>
+                    <a href="citizen.html"><b>CITIZEN</b></a>
+                </li>
+            </ul>
         </div>
         <form role="form" method="post">
-          <label for="name">First Name</label>
-          <input type="text" name="firstname">
-
-          <label for="name">Last Name</label>
-          <input type="text" name="lasttname">
-
-          <label for="name">Other Name</label>
-          <input type="text" name="othertname">
-
-          <label for="email">Enail Address</label>
+          <label for="email">Enail Address/Username</label>
           <input type="text" name="email">
-
-          <label for="name">Username</label>
-          <input type="text" name="username">
-
-          <label for="phone">Phone Number</label>
-          <input type="number" name="phone">
 
           <label for="password">Password</label>
           <input type="password" name="password">
-
-          <label for="confirm">Confirm Password</label>
-          <input type="password" name="confirm">
-          
-          <label for="type">User type</label>
-          <div class="radio">
-            <div><input type="radio" name="type" value="politician" checked> politician</div>
-            <div><input type="radio" name="type" value="citizen"> Citizen</div>
-          </div>
-          
-          <div class="upload">
-            <label for="media">Upload Passport</label>
-            <input type="file" name="media">
-          </div>
           
           <div class="form-btn center">
-            <button class="col-white bg-green-black" onclick="location.href='signin.html';">Register</button>
-            <button class="col-white bg-red">Reset</button>
+            <button class="col-white bg-green-black" onclick="location.href='signin.html';">Sign In</button>
           </div>
         </form>
       </div>
