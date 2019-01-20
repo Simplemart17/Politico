@@ -1,0 +1,296 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    line-height: 1.5;
+}
+
+.marquee {
+    background: #dfdfdf;
+    height: 30px;
+    width: 100%;
+    padding: 0px;
+    border: none;
+    position: fixed;
+}
+
+.marquee img {
+    height: 13px;
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* global variables*/
+.col-red {
+    color: #ff0000;
+}
+
+.col-green-black {
+    color: #0f2e01;
+}
+
+.col-white {
+    color: #ffffff;
+}
+
+.page-width {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.center {
+    text-align: center;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.large-text {
+    font-size: 20px;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-red {
+    background-color: #ff0000;
+}
+
+.bg-green-black {
+    background-color: #0f2e01;
+}
+
+/* Nav bar */
+.nav-wrapper {
+    padding-top: 30px;
+}
+
+.nav {
+    background-color: #86CA91;
+    color: #ffffff;
+    width: 100%;
+    height: 55px;
+    border-bottom: 1px solid #7d8a7b;
+}
+  
+.nav .nav-center .nav-header {
+    display: inline;
+}
+  
+.nav .nav-center .nav-header .nav-title {
+    display: inline-block;
+}
+  
+.nav-title {
+    color: #ffffff;
+    margin-top: 9px;
+}
+
+.nav-title a {
+    font-size: 25px;
+    color: #ffffff;
+    border-bottom: 3px solid
+}
+  
+.nav .nav-center .nav-btn {
+    display: none;
+}
+  
+.nav .nav-center .nav-links {
+    display: inline-block;
+    float: right;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.nav-links a {
+    height: 50px;
+    border: 1px solid #0f2e01;
+    padding: 10px 15px;
+    color: #ffffff;
+}
+  
+.nav .nav-center .nav-links a {
+    margin-left: 10px;
+    transition: border-color 0.8s;
+    border-bottom-width: 0.33s;
+    color: 0.4s;  
+}
+  
+.nav .nav-center .nav-links a:hover {
+    border-bottom-width: 3px;
+    border-color: #ffffff;
+    color: #5a5a5a
+}
+  
+.nav .nav-center #nav-check {
+    display: none;
+}
+  
+.nav-center {
+    width: 85%;
+    margin: 0 auto;
+}
+  
+.active {
+    font-weight: bold;
+    border-bottom: solid 3px #a5f181;
+}
+
+/* Showcase */
+.showcase {
+    align-items: center;
+    background-image: linear-gradient(to right bottom, rgba(52, 93, 112, 0.5), rgba(40,180,133,0.9)
+    ), url(../images/INEC.jpg);
+    background-size: cover;
+    height: 60vh;
+    justify-content: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.showcase-title {
+    font-size: 3em;
+}
+
+.showcase-text {
+    line-height: 2;
+}
+
+.showcase-btn {
+    margin-top: -45.5px;
+    cursor: pointer;
+}
+
+/*
+.trapezoid {
+    border-bottom: 50px solid red;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    height: 0;
+    width: 250px;
+}
+*/
+
+/* Information section */
+.row-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: auto;
+    padding: 5% 0;
+}
+
+.row-items {
+    margin: 5%;
+    padding: 0 3px;
+}
+
+.row-items img {
+    height: 8em;
+    display: block;
+    margin: 5% auto;
+}
+
+.row-items p {
+    padding-top: 15px;
+}
+
+
+
+/* footer */
+.footer {
+    text-align: center;
+    background: #5a5a5a;
+    padding: 15px;
+    color: #ffffff;
+    font-size: 16px;
+  }
+  
+@media (max-width:670px) {
+    .nav .nav-center .nav-btn {
+      display: inline-block;
+      position: absolute;
+      right: 12px;
+      top: 47px;
+    }
+    .nav .text .nav-btn label {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      padding: 13px;
+    }
+    .nav .nav-center .nav-btn label:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    .nav .nav-center .nav-btn label span {
+      display: block;
+      width: 25px;
+      height: 10px;
+      border-top: 2px solid #eee;
+    }
+    .nav .nav-center .nav-links {
+      position: absolute;
+      display: block;
+      width: 100%;
+      background-color: #666060;
+      height: 0px;
+      transition: all 0.3s ease-in;
+      overflow-y: hidden;
+      top: 70px;
+      left: 0px;
+    }
+    .nav .nav-center .nav-links a {
+      display: block;
+      width: 100%;
+      padding: 0px;
+      color: #efefef;
+      border: none;
+      margin-top: 10px;
+      height: 30px;
+    }
+    .nav .nav-center .nav-links a:hover {
+        color: #60fa19;
+        transition: 0.8s;
+    }
+    .nav .nav-center  #nav-check:not(:checked) + .nav-links {
+      height: 0px;
+    }
+    .nav .nav-center #nav-check:checked + .nav-links {
+      height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+
+    .showcase {
+        display: block;
+        align-items: center;
+    }
+
+    .showcase-title {
+        font-size: 25px;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .showcase-text {
+        font-size: 16px;
+        padding: 20px;
+        line-height: 1.6;
+    }
+
+    .row-content {
+        grid-template-columns: 100%;
+    }
+}
