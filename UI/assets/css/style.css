@@ -334,6 +334,17 @@ a {
     text-decoration: underline;
 }
 
+/* Reset password */
+.box-header {
+    display: grid;  
+}
+
+.box-header input {
+    height: 50px;
+    font-size: 17px;
+    letter-spacing: 3px;
+}
+
 /* footer */
 .footer {
     text-align: center;
