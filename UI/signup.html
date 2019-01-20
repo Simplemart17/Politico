@@ -7,7 +7,7 @@
     <meta name="description" content="Politico is a platform designed for politicans and citizens">
     <meta name="keywords" content="election, mandate, vote, government">
     <meta name="author" content="Martins Aloba">
-    <title>Politico|Home</title>
+    <title>Politico|Signup</title>
     <link rel="shortcut icon" href="./UI/assets/images/favicon.ico">
     <link rel="stylesheet" href="../UI/assets/css/style.css">
 </head>
@@ -28,8 +28,8 @@
           </div>
             <input type="checkbox" id="nav-check" />
             <div class="nav-links">
-              <a href="signin.html">Sign Up</a>
-              <a href="signup.html">Sign In</a>
+              <a href="../UI/signup.html">Sign Up</a>
+              <a href="../UI/citizen-signin.html">Sign In</a>
             </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
     <section>
     <!-- Registeration form Section -->
       <div class="form-wrapper">
-        <div class="form-header center">
+        <div class="center">
             <h1>Sign Up Form</h1>
             <small class="small-text">All fields are required!</small>
         </div>
@@ -52,14 +52,14 @@
           <label for="name">Other Name</label>
           <input type="text" name="othertname">
 
-          <label for="email">Enail Address</label>
-          <input type="text" name="email">
+          <label for="email">Email Address</label>
+          <input type="email" name="email">
 
           <label for="name">Username</label>
           <input type="text" name="username">
 
           <label for="phone">Phone Number</label>
-          <input type="number" name="phone">
+          <input type="text/number" name="phone">
 
           <label for="password">Password</label>
           <input type="password" name="password">
@@ -79,7 +79,7 @@
           </div>
           
           <div class="form-btn center">
-            <button class="col-white bg-green-black" onclick="location.href='signin.html';">Register</button>
+            <button class="col-white bg-green" onclick="location.href='signin.html';">Register</button>
             <button class="col-white bg-red">Reset</button>
           </div>
         </form>
