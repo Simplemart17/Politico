@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Politico is a platform designed for politicans and citizens">
+    <meta name="keywords" content="election, mandate, vote, government">
+    <meta name="author" content="Martins Aloba">
+    <title>Politico|Signin</title>
+    <link rel="shortcut icon" href="./UI/assets/images/favicon.ico">
+    <link rel="stylesheet" href="../UI/assets/css/style.css">
+</head>
+  <body>
+    <!-- Nav bar -->
+    <div>
+      <div class="nav">
+        <div class="nav-center">
+          <div class="nav-header">
+            <div class="nav-title">
+              <a href="../index.html">Politico</a>
+            </div>
+          </div>
+          <div class="nav-btn">
+            <label for="nav-check">
+              <span></span> <span></span> <span></span>
+            </label>
+          </div>
+            <input type="checkbox" id="nav-check" />
+            <div class="nav-links">
+              <a href="../UI/signup.html">Sign Up</a>
+              <a href="../UI/citizen-signin.html">Sign In</a>
+            </div>
+        </div>
+      </div>
+    </div>
+      
+    <section>
+    <!-- form Section -->
+      <div class="form-header">
+        <div class="form-grid">
+          <input class="center form-inactive col-white" onclick="location.href='politician-signin.html';"  value="POLITICIAN">
+          <input class="form-active center col-white" onclick="location.href='citizen-signin.html';" value="CITIZEN">
+        </div>     
+      </div>
+      <div class="form-wrapper login-form">
+        <div class="center"><p>Sign In as Citizen</p></div>
+        <form role="form" method="post">
+          <label for="email">Email/Username</label>
+          <input type="text" name="email">
+
+          <label for="password">Password</label>
+          <input type="password" name="password">
+
+          <div class="pass-reset center">
+            <a href="./reset.html">Forgot Password?</a>
+          </div>
+          <div class="form-btn">
+            <input class="col-white bg-green" onclick="location.href='citizen.html';" type="button" value="Sign In">
+          </div>
+        </form>
+      </div> 
+    </section>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
