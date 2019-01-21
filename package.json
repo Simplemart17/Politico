@@ -1,0 +1,29 @@
+{
+  "name": "politico",
+  "version": "1.0.0",
+  "description": "A platform for politician to contest for government office and citizen to vote",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d UI"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Simplemart17/Politico.git"
+  },
+  "keywords": [
+    "Mandate",
+    "Election",
+    "Politician",
+    "Citizen"
+  ],
+  "author": "Martins Aloba",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Simplemart17/Politico/issues"
+  },
+  "homepage": "https://github.com/Simplemart17/Politico#readme",
+  "dependencies": {
+    "gh-pages": "^2.0.1"
+  }
+}

@@ -275,6 +275,11 @@ a {
     transition: 0.5s;
 }
 
+.inline {
+    display: inline-block;
+    padding: 0 10px;
+}
+
 /* Signin form */
 .login-form {
     margin-top: 0px;
