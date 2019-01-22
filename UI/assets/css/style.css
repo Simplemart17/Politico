@@ -134,7 +134,8 @@ a {
 
 .nav-links a {
     height: 50px;
-    border: 1px solid #0f2e01;
+    border: 0.5px solid #b6c9ae;
+    background: #76b17f;
     padding: 10px 15px;
     color: #ffffff;
 }
@@ -149,7 +150,8 @@ a {
 .nav .nav-center .nav-links a:hover {
     border-bottom-width: 3px;
     border-color: #ffffff;
-    color: #5a5a5a
+    color: #e4f0e3;
+    background: #6a966dd8;
 }
   
 .nav .nav-center #nav-check {
@@ -273,6 +275,30 @@ a {
     padding: 0 10px;
 }
 
+.reg-btn input {
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    border: none;
+    margin-top: 20px;
+}
+
+.reg-btn input:hover {
+    opacity: 0.8;
+    transition: 0.7s;
+}
+
+.links {
+    font-size: 14px;
+    margin-top: 30px;
+    margin-left: 60%;
+    float: left;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
 /* Signin form */
 .login-form {
     margin-top: 0px;
@@ -325,7 +351,8 @@ a {
 }
 
 .pass-reset {
-    margin: 3%;
+    margin-top: 3%;
+    margin-left: 65%;
 }
 
 /* Reset password */
