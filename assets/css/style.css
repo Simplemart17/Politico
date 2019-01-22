@@ -80,6 +80,10 @@ a {
     background-color: #7d8a7b;
 }
 
+.bg-grey {
+    background-color: grey;
+}
+
 /* Nav bar */
 .nav-wrapper {
     padding-top: 30px;
@@ -130,7 +134,8 @@ a {
 
 .nav-links a {
     height: 50px;
-    border: 1px solid #0f2e01;
+    border: 0.5px solid #b6c9ae;
+    background: #76b17f;
     padding: 10px 15px;
     color: #ffffff;
 }
@@ -145,7 +150,8 @@ a {
 .nav .nav-center .nav-links a:hover {
     border-bottom-width: 3px;
     border-color: #ffffff;
-    color: #5a5a5a
+    color: #e4f0e3;
+    background: #6a966dd8;
 }
   
 .nav .nav-center #nav-check {
@@ -156,13 +162,6 @@ a {
     width: 85%;
     margin: 0 auto;
 }
-  
-/*
-.active {
-    font-weight: bold;
-    border-bottom: solid 3px #a5f181;
-}
-*/
 
 .active {
     background: #88da8f;
@@ -193,16 +192,6 @@ a {
     margin-top: -45.5px;
     cursor: pointer;
 }
-
-/*
-.trapezoid {
-    border-bottom: 50px solid red;
-    border-left: 25px solid transparent;
-    border-right: 25px solid transparent;
-    height: 0;
-    width: 250px;
-}
-*/
 
 /* Information section */
 .row-content {
@@ -286,6 +275,30 @@ a {
     padding: 0 10px;
 }
 
+.reg-btn input {
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    border: none;
+    margin-top: 20px;
+}
+
+.reg-btn input:hover {
+    opacity: 0.8;
+    transition: 0.7s;
+}
+
+.links {
+    font-size: 14px;
+    margin-top: 30px;
+    margin-left: 60%;
+    float: left;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
 /* Signin form */
 .login-form {
     margin-top: 0px;
@@ -338,14 +351,15 @@ a {
 }
 
 .pass-reset {
-    margin: 3%;
+    margin-top: 3%;
+    margin-left: 65%;
 }
 
+/* Reset password */
 .pass-reset:hover {
     text-decoration: underline;
 }
 
-/* Reset password */
 .box-header {
     display: grid;  
 }
