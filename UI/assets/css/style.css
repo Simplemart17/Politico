@@ -80,6 +80,10 @@ a {
     background-color: #7d8a7b;
 }
 
+.bg-grey {
+    background-color: grey;
+}
+
 /* Nav bar */
 .nav-wrapper {
     padding-top: 30px;
@@ -156,13 +160,6 @@ a {
     width: 85%;
     margin: 0 auto;
 }
-  
-/*
-.active {
-    font-weight: bold;
-    border-bottom: solid 3px #a5f181;
-}
-*/
 
 .active {
     background: #88da8f;
@@ -193,16 +190,6 @@ a {
     margin-top: -45.5px;
     cursor: pointer;
 }
-
-/*
-.trapezoid {
-    border-bottom: 50px solid red;
-    border-left: 25px solid transparent;
-    border-right: 25px solid transparent;
-    height: 0;
-    width: 250px;
-}
-*/
 
 /* Information section */
 .row-content {
@@ -341,11 +328,11 @@ a {
     margin: 3%;
 }
 
+/* Reset password */
 .pass-reset:hover {
     text-decoration: underline;
 }
 
-/* Reset password */
 .box-header {
     display: grid;  
 }

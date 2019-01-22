@@ -39,50 +39,53 @@
     <!-- Registeration form Section -->
       <div class="form-wrapper">
         <div class="center">
-            <h1>Sign Up Form</h1>
-            <small class="small-text">All fields are required!</small>
+            <h1>Register Here</h1>
         </div>
-        <form role="form" method="post">
-          <label for="name">First Name</label>
+        <form id="myForm" role="form" method="post">
+          <label for="name">First Name<span class="col-red">*</span></label>
           <input type="text" name="firstname">
 
-          <label for="name">Last Name</label>
+          <label for="name">Last Name<span class="col-red">*</span></label>
           <input type="text" name="lasttname">
 
-          <label for="name">Other Name</label>
+          <label for="name">Other Name<span class="col-red">*</span></label>
           <input type="text" name="othertname">
 
-          <label for="email">Email Address</label>
+          <label for="email">Email Address<span class="col-red">*</span></label>
           <input type="email" name="email">
 
-          <label for="name">Username</label>
+          <label for="name">Username<span class="col-red">*</span></label>
           <input type="text" name="username">
 
-          <label for="phone">Phone Number</label>
+          <label for="phone">Phone Number<span class="col-red">*</span></label>
           <input type="text/number" name="phone">
 
-          <label for="password">Password</label>
+          <label for="password">Password<span class="col-red">*</span></label>
           <input type="password" name="password">
 
-          <label for="confirm">Confirm Password</label>
+          <label for="confirm">Confirm Password<span class="col-red">*</span></label>
           <input type="password" name="confirm">
           
-          <label for="type">User type</label>
+          <label for="type">User type<span class="col-red">*</span></label>
           <div class="radio">
             <div class="inline"><input type="radio" name="type" value="politician" checked> politician</div>
             <div class="inline"><input type="radio" name="type" value="citizen"> Citizen</div>
           </div>
           
           <div class="upload">
-            <label for="media">Upload Passport</label>
+            <label for="media">Upload Passport<span class="col-red">*</span></label>
             <input type="file" name="media">
           </div>
           
           <div class="form-btn center">
-            <button class="col-white bg-green" onclick="location.href='signin.html';">Register</button>
-            <button class="col-white bg-red">Reset</button>
+            <input class="col-white bg-green" onclick="location.href='citizen-profile.html';" type="button" value="Register">
+            <input class="col-white bg-grey" onclick="location.href='citizen-profile.html';" type="button" value="Reset">
           </div>
         </form>
+        <div class="links">
+              <p>Already have an account?
+            <a href="signin.html">Signin</a></p>
+          </div>
       </div>
       
     </section>
