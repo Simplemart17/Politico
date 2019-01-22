@@ -411,7 +411,69 @@ a {
     transition: 0.33333s;
 }
 
+/* party list */
 
+.main-area {
+    margin-bottom: 20px;
+}
+
+.main-area h2 {
+    margin-top: 20px;
+    margin-left: 55px;
+    font-size: 40px;
+    color: #0f2e01;
+}
+
+.column {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 20px 50px;
+    padding-bottom: 10px;
+}
+
+.box {
+    height: 100%;
+    border: 3px solid #f4f4f4;
+    border-radius: 6px;
+    margin: 5px;
+    box-shadow: 2px 3px;
+}
+
+.odd {
+    background: #86CA91;
+}
+
+.box:hover {
+    opacity: 0.8;
+}
+
+.even {
+    background: #86aa89;
+}
+
+.box-inner {
+    padding: 5px;
+}
+
+.box-name {
+    display: inline-block;
+    float: right;
+    margin-top: 15px;
+    margin-right: 30px;
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+.box-info {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.box img {
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #c7c5c5;
+}
 
 .footer {
     text-align: center;
