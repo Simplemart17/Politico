@@ -7,7 +7,7 @@
     <meta name="description" content="Politico is a platform designed for politicans and citizens">
     <meta name="keywords" content="election, mandate, vote, government">
     <meta name="author" content="Martins Aloba">
-    <title>Politico|Reset Password</title>
+    <title>Politico|Signin</title>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -28,31 +28,41 @@
           </div>
             <input type="checkbox" id="nav-check" />
             <div class="nav-links">
-              <a href="signup.html">Sign Up</a>
-              <a href="citizen-signin.html">Sign In</a>
+              <a href="citizen-profile.html">Dashboard</a>
+              <a href="citizen-signin.html">Sign Out</a>
             </div>
         </div>
       </div>
     </div>
       
     <section>
-    <!-- form Section -->
-      <div class="form-header">
-        <div class="box-header">
-          <input class="center form-inactive col-white"value="RESET PASSWORD">
-        </div>     
-      </div>
-      <div class="form-wrapper login-form">
-        <div class="center"><p>Enter Your Registered Email Address</p></div>
-        <form role="form" method="post">
-          <label for="email">Email Address</label>
-          <input type="email" name="email">
-          <div class="form-btn">
-            <input class="col-white bg-green" onclick="location.href='citizen-signin.html';" type="button" value="Submit">
+    <!-- Profile Section -->
+      <div class="profile-header">
+        <div class="profile-header-info">
+          <img src="assets/images/profile.jpg" alt="profile image">
+          <div class="profile-info">
+            <h2>Chika John</h2>
+            <h4>chika.john@gmail.com</h4>
+            <h4>+234 802 345 6789</h4>
           </div>
-        </form>
-      </div> 
+        </div>
+      </div>
+      <div class="profile-content">
+        <div class="sidebar">
+          <div class="sidebar-menu">
+            <ul>
+              <li class="active"><a href="index.html">Dashboard</a></li>
+              <li><a href="candidate.html">Know Your Candidates</a></li>
+              <li><a href="vote.html">Give Your Mandate</a></li>
+            </ul>
+          </div>
+        </div>
+        
     </section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer center">Copyright &copy; 2018 Martins Aloba</div>
+    </footer>
     <script src="assets/js/main.js"></script>
   </body>
 </html>
