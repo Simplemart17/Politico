@@ -569,7 +569,6 @@ table, th, td {
     padding: 30px;
   }
 
-<<<<<<< HEAD
   th.col-10 {
       width: 10%;
   }
@@ -578,8 +577,6 @@ table, th, td {
       width: 15%;
   }
 
-=======
->>>>>>> develop
   th.col-20 {
       width: 20%;
   } 
@@ -638,7 +635,6 @@ table, th, td {
     background: #5b855ed8
 }
 
-<<<<<<< HEAD
 /* voting table */
 .vote-btn-area {
     padding: 20px 0px;
@@ -661,8 +657,6 @@ table, th, td {
 }
 
 
-=======
->>>>>>> develop
 .footer {
     text-align: center;
     background: #5a5a5a;
