@@ -321,6 +321,7 @@ a {
     font-size: 17px;
     letter-spacing: 3px;
     cursor: pointer;
+    outline: none;
 }
 
 .form-active {
@@ -430,7 +431,6 @@ a {
 }
 
 /* party list */
-
 .main-area {
     margin-bottom: 20px;
 }
@@ -494,14 +494,14 @@ a {
 }
 
 /* Modal style */
-.modal-content input[type="text"], .modal-content input[type="password"] {
+.modal-content input[type="text"], .modal-content input[type="password"], .modal-content input[type="file"], textarea {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     background: #f1f1f1;
   }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -510,7 +510,7 @@ input[type=text]:focus, input[type=password]:focus {
   padding: 60px;
 }
 
-.modal {
+.partyModal, .modal, .officeModal, .editModal, .petitionModal, .resultModal {
   display: none; 
   position: fixed;
   z-index: 1;
@@ -530,6 +530,22 @@ input[type=text]:focus, input[type=password]:focus {
   width: 70%;
 }
 
+.table-modal {
+    width: 100%;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: 1%;
+    padding: 2%;
+    border-left: 2px solid #888888;
+    font-size: 16px;
+}
+
 hr {
   border: 1px solid #e9f0ed;
   margin-bottom: 25px;
@@ -541,7 +557,7 @@ hr {
   top: 15px;
   font-size: 40px;
   font-weight: bold;
-  color: #f1f1f1;
+  color: #f8c2b4;
 }
 
 .close:hover,
@@ -567,6 +583,14 @@ table, th, td {
 
   .table-area {
     padding: 30px;
+  }
+
+  th.col-10 {
+      width: 10%;
+  }
+
+  th.col-15 {
+      width: 15%;
   }
 
   th.col-20 {
@@ -625,6 +649,59 @@ table, th, td {
 
 .local {
     background: #5b855ed8
+}
+
+/* voting table */
+.vote-btn-area {
+    padding: 20px 0px;
+}
+
+.vote-btn {
+    height: 50px;
+    width: 120px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #314d37;
+    border: none;
+    outline: none;
+}
+
+.vote-btn:hover {
+    opacity: 0.6;
+    transition: 0.6s;
+}
+
+/* Admin Panel */
+.admin-box-name {
+    float: right;
+    margin-right: 40px;
+    margin-top: -20px;
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+.mt {
+    float: right;
+    padding: 0px 10px 0px 10px;
+    cursor: pointer;
+}
+
+.admin-header-btn {
+    margin-top: 20px;
+    margin-bottom: -20px;
+    margin-left: 67%;
+}
+
+.admin-header-btn input {
+    font-size: 15px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.admin-header-btn input:hover {
+    opacity: 0.6;
+    transition: 06s;
 }
 
 .footer {
