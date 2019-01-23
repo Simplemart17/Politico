@@ -12,6 +12,14 @@ const closeModal = () => {
     document.getElementById('modal').style.display='none'
 }
 
+const openPetitionModal = () => {
+    document.getElementById('petitionModal').style.display = 'block';
+}
+
+const closePetitionModal = () => {
+    document.getElementById('petitionModal').style.display='none'
+}
+
 const openPartyModal = () => {
     document.getElementById('partyModal').style.display = 'block';
 }

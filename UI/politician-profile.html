@@ -55,7 +55,7 @@
               <li class="modal-link" onclick="openModal()">Interest Form</li>
               <li><a href="vote.html">Cast Your Vote</a></li>
               <li><a href="#">Election result</a></li>
-              <li><a href="#">Challenge Result</a></li>
+              <li class="modal-link" onclick="openPetitionModal()">Challenge Result</li>
             </ul>
           </div>
         </div>
@@ -200,6 +200,42 @@
                 </div>
             </form>
           </div>
+          <!-- Petition Modal Content -->
+          <div id="petitionModal" class="petitionModal">
+            <span onclick="closePetitionModal()" class="close" title="Close Modal">&times;</span>
+            <form class="modal-content">
+                <div class="modal-container">
+                    <h1>Petition Form</h1>
+                    <hr>
+                    <label for="elcttype"><b>Election Type<span class="col-red">*</span></b></label>
+                    <input type="text" placeholder="Federal, Legislative, State, Local Governement" name="electype">
+    
+                    <label for="office"><b>Political Office<span class="col-red">*</span></b></label>
+                    <input type="text" placeholder="President, Senate ..." name="office">
+              
+                    <label for="party"><b>Your political Party<span class="col-red">*</span></b></label>
+                    <input type="text"  name="party">
+    
+                    <label for="desc"><b>Description<span class="col-red">*</span></b></label>
+                    <textarea></textarea>
+
+                    <label for="evidence"><b>Upload Evidence(s)<span class="col-red">*</span></b></label>
+                    <input type="file" placeholder="Enter petition details here..." name="desc">
+                    
+                    <label>
+                      <input type="checkbox" checked="checked" name="confirm"> I confirm that the above details are correct
+                    </label>
+                    <div class="reg-btn center">
+                        <div class="inline">
+                            <input class="col-white bg-green" onclick="location.href='politician-profile.html';" type="button" value="Submit">
+                        </div>
+                        <div class="inline ">
+                            <input class="col-white bg-grey" onclick="closePetitionModal()" type="button" value="Cancel">
+                        </div> 
+                    </div>
+                    </div>
+                </form>
+              </div>
     </section>
     <!-- Footer -->
     <footer>
