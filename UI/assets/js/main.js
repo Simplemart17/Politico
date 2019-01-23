@@ -51,3 +51,20 @@ const removeParty = () => {
     let elem = document.getElementById('remove');
     elem.parentNode.removeChild(elem);
 }
+
+
+const adminLogin = () => {
+    if((document.getElementById('password').value == 'admin') && (document.getElementById('username').value == 'admin')) {
+       location.href = "admin.html";
+    } else {
+        location.href='politician-profile.html';
+    }
+}
+
+const adminPanel = () => {
+    if ((document.getElementById('password').value == 'admin') && (document.getElementById('username').value == 'admin')) {
+        location.href = "admin.html";
+    } else {
+        location.href='citizen-profile.html';
+    }
+}
