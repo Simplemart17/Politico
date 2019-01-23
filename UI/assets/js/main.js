@@ -44,6 +44,14 @@ const closeEditModal = () => {
     document.getElementById('editModal').style.display='none'
 }
 
+const openResultModal = () => {
+    document.getElementById('resultModal').style.display = 'block';
+}
+
+const closeResultModal = () => {
+    document.getElementById('resultModal').style.display='none'
+}
+
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";

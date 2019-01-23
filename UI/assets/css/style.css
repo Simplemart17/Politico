@@ -510,7 +510,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   padding: 60px;
 }
 
-.partyModal, .modal, .officeModal, .editModal, .petitionModal {
+.partyModal, .modal, .officeModal, .editModal, .petitionModal, .resultModal {
   display: none; 
   position: fixed;
   z-index: 1;
@@ -528,6 +528,10 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
   border: none;
   box-shadow: 2px 3px;
   width: 70%;
+}
+
+.table-modal {
+    width: 100%;
 }
 
 textarea {
@@ -553,7 +557,7 @@ hr {
   top: 15px;
   font-size: 40px;
   font-weight: bold;
-  color: #f1f1f1;
+  color: #f8c2b4;
 }
 
 .close:hover,

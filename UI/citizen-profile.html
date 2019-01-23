@@ -7,7 +7,7 @@
     <meta name="description" content="Politico is a platform designed for politicans and citizens">
     <meta name="keywords" content="election, mandate, vote, government">
     <meta name="author" content="Martins Aloba">
-    <title>Politico|Signin</title>
+    <title>Politico|Profile</title>
     <link rel="shortcut icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -54,7 +54,7 @@
               <li class="active"><a href="#">Dashboard</a></li>
               <li><a href="candidate.html">Know Your Candidates</a></li>
               <li><a href="vote.html">Give Your Mandate</a></li>
-              <li><a href="#">Election Result</a></li>
+              <li class="modal-link" onclick="openResultModal()">Election Result</li>
             </ul>
           </div>
         </div>
@@ -166,6 +166,132 @@
           </div>
         </div>
       </div>
+      <div id="resultModal" class="resultModal">
+        <span onclick="closeResultModal()" class="close" title="Close Modal">&times;</span>
+        <div class="profile-header">
+          <div class="main-area center">
+                  <div>
+                    <h2>See Your Result</h2>
+                  </div>
+                </div>
+    </div>
+    <div class="vote-area">
+      <div class="main-area table-area bg-white">
+          <table class="candidate">
+              <caption>You will find here who and position you voted for</caption>
+              <tr>
+                <th class="col-15">Type</th>
+                <th class="col-15">Office Name</th>
+                <th class="col-30">Candidate</th>
+                <th class="col-30">Party</th>
+              </tr>
+
+              <tr>
+                <td class="federal"><h3>FEDERAL</h3></td>
+                <td class="federal"><h3>PRESIDENT</h3></td>
+                <td class="candidate-box">
+                    <div class="candidate-box-area">
+                      <div >
+                          <img src="assets/images/politician1.jpg" alt="">
+                      </div>
+                      <div>
+                          <h3>Hillary Clinton</h3>
+                      </div>  
+                    </div>
+                  
+                </td>
+                <td class="party-box">
+                  <div class="party-box-area">
+                      <div >
+                          <img src="assets/images/partylogo1.png" alt="">
+                      </div>
+                      <div>
+                          <h3>PPA</h3>
+                          <h4>Political Party Alliance</h4>
+                      </div>  
+                  </div>
+                </td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                  <td class="legislative"><h3>LEGISLATIVE</h3></td>
+                  <td class="legislative"><h3>SENATE</h3></td>
+                  <td class="candidate-box">
+                      <div class="candidate-box-area">
+                          <div >
+                              <img src="assets/images/politician1.jpg" alt="">
+                          </div>
+                          <div>
+                              <h3>Aishat Buhari</h3>
+                          </div>  
+                      </div>
+                  </td>
+                  <td class="candidate-box">
+                      <div class="party-box-area">
+                          <div >
+                              <img src="assets/images/partylogo1.png" alt="">
+                          </div>
+                          <div>
+                              <h3>PPA</h3>
+                              <h4>Political Party Alliance</h4>
+                          </div>  
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="state"><h3>STATE</h3></td>
+                  <td class="state"><h3>GOVERNOR</h3></td>
+                  <td class="candidate-box">
+                      <div class="candidate-box-area">
+                          <div >
+                              <img src="assets/images/politician3.jpeg" alt="">
+                            </div>
+                          <div>
+                              <h3>John Stone</h3>
+                          </div>  
+                      </div>    
+                  </td>
+                  <td class="party-box">
+                      <div class="party-box-area">
+                          <div >
+                              <img src="assets/images/partylogo1.png" alt="">
+                          </div>
+                          <div>
+                              <h3>PPA</h3>
+                              <h4>Political Party Alliance</h4>
+                          </div>  
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td class="local"><h3>LOCAL GOVERNMENT</h3></td>
+                  <td class="local"><h3>CHAIRMAN</h3></td>
+                  <td class="candidate-box">
+                      <div class="candidate-box-area">
+                          <div >
+                              <img src="assets/images/politician2.jpg" alt="">
+                          </div>
+                          <div>
+                              <h3>Rotimi Amaechi</h3>
+                          </div>  
+                      </div>
+                  </td>
+                  <td class="party-box">
+                      <div class="party-box-area">
+                          <div >
+                              <img src="assets/images/partylogo2.jpeg" alt="">
+                          </div>
+                          <div>
+                              <h3>GTA</h3>
+                              <h4>Grand Team Alliance</h4>
+                          </div>  
+                      </div>
+                  </td>
+              </tr>
+          </table>
+      </div>
+    </div>
     </section>
     <!-- Footer -->
     <footer>
