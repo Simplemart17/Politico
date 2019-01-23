@@ -52,9 +52,10 @@
           <div class="sidebar-menu">
             <ul>
               <li class="active"><a href="#">Dashboard</a></li>
-              <li><a href="candidate.html">Know Your Candidates</a></li>
-              <li><a href="vote.html">Give Your Mandate</a></li>
-              <li><a href="#">Election Result</a></li>
+              <li class="modal-link" onclick="openModal()">Interest Form</li>
+              <li><a href="#">Cast Your Vote</a></li>
+              <li><a href="#">Election result</a></li>
+              <li><a href="#">Challenge Result</a></li>
             </ul>
           </div>
         </div>
@@ -166,6 +167,39 @@
           </div>
         </div>
       </div>
+      <!-- Modal Section -->
+      <div id="modal" class="modal">
+        <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content">
+            <div class="modal-container">
+                <h1>Expression of Interest Form</h1>
+                <hr>
+                <label for="name"><b>Full Name<span class="col-red">*</span></b></label>
+                <input type="text" placeholder="Enter Your Full Name" name="fname">
+
+                <label for="party"><b>Political Party<span class="col-red">*</span></b></label>
+                <input type="text" placeholder="Enter Your Political Party" name="party" required>
+          
+                <label for="ptype"><b>Position Type<span class="col-red">*</span></b></label>
+                <input type="text" placeholder="E.g Federal, Legislative, State or Local Governement" name="position">
+
+                <label for="ofname"><b>Office Name<span class="col-red">*</span></b></label>
+                <input type="text" placeholder="Enter Office Name e.g President" name="name">
+                
+                <label>
+                  <input type="checkbox" checked="checked" name="confirm"> I confirm that the above details are correct
+                </label>
+                <div class="reg-btn center">
+                    <div class="inline">
+                        <input class="col-white bg-green" onclick="location.href='politician-profile.html';" type="button" value="Submit">
+                    </div>
+                    <div class="inline ">
+                        <input class="col-white bg-grey" onclick="closeModal()" type="button" value="Cancel">
+                    </div> 
+                </div>
+                </div>
+            </form>
+          </div>
     </section>
     <!-- Footer -->
     <footer>
