@@ -494,7 +494,7 @@ a {
 }
 
 /* Modal style */
-.modal-content input[type="text"], .modal-content input[type="password"] {
+.modal-content input[type="text"], .modal-content input[type="password"], .modal-content input[type="file"] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -510,7 +510,7 @@ input[type=text]:focus, input[type=password]:focus {
   padding: 60px;
 }
 
-.modal {
+.partyModal, .modal, .officeModal, .editModal {
   display: none; 
   position: fixed;
   z-index: 1;
@@ -654,6 +654,38 @@ table, th, td {
 .vote-btn:hover {
     opacity: 0.6;
     transition: 0.6s;
+}
+
+/* Admin Panel */
+.admin-box-name {
+    float: right;
+    margin-right: 40px;
+    margin-top: -20px;
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+.mt {
+    float: right;
+    padding: 0px 10px 0px 10px;
+    cursor: pointer;
+}
+
+.admin-header-btn {
+    margin-top: 20px;
+    margin-bottom: -20px;
+    margin-left: 67%;
+}
+
+.admin-header-btn input {
+    font-size: 15px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.admin-header-btn input:hover {
+    opacity: 0.6;
+    transition: 06s;
 }
 
 
