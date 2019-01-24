@@ -2,10 +2,14 @@
   "name": "politico",
   "version": "1.0.0",
   "description": "A platform for politician to contest for government office and citizen to vote",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "gh-pages -d UI"
+    "start": "babel-node ./app/app.js",
+    "dev": "nodemon ./app/app.js --exec babel-node",
+    "build": "rm -rf build && babel app -d build",
+    "lint": "eslint ./app --fix",
+    "deploy": "gh-pages -d UI",
+    "test": "nyc mocha test/**/*.js --require babel-polyfill --require babel-register --exit"
   },
   "repository": {
     "type": "git",
@@ -24,6 +28,31 @@
   },
   "homepage": "https://github.com/Simplemart17/Politico#readme",
   "dependencies": {
-    "gh-pages": "^2.0.1"
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "cloudinary": "^1.13.2",
+    "cors": "^2.8.5",
+    "coveralls": "^3.0.2",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "gh-pages": "^2.0.1",
+    "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "moment": "^2.24.0",
+    "nyc": "^13.1.0",
+    "request": "^2.88.0",
+    "supertest": "^3.4.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.15.0",
+    "nodemon": "^1.18.9"
   }
 }
