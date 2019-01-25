@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get('/party', partyController.getAllParty);
 
+router.get('/party/:id', partyController.getParty);
+
 router.post('/party', validation.input, partyController.createParty);
 
 export default router;
