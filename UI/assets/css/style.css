@@ -290,9 +290,7 @@ a {
 
 .links {
     font-size: 14px;
-    margin-top: 30px;
-    margin-left: 60%;
-    float: left;
+    margin-top: 20px;
 }
 
 .links a:hover {
@@ -337,7 +335,7 @@ a {
 
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
 }
 
 .form-btn input {
@@ -352,6 +350,7 @@ a {
 }
 
 .pass-reset {
+    box-sizing: border-box;
     margin-top: 3%;
     margin-left: 65%;
 }
@@ -381,8 +380,8 @@ a {
 .profile-info {
     display: inline-block;
     float: right;
-    margin-top: 10px;
-    margin-right: 450px;
+    margin-top: 1.5%;
+    margin-right: 25%;
 }
 
 .profile-info h2 {
@@ -397,9 +396,9 @@ a {
 }
 
 .profile-header img {
-    height: 150px;
+    height: 140px;
     border-radius: 50%;
-    margin-left: 300px;
+    margin-left: 20%;
 }
 
 .profile-content {
@@ -570,42 +569,42 @@ hr {
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
-  }
+}
   th, td {
     padding: 15px;
     text-align: left;    
-  }
+}
 
   table {
     table-layout:fixed;
     width: 100%;
-  }
+}
 
   .table-area {
     padding: 30px;
-  }
+}
 
   th.col-10 {
       width: 10%;
-  }
+}
 
   th.col-15 {
       width: 15%;
-  }
+}
 
   th.col-20 {
       width: 20%;
-  } 
+} 
   
   th.col-30 {
     width: 30%;
-  }
+}
 
   .candidate th {
       background-color: #1e3f0f88;
       color: #ffffff;
       font-size: 20px;
-  }
+}
 
   .candidate-box:nth-child(even), .party-box:nth-child(even) {
       background: #cfe9c4;
@@ -613,12 +612,11 @@ table, th, td {
 
   .candidate-box:nth-child(odd), .party-box:nth-child(odd) {
       background: #c8dacd;
-  }
+}
 
   .candidate-box-area, .party-box-area {
     display: grid;
     grid-template-columns: 30% 70%;
-    padding-bottom: px;
 }
 
 .party-box-area  {
@@ -719,6 +717,11 @@ table, th, td {
       right: 12px;
       top: 20px;
     }
+
+    .nav-wrapper .nav .nav-center .nav-btn {
+        top: 45px; 
+    }
+
     .nav .text .nav-btn label {
       display: inline-block;
       width: 50px;
@@ -750,6 +753,7 @@ table, th, td {
       width: 100%;
       padding: 0px;
       color: #efefef;
+      background: none;
       border: none;
       margin-top: 10px;
       height: 30px;
@@ -757,6 +761,7 @@ table, th, td {
     .nav .nav-center .nav-links a:hover {
         color: #60fa19;
         transition: 0.8s;
+        background: none;
     }
     .nav .nav-center  #nav-check:not(:checked) + .nav-links {
       height: 0px;
@@ -794,4 +799,100 @@ table, th, td {
     .form-header {
         width: 90%;
     }
+
+    .links {
+        font-size: 12px;
+        margin-top: 7%;
+    }
+    
+    .links a:hover {
+        text-decoration: underline;
+    }
+
+    .pass-reset {
+        box-sizing: border-box;
+        margin-top: 3%;
+        margin-left: 56%;
+    }
+
+    .admin-header-btn {
+        display: flex;
+        margin-left: 25%;
+    }
+
+    .main-area h2 {
+        margin-top: 10px;
+        margin-left: 55px;
+        font-size: 30px;
+    }
+
+    .column {
+        margin: 0px 50px;
+        padding-bottom: 10px;
+        grid-template-columns: 100%;
+    }
+     
+    .profile-info {
+        display: inline-block;
+        float: right;
+        margin-top: 0px;
+        margin-right: 60px;
+    }
+    
+    .profile-info h2 {
+        font-size: 20px;
+        letter-spacing: 2px;
+        color: #888888;
+    }
+    
+    .profile-info h4 {
+        padding: 3px;
+        color: #304e35
+    }
+    
+    .profile-header img {
+        height: 60px;
+        border-radius: 50%;
+        margin-left: 20%;
+    }
+
+    .profile-content {
+        display: grid;
+        grid-template-columns: 100%;
+        height: 10%;
+        margin: auto;
+    }
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .candidate-box-area img, .party-box-area img {
+        border-radius: 50%;
+        height: 50%;
+    }
+
+    .candidate th {
+        font-size: 15px;
+    }
+
+    .candidate-box-area, .party-box-area {
+        display: grid;
+        grid-template-columns: 100%;
+    }
+    
+    .party-box-area  {
+        padding: 10px 0;
+    }
+    
+    .candidate-box-area h3, h4, .party-box-area h3, .federal h3, .legislative h3, .local h3, .state h3 {
+        font-size: 12px;
+    }
+    
+    .candidate-box-area img, .party-box-area img {
+        border-radius: 60%;
+        height: 60%;
+        width: 60%;
+    }    
 }
