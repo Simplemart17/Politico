@@ -290,9 +290,7 @@ a {
 
 .links {
     font-size: 14px;
-    margin-top: 30px;
-    margin-left: 60%;
-    float: left;
+    margin-top: 20px;
 }
 
 .links a:hover {
@@ -337,7 +335,7 @@ a {
 
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
 }
 
 .form-btn input {
@@ -352,6 +350,7 @@ a {
 }
 
 .pass-reset {
+    box-sizing: border-box;
     margin-top: 3%;
     margin-left: 65%;
 }
@@ -719,6 +718,11 @@ table, th, td {
       right: 12px;
       top: 20px;
     }
+
+    .nav-wrapper .nav .nav-center .nav-btn {
+        top: 45px; 
+    }
+
     .nav .text .nav-btn label {
       display: inline-block;
       width: 50px;
@@ -750,6 +754,7 @@ table, th, td {
       width: 100%;
       padding: 0px;
       color: #efefef;
+      background: none;
       border: none;
       margin-top: 10px;
       height: 30px;
@@ -757,6 +762,7 @@ table, th, td {
     .nav .nav-center .nav-links a:hover {
         color: #60fa19;
         transition: 0.8s;
+        background: none;
     }
     .nav .nav-center  #nav-check:not(:checked) + .nav-links {
       height: 0px;
@@ -793,5 +799,37 @@ table, th, td {
 
     .form-header {
         width: 90%;
+    }
+
+    .links {
+        font-size: 12px;
+        margin-top: 7%;
+    }
+    
+    .links a:hover {
+        text-decoration: underline;
+    }
+
+    .pass-reset {
+        box-sizing: border-box;
+        margin-top: 3%;
+        margin-left: 56%;
+    }
+
+    .admin-header-btn {
+        display: flex;
+        margin-left: 25%;
+    }
+
+    .main-area h2 {
+        margin-top: 10px;
+        margin-left: 55px;
+        font-size: 30px;
+    }
+
+    .column {
+        margin: 0px 50px;
+        padding-bottom: 10px;
+        grid-template-columns: 100%;
     }
 }
