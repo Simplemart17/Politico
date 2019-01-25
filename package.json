@@ -10,7 +10,8 @@
     "lint": "eslint ./app --fix",
     "deploy": "gh-pages -d UI",
     "test": "nyc mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
-    "local": "nyc --reporter=text --reporter=html mocha test/**/*.js --require babel-polyfill --require babel-register --exit"
+    "local": "nyc --reporter=text --reporter=html mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",

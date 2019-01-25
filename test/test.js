@@ -21,7 +21,7 @@ describe('Party /GET', () => {
   });
   it('should return error for invalid address', (done) => {
     chai.request(app)
-      .get('/api/v1/')
+      .get('/api/v')
       .end((err, res) => {
         res.should.have.status(404);
         res.should.be.a.json;
