@@ -14,17 +14,45 @@ describe('Party /GET', () => {
         res.should.have.status(200);
         res.should.be.a.json;
         res.body.should.be.a('object');
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Political Party list was successfully retrieved')
         done();
       });
   });
   it('should return error for invalid address', (done) => {
     chai.request(app)
-      .get('/api/v1/party/invalid-route')
+      .get('/api/v1/')
       .end((err, res) => {
         res.should.have.status(404);
         res.should.be.a.json;
         res.body.should.have.property('error');
         res.body.error.should.equal('The page cannot be found!');
+        done();
+      });
+  });
+});
+
+describe('Party /GET/:id', () => {
+  it('should GET a specific political party', (done) => {
+    chai.request(app)
+      .get('/api/v1/party/1')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.a.json;
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Party record retrieved successfully!');
+        done();
+      });
+  });
+  it('should return error when an id is not found', (done) => {
+    const id = 'none';
+    chai.request(app)
+      .get(`/api/v1/party/${id}`)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.should.be.a.json;
+        res.body.should.have.property('error');
+        res.body.error.should.equal('Party record does not exist!');
         done();
       });
   });

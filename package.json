@@ -9,7 +9,8 @@
     "build": "rm -rf build && babel app -d build",
     "lint": "eslint ./app --fix",
     "deploy": "gh-pages -d UI",
-    "test": "nyc mocha test/**/*.js --require babel-polyfill --require babel-register --exit"
+    "test": "nyc mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
+    "local": "nyc --reporter=text --reporter=html mocha test/**/*.js --require babel-polyfill --require babel-register --exit"
   },
   "repository": {
     "type": "git",
