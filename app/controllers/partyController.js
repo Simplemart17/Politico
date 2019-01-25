@@ -9,6 +9,23 @@ class PartyController {
     });
   }
 
+  static getParty(req, res) {
+    const id = parseInt(req.params.id, 10);
+    partydb.map((data) => {
+      if (data.id === id) {
+        return res.status(200).json({
+          message: 'Party record retrieved successfully!',
+          status: 200,
+          data,
+        });
+      }
+      return res.status(404).json({
+        status: 404,
+        error: 'Party record does not exist!',
+      });
+    });
+  }
+
   static createParty(req, res) {
     const data = {
       id: partydb.length + 1,
