@@ -40,6 +40,29 @@ class PartyController {
       data,
     });
   }
+
+  static deleteParty(req, res) {
+    const id = parseInt(req.params.id, 10);
+    let foundParty;
+    let itemIndex;
+    partydb.map((data, index) => {
+      if (data.id === id) {
+        foundParty = data;
+        itemIndex = index;
+      }
+    });
+    if (!foundParty) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Political Party record cannot be found!',
+      });
+    }
+    partydb.splice(itemIndex, 1);
+    return res.status(200).json({
+      status: 200,
+      message: 'Political Party was successfully deleted!',
+    });
+  }
 }
 
 export default PartyController;
