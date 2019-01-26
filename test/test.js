@@ -134,3 +134,18 @@ describe('Party /POST', () => {
       });
   });
 });
+
+describe('Office /GET', () => {
+  it('should GET the list of all government office', (done) => {
+    chai.request(app)
+      .get('/api/v1/office')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.a.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Government office lists was successfully retrieved');
+        done();
+      });
+  });
+});
