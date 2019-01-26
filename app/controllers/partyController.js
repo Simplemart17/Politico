@@ -55,7 +55,7 @@ class PartyController {
     if (!foundParty) {
       return res.status(404).json({
         status: 404,
-        error: 'Party record is not found!',
+        error: 'Party record cannot be found!',
       });
     }
     if (!req.body.name) {
@@ -64,18 +64,18 @@ class PartyController {
         error: 'name field is required!',
       });
     }
-    const newData = {
+    const data = {
       id: foundParty.id,
       name: req.body.name || foundParty.name,
       hqAddress: foundParty.hqAddress,
       logoUrl: foundParty.logoUrl,
     };
-    partydb.splice(itemIndex, 1, newData);
+    partydb.splice(itemIndex, 1, data);
 
     return res.status(201).json({
       message: 'Party name was successfully edited!',
       status: 201,
-      newData,
+      data,
     });
   }
 }

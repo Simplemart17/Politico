@@ -134,3 +134,63 @@ describe('Party /POST', () => {
       });
   });
 });
+
+describe('Party /PATCH', () => {
+  it('should edit the name of the party', (done) => {
+    const newName = {
+      name: 'New nigeria Consensus',
+    };
+    chai.request(app)
+      .get('/api/v1/party')
+      .end((err, res) => {
+        chai.request(app)
+          .patch('/api/v1/party/1/name')
+          .send(newName)
+          .end((err, res) => {
+            res.should.have.status(201);
+            res.should.be.json;
+            res.body.should.have.property('message');
+            res.body.message.should.equal('Party name was successfully edited!');
+            res.body.should.have.property('data');
+            res.body.data.should.be.a('object');
+            done(err);
+          });
+      });
+  });
+  it('should return error when name field is empty', (done) => {
+    const emptyField = {
+      name: '',
+    };
+    chai.request(app)
+      .get('/api/v1/party')
+      .end((err, res) => {
+        chai.request(app)
+          .patch('/api/v1/party/1/name')
+          .send(emptyField)
+          .end((err, res) => {
+            res.should.have.status(400);
+            res.should.be.json;
+            res.body.should.have.property('error').equal('name field is required!');
+            done(err);
+          });
+      });
+  });
+  it('should return error when party record is not found', (done) => {
+    const emptyField = {
+      name: 'Nigeria America Party',
+    };
+    chai.request(app)
+      .get('/api/v1/party')
+      .end((err, res) => {
+        chai.request(app)
+          .patch('/api/v1/party/10/name')
+          .send(emptyField)
+          .end((err, res) => {
+            res.should.have.status(404);
+            res.should.be.json;
+            res.body.should.have.property('error').equal('Party record cannot be found!');
+            done(err);
+          });
+      });
+  });
+});
