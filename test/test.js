@@ -135,6 +135,7 @@ describe('Party /POST', () => {
   });
 });
 
+// Test for office endpoint
 describe('Office /GET', () => {
   it('should GET the list of all government office', (done) => {
     chai.request(app)
