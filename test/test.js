@@ -134,3 +134,25 @@ describe('Party /POST', () => {
       });
   });
 });
+
+// Office endpoint test
+describe('Party /POST', () => {
+  it('should CREATE a new political party', (done) => {
+    const newOffice = {
+      type: 'Legislative',
+      name: 'Senate',
+    };
+    chai.request(app)
+      .post('/api/v1/office')
+      .send(newOffice)
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.should.be.json;
+        res.body.should.have.property('data');
+        res.body.data.should.be.a('object');
+        res.body.data.should.have.property('type').equal('Legislative');
+        res.body.data.should.have.property('name').equal('Senate');
+        done();
+      });
+  });
+});
