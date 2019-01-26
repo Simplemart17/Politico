@@ -150,3 +150,28 @@ describe('Office /GET', () => {
       });
   });
 });
+
+describe('Office /GET/:id', () => {
+  it('should GET a specific government office', (done) => {
+    chai.request(app)
+      .get('/api/v1/office/1')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.a.json;
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Government office was successfully retreived!');
+        done();
+      });
+  });
+  it('should return error when an id is not found', (done) => {
+    chai.request(app)
+      .get('/api/v1/office/5')
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.should.be.a.json;
+        res.body.should.have.property('error');
+        res.body.error.should.equal('Governmenent office does not exist!');
+        done();
+      });
+  });
+});

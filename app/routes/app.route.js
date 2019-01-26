@@ -13,4 +13,6 @@ router.post('/party', validation.input, partyController.createParty);
 
 router.get('/office', officeController.getAllOffice);
 
+router.get('/office/:id', officeController.getOffice);
+
 export default router;
