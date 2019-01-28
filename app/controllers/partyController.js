@@ -77,7 +77,7 @@ class PartyController {
     });
     if (!foundParty) {
       return res.status(404).json({
-        status: 404
+        status: 404,
         error: 'Party record cannot be found!',
       });
     }
@@ -94,7 +94,7 @@ class PartyController {
       logoUrl: foundParty.logoUrl,
     };
     partydb.splice(itemIndex, 1, data);
-    
+
     return res.status(200).json({
       message: `Party name was successfully changed to '${data.name}'`,
       status: 200,
