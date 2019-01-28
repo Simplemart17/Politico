@@ -181,6 +181,10 @@ describe('Party /DELETE/:id', () => {
                 res.body.should.have.property('error').equal('Political Party record cannot be found!');
                 done(err);
               });
+          });
+      });
+  });
+});
           
 describe('Party /PATCH', () => {
   it('should edit the name of the party', (done) => {
