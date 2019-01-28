@@ -19,10 +19,11 @@ class PartyController {
           data,
         });
       }
-      return res.status(404).json({
-        status: 404,
-        error: 'Party record does not exist!',
-      });
+      return null;
+    });
+    return res.status(404).json({
+      status: 404,
+      error: 'Party record does not exist!',
     });
   }
 
@@ -37,6 +38,43 @@ class PartyController {
     return res.status(201).json({
       message: 'political Party was successfully created!',
       status: 201,
+      data,
+    });
+  }
+
+  static editParty(req, res) {
+    const id = parseInt(req.params.id, 10);
+    let foundParty;
+    let itemIndex;
+    partydb.map((data, index) => {
+      if (data.id === id) {
+        foundParty = data;
+        itemIndex = index;
+      }
+    });
+    if (!foundParty) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Party record cannot be found!',
+      });
+    }
+    if (!req.body.name) {
+      return res.status(400).json({
+        status: 400,
+        error: 'name field is required!',
+      });
+    }
+    const data = {
+      id: foundParty.id,
+      name: req.body.name || foundParty.name,
+      hqAddress: foundParty.hqAddress,
+      logoUrl: foundParty.logoUrl,
+    };
+    partydb.splice(itemIndex, 1, data);
+
+    return res.status(200).json({
+      message: `Party name was successfully changed to '${data.name}'`,
+      status: 200,
       data,
     });
   }
