@@ -12,4 +12,6 @@ router.post('/party', validation.input, partyController.createParty);
 
 router.delete('/party/:id', partyController.deleteParty);
 
+router.patch('/party/:id/name', partyController.editParty);
+
 export default router;
