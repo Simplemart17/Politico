@@ -15,7 +15,7 @@ describe('Party /GET', () => {
         res.should.be.a.json;
         res.body.should.be.a('object');
         res.body.should.have.property('message');
-        res.body.message.should.equal('Political Party list was successfully retrieved')
+        res.body.message.should.equal('Political Party list was successfully retrieved');
         done();
       });
   });
@@ -99,7 +99,7 @@ describe('Party /POST', () => {
         done();
       });
   });
-  it('should return error for name field is empty', (done) => {
+  it('should return error for headquarter field is empty', (done) => {
     const newParty = {
       name: 'Community Pational Party',
       hqAddress: '',
@@ -116,7 +116,7 @@ describe('Party /POST', () => {
         done();
       });
   });
-  it('should return error for name field is empty', (done) => {
+  it('should return error for logo field is empty', (done) => {
     const newParty = {
       name: 'Community Pational Party',
       hqAddress: 'Glass House, Abuja',
