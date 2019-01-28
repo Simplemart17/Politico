@@ -2,6 +2,21 @@ import moment from 'moment';
 import officedb from '../model/officedb';
 
 class officeController {
+  static createOffice(req, res) {
+    const data = {
+      id: officedb.length + 1,
+      type: req.body.type,
+      name: req.body.name,
+      createdOn: moment(),
+    };
+    officedb.push(data);
+    return res.status(201).json({
+      message: 'Political Office was successfully created!',
+      status: 201,
+      data,
+    });
+  }
+
   static getAllOffice(req, res) {
     return res.status(200).json({
       message: 'Government office lists was successfully retrieved',
