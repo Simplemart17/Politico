@@ -147,10 +147,10 @@ describe('Party /PATCH', () => {
           .patch('/api/v1/party/1/name')
           .send(newName)
           .end((err, res) => {
-            res.should.have.status(201);
+            res.should.have.status(200);
             res.should.be.json;
             res.body.should.have.property('message');
-            res.body.message.should.equal('Party name was successfully edited!');
+            res.body.message.should.equal(`Party name was successfully changed to '${newName.name}'`);
             res.body.should.have.property('data');
             res.body.data.should.be.a('object');
             done(err);

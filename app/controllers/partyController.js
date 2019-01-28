@@ -72,9 +72,9 @@ class PartyController {
     };
     partydb.splice(itemIndex, 1, data);
 
-    return res.status(201).json({
-      message: 'Party name was successfully edited!',
-      status: 201,
+    return res.status(200).json({
+      message: `Party name was successfully changed to '${data.name}'`,
+      status: 200,
       data,
     });
   }
