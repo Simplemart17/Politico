@@ -15,4 +15,8 @@ router.get('/office', officeController.getAllOffice);
 
 router.get('/office/:id', officeController.getOffice);
 
+router.delete('/party/:id', partyController.deleteParty);
+
+router.patch('/party/:id/name', partyController.editParty);
+
 export default router;
