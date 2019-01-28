@@ -15,7 +15,7 @@ describe('Party /GET', () => {
         res.should.be.a.json;
         res.body.should.be.a('object');
         res.body.should.have.property('message');
-        res.body.message.should.equal('Political Party list was successfully retrieved')
+        res.body.message.should.equal('Political Party list was successfully retrieved');
         done();
       });
   });
@@ -190,6 +190,57 @@ describe('Party /PATCH', () => {
             res.should.be.json;
             res.body.should.have.property('error').equal('Party record cannot be found!');
             done(err);
+          });
+      });
+  });
+});
+
+describe('Party /DELETE/:id', () => {
+  it('should delete a specific political party from the database', (done) => {
+    const newParty = {
+      name: 'Community Pational Party',
+      hqAddress: 'Glass House, Abuja',
+      logoUrl: '',
+    };
+    chai.request(app)
+      .post('/api/v1/party')
+      .send(newParty)
+      .end((err, res) => {
+        chai.request(app)
+          .get('/ap1/v1/party')
+          .end((err, res) => {
+            chai.request(app)
+              .delete('/api/v1/party/1')
+              .end((err, res) => {
+                res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.have.property('message').equal('Political Party was successfully deleted!');
+                done(err);
+              });
+          });
+      });
+  });
+  it('should return error when a specific political party is not not found', (done) => {
+    const newParty = {
+      name: 'Community Pational Party',
+      hqAddress: 'Glass House, Abuja',
+      logoUrl: '',
+    };
+    chai.request(app)
+      .post('/api/v1/party')
+      .send(newParty)
+      .end((err, res) => {
+        chai.request(app)
+          .get('/ap1/v1/party')
+          .end((err, res) => {
+            chai.request(app)
+              .delete('/api/v1/party/6')
+              .end((err, res) => {
+                res.should.have.status(404);
+                res.should.be.json;
+                res.body.should.have.property('error').equal('Political Party record cannot be found!');
+                done(err);
+              });
           });
       });
   });
