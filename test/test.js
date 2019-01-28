@@ -99,7 +99,7 @@ describe('Party /POST', () => {
         done();
       });
   });
-  it('should return error for name field is empty', (done) => {
+  it('should return error for headquarter field is empty', (done) => {
     const newParty = {
       name: 'Community Pational Party',
       hqAddress: '',
@@ -116,7 +116,7 @@ describe('Party /POST', () => {
         done();
       });
   });
-  it('should return error for name field is empty', (done) => {
+  it('should return error for logo field is empty', (done) => {
     const newParty = {
       name: 'Community Pational Party',
       hqAddress: 'Glass House, Abuja',
