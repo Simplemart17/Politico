@@ -135,113 +135,43 @@ describe('Party /POST', () => {
   });
 });
 
-describe('Party /PATCH', () => {
-  it('should edit the name of the party', (done) => {
-    const newName = {
-      name: 'New nigeria Consensus',
-    };
+// Test for office endpoint
+describe('Office /GET', () => {
+  it('should GET the list of all government office', (done) => {
     chai.request(app)
-      .get('/api/v1/party')
+      .get('/api/v1/office')
       .end((err, res) => {
-        chai.request(app)
-          .patch('/api/v1/party/1/name')
-          .send(newName)
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.should.be.json;
-            res.body.should.have.property('message');
-            res.body.message.should.equal(`Party name was successfully changed to '${newName.name}'`);
-            res.body.should.have.property('data');
-            res.body.data.should.be.a('object');
-            done(err);
-          });
-      });
-  });
-  it('should return error when name field is empty', (done) => {
-    const emptyField = {
-      name: '',
-    };
-    chai.request(app)
-      .get('/api/v1/party')
-      .end((err, res) => {
-        chai.request(app)
-          .patch('/api/v1/party/1/name')
-          .send(emptyField)
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.should.be.json;
-            res.body.should.have.property('error').equal('name field is required!');
-            done(err);
-          });
-      });
-  });
-  it('should return error when party record is not found', (done) => {
-    const emptyField = {
-      name: 'Nigeria America Party',
-    };
-    chai.request(app)
-      .get('/api/v1/party')
-      .end((err, res) => {
-        chai.request(app)
-          .patch('/api/v1/party/10/name')
-          .send(emptyField)
-          .end((err, res) => {
-            res.should.have.status(404);
-            res.should.be.json;
-            res.body.should.have.property('error').equal('Party record cannot be found!');
-            done(err);
-          });
+        res.should.have.status(200);
+        res.should.be.a.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Government office lists was successfully retrieved');
+        done();
       });
   });
 });
 
-describe('Party /DELETE/:id', () => {
-  it('should delete a specific political party from the database', (done) => {
-    const newParty = {
-      name: 'Community Pational Party',
-      hqAddress: 'Glass House, Abuja',
-      logoUrl: '',
-    };
+describe('Office /GET/:id', () => {
+  it('should GET a specific government office', (done) => {
     chai.request(app)
-      .post('/api/v1/party')
-      .send(newParty)
+      .get('/api/v1/office/1')
       .end((err, res) => {
-        chai.request(app)
-          .get('/ap1/v1/party')
-          .end((err, res) => {
-            chai.request(app)
-              .delete('/api/v1/party/1')
-              .end((err, res) => {
-                res.should.have.status(200);
-                res.should.be.json;
-                res.body.should.have.property('message').equal('Political Party was successfully deleted!');
-                done(err);
-              });
-          });
+        res.should.have.status(200);
+        res.should.be.a.json;
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Government office was successfully retreived!');
+        done();
       });
   });
-  it('should return error when a specific political party is not not found', (done) => {
-    const newParty = {
-      name: 'Community Pational Party',
-      hqAddress: 'Glass House, Abuja',
-      logoUrl: '',
-    };
+  it('should return error when an id is not found', (done) => {
     chai.request(app)
-      .post('/api/v1/party')
-      .send(newParty)
+      .get('/api/v1/office/5')
       .end((err, res) => {
-        chai.request(app)
-          .get('/ap1/v1/party')
-          .end((err, res) => {
-            chai.request(app)
-              .delete('/api/v1/party/6')
-              .end((err, res) => {
-                res.should.have.status(404);
-                res.should.be.json;
-                res.body.should.have.property('error').equal('Political Party record cannot be found!');
-                done(err);
-              });
-          });
+        res.should.have.status(404);
+        res.should.be.a.json;
+        res.body.should.have.property('error');
+        res.body.error.should.equal('Governmenent office does not exist!');
+        done();
       });
   });
 });
