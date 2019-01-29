@@ -35,10 +35,11 @@ class officeController {
           data,
         });
       }
-      return res.status(404).json({
-        status: 404,
-        error: 'Governmenent office does not exist!',
-      });
+      return null;
+    });
+    return res.status(404).json({
+      status: 404,
+      error: 'Governmenent office does not exist!',
     });
   }
 }
