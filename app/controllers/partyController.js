@@ -62,9 +62,9 @@ class PartyController {
     return res.status(200).json({
       status: 200,
       message: 'Political Party was successfully deleted!',
-     });
+    });
   }
-      
+
   static editParty(req, res) {
     const id = parseInt(req.params.id, 10);
     let foundParty;

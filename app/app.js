@@ -1,14 +1,17 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import router from './routes/app.route';
 
-const app = express();
+dotenv.config();
 
+const app = express();
 const port = (process.env.PORT || 8000);
 
-app.set('appVersion', '/api/v1');
 app.use(cors());
+
+app.set('appVersion', '/api/v1');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
