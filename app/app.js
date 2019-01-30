@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import router from './routes/app.route';
+import userRouter from './routes/users.route';
 
 dotenv.config();
 
@@ -13,9 +14,10 @@ app.use(cors());
 
 app.set('appVersion', '/api/v1');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(app.get('appVersion'), router);
+app.use(app.get('appVersion'), userRouter);
 
 
 app.get('*', (req, res) => {

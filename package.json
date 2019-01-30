@@ -11,6 +11,7 @@
     "deploy": "gh-pages -d UI",
     "test": "nyc mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
     "create:tables": "babel-node ./app/model/createTables.js",
+    "drop:tables": "babel-node ./app/model/dropTables.js",
     "local": "nyc --reporter=text --reporter=html mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
