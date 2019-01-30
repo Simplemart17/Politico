@@ -29,7 +29,7 @@ const createPartyTable = () => {
           )`;
   return text;
 };
-const dropPartyTable = () => 'DROP TABLE IF EXISTS users';
+const dropPartyTable = () => 'DROP TABLE IF EXISTS parties';
 
 const createOfficeTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
@@ -41,7 +41,7 @@ const createOfficeTable = () => {
             )`;
   return text;
 };
-const dropOfficeTable = () => 'DROP TABLE IF EXISTS users';
+const dropOfficeTable = () => 'DROP TABLE IF EXISTS offices';
 
 const createCandidateTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
@@ -54,7 +54,7 @@ const createCandidateTable = () => {
               )`;
   return text;
 };
-const dropCandidateTable = () => 'DROP TABLE IF EXISTS users';
+const dropCandidateTable = () => 'DROP TABLE IF EXISTS candidates';
 
 const createVoteTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
@@ -67,14 +67,16 @@ const createVoteTable = () => {
               )`;
   return text;
 };
-const dropVoteTable = () => 'DROP TABLE IF EXISTS users';
+const dropVoteTable = () => 'DROP TABLE IF EXISTS votes';
 
 const deleteParty = id => ({
   text: 'DELETE FROM party WHERE id = $1',
   values: [id],
 });
 
-module.exports = {
+const addUser = () => `INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl, isAdmin) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
+
+export {
   createUsersTable,
   dropUsersTable,
   createPartyTable,
@@ -86,4 +88,5 @@ module.exports = {
   createVoteTable,
   dropVoteTable,
   deleteParty,
+  addUser,
 };

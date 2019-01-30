@@ -1,10 +1,57 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app/app';
+import db from '../app/model/db';
+import createUsersTable, { dropUsersTable } from '../app/model/queries';
 
 chai.use(chaiHttp);
 
 const { should } = chai.should();
+
+const newUser = {
+  firstname: 'Martins',
+  lastname: 'Aloba',
+  othernames: 'Crown',
+  email: 'crown-mart@gmail.com',
+  phonenumber: '08012345678',
+  username: 'simplemart',
+  password: 'password',
+  passportUrl: 'www.image1.com',
+};
+
+// User signin test
+describe('TEST', () => {
+  before(async () => {
+    try {
+      await db.query(createUsersTable());
+    } catch (error) {
+      console.log(error);
+    }
+  });
+});
+
+after(async () => {
+  try {
+    await db.query(dropUsersTable());
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+describe('SIGNUP ', () => {
+  it('should create new user account', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(newUser)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.data[0].user.firstname.should.equal(newUser.firstname);
+        done(err);
+      });
+  });
+});
 
 describe('Party /GET', () => {
   it('should GET the list of all political parties', (done) => {
@@ -79,7 +126,7 @@ describe('Party /POST', () => {
         res.body.data.hqAddress.should.equal('Victoria Island, Lagos');
         res.body.data.should.have.property('logoUrl');
         res.body.data.logoUrl.should.equal('www.image.com/image3');
-        done();
+        done(err);
       });
   });
   it('should return error for name field is empty', (done) => {
