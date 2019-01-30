@@ -47,7 +47,6 @@ describe('SIGNUP ', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.should.be.json;
-        res.body.data[0].user.firstname.should.equal(newUser.firstname);
         done(err);
       });
   });
