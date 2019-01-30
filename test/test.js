@@ -45,7 +45,7 @@ describe('SIGNUP ', () => {
       .post('/api/v1/auth/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(201);
         res.should.be.json;
         done(err);
       });
