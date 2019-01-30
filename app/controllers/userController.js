@@ -6,7 +6,7 @@ const Users = {
   async signUpUsers(req, res) {
     const hashPassword = generateHashPassword(req.body.password);
     const {
-      firstname, lastname, othernames, email, phonenumber, username, passportUrl, isadmin,
+      firstname, lastname, othernames, email, phonenumber, username, passportUrl,
     } = req.body;
     const values = [
       firstname,
@@ -17,7 +17,6 @@ const Users = {
       username,
       hashPassword,
       passportUrl,
-      isadmin || 'false',
     ];
     try {
       const { rows } = await dBase.query(queries.addUser(), values);
@@ -27,8 +26,8 @@ const Users = {
         status: 201,
         message: 'You have successfully registered!',
         data: [{
-          user: rows[0],
           token,
+          user: rows[0],
         }],
       });
     } catch (error) {
@@ -43,6 +42,34 @@ const Users = {
           error: 'Username already exist!',
         });
       }
+      return res.json(error);
+    }
+  },
+
+  async userSignIn(req, res) {
+    const text = 'SELECT * FROM users WHERE   EMAIL = $1';
+    try {
+      const { rows } = await dBase.query(text, [req.body.email]);
+      if (!rows[0]) {
+        return res.status(406).json({
+          error: 'Incorrect email address',
+        });
+      }
+      if (!comparePassword(rows[0].password, req.body.password)) {
+        return res.status(406).json({
+          error: 'Incorrect password!',
+        });
+      }
+      const token = generateToken(rows[0].id);
+      delete rows[0].password;
+      return res.status(200).json({
+        message: 'You have successfully signed in!',
+        data: [{
+          token,
+          user: rows[0],
+        }],
+      });
+    } catch (error) {
       return res.json(error);
     }
   },
