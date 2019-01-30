@@ -22,9 +22,9 @@ const Users = {
     try {
       const { rows } = await dBase.query(queries.addUser(), values);
       const token = generateToken(rows[0].id);
-      console.log(res.user);
-      return res.status(200).json({
-        status: 200,
+      delete rows[0].password;
+      return res.status(201).json({
+        status: 201,
         message: 'You have successfully registered!',
         data: [{
           user: rows[0],
@@ -43,7 +43,6 @@ const Users = {
           error: 'Username already exist!',
         });
       }
-      console.log(error);
       return res.json(error);
     }
   },
