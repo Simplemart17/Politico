@@ -1,47 +1,69 @@
-import moment from 'moment';
-import officedb from '../model/officedb';
+import dBase from '../model/db';
+import * as queries from '../model/queries';
 
-class officeController {
-  static createOffice(req, res) {
-    const data = {
-      id: officedb.length + 1,
-      type: req.body.type,
-      name: req.body.name,
-      createdOn: moment(),
-    };
-    officedb.push(data);
-    return res.status(201).json({
-      message: 'Political Office was successfully created!',
-      status: 201,
-      data,
-    });
-  }
+const officeController = {
+  async createOffice(req, res) {
+    const { type, name } = req.body;
+    const values = [
+      type,
+      name,
+    ];
+    try {
+      const { rows } = await dBase.query(queries.newOffice(), values);
+      return res.status(201).json({
+        status: 201,
+        message: 'Political Office was successfully created!',
+        data: [
+          rows[0],
+        ],
+      });
+    } catch (error) {
+      return res.json(error);
+    }
+  },
 
-  static getAllOffice(req, res) {
-    return res.status(200).json({
-      message: 'Government office lists was successfully retrieved',
-      status: 200,
-      data: officedb,
-    });
-  }
-
-  static getOffice(req, res) {
-    const id = parseInt(req.params.id, 10);
-    officedb.map((data) => {
-      if (data.id === id) {
-        return res.status(200).json({
-          message: 'Government office was successfully retreived!',
-          status: 200,
-          data,
+  async getAllOffice(req, res) {
+    try {
+      const { rows, rowCount } = await dBase.query(queries.getOffices());
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          message: 'No record found!',
         });
       }
-      return null;
-    });
-    return res.status(404).json({
-      status: 404,
-      error: 'Governmenent office does not exist!',
-    });
-  }
-}
+      return res.status(200).json({
+        status: 200,
+        message: 'Government office lists was successfully retrieved',
+        data: [
+          rows,
+        ],
+        Total: rowCount,
+      });
+    } catch (error) {
+      return res.json(error);
+    }
+  },
+
+  async getOffice(req, res) {
+    try {
+      const { rows } = await dBase.query(queries.getOffice(), [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          message: 'Governmenent office does not exist!',
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        message: 'Government office was successfully retreived!',
+        data: [
+          rows[0],
+        ],
+      });
+    } catch (error) {
+      return res.json(error);
+    }
+  },
+};
 
 export default officeController;

@@ -1,6 +1,7 @@
 import express from 'express';
 import partyController from '../controllers/partyController';
 import officeController from '../controllers/officeController';
+import candidate from '../controllers/candidateController';
 import validation from '../middleware/validation';
 
 const router = express.Router();
@@ -20,5 +21,7 @@ router.post('/office', officeController.createOffice);
 router.get('/office', officeController.getAllOffice);
 
 router.get('/office/:id', officeController.getOffice);
+
+router.post('/office/:id/register', candidate.registerCandidate);
 
 export default router;

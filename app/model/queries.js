@@ -25,7 +25,7 @@ const createPartyTable = () => {
             createdon DATE DEFAULT CURRENT_DATE,
             name VARCHAR(128) NOT NULL,
             hqAddress VARCHAR(128) NOT NULL,
-            logoUrl VARCHAR(128)[]
+            logoUrl VARCHAR(128)
           )`;
   return text;
 };
@@ -46,11 +46,11 @@ const dropOfficeTable = () => 'DROP TABLE IF EXISTS offices';
 const createCandidateTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
               candidates(
-                id SERIAL PRIMARY KEY,
+                id SERIAL UNIQUE,
                 createdon DATE DEFAULT CURRENT_DATE,
-                office_id INTEGER NOT NULL REFERENCES offices (id),
-                party_id INTEGER NOT NULL REFERENCES parties (id),
-                candidate_id INTEGER NOT NULL REFERENCES users (id)
+                office INTEGER NOT NULL REFERENCES offices (id),
+                candidate INTEGER NOT NULL REFERENCES users (id),
+                PRIMARY KEY (office, candidate)
               )`;
   return text;
 };
@@ -69,12 +69,25 @@ const createVoteTable = () => {
 };
 const dropVoteTable = () => 'DROP TABLE IF EXISTS votes';
 
-const deleteParty = id => ({
-  text: 'DELETE FROM party WHERE id = $1',
-  values: [id],
-});
+const addUser = () => `INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
 
-const addUser = () => `INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl, isAdmin) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
+const newCandidate = () => `INSERT INTO candidates(office, candidate) VALUES($1, $2) RETURNING *`;
+
+const newOffice = () => `INSERT INTO offices(type, name) VALUES($1, $2) RETURNING *`;
+
+const getOffices = () => 'SELECT * FROM offices';
+
+const getOffice = () => 'SELECT * FROM offices WHERE id = $1';
+
+const getParties = () => 'SELECT * FROM parties';
+
+const getParty = () => 'SELECT * FROM parties WHERE id = $1';
+
+const newParty = () => `INSERT INTO parties(name, hqAddress, logoUrl) VALUES($1, $2, $3) RETURNING *`;
+
+const deleteParty = () => 'DELETE FROM parties WHERE id = $1 returning *';
+
+const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING *';
 
 export {
   createUsersTable,
@@ -87,6 +100,14 @@ export {
   dropCandidateTable,
   createVoteTable,
   dropVoteTable,
-  deleteParty,
   addUser,
+  newCandidate,
+  newOffice,
+  getOffices,
+  getOffice,
+  getParties,
+  newParty,
+  deleteParty,
+  updateParty,
+  getParty,
 };

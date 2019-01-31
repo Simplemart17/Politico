@@ -6,7 +6,7 @@ const Users = {
   async signUpUsers(req, res) {
     const hashPassword = generateHashPassword(req.body.password);
     const {
-      firstname, lastname, othernames, email, phonenumber, username, passportUrl, isadmin,
+      firstname, lastname, othernames, email, phonenumber, username, passportUrl,
     } = req.body;
     const values = [
       firstname,
@@ -17,7 +17,6 @@ const Users = {
       username,
       hashPassword,
       passportUrl,
-      isadmin || 'false',
     ];
     try {
       const { rows } = await dBase.query(queries.addUser(), values);
@@ -27,8 +26,8 @@ const Users = {
         status: 201,
         message: 'You have successfully registered!',
         data: [{
-          user: rows[0],
           token,
+          user: rows[0],
         }],
       });
     } catch (error) {
