@@ -74,7 +74,7 @@ const deleteParty = id => ({
   values: [id],
 });
 
-const addUser = () => `INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl, isAdmin) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
+const addUser = () => `INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
 
 export {
   createUsersTable,

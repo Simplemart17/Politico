@@ -20,26 +20,7 @@ const newUser = {
 };
 
 // User signin test
-describe('TEST', () => {
-  before(async () => {
-    try {
-      await db.query(createUsersTable());
-    } catch (error) {
-      console.log(error);
-    }
-  });
-});
-
-after(async () => {
-  try {
-    await db.query(dropUsersTable());
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-
-describe('SIGNUP ', () => {
+describe('SIGNUP', () => {
   it('should create new user account', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -47,6 +28,24 @@ describe('SIGNUP ', () => {
       .end((err, res) => {
         res.should.have.status(201);
         res.should.be.json;
+        res.body.should.have.property('message');
+        res.body.message.should.equal('You have successfully registered!');
+        done(err);
+      });
+  });
+});
+
+// user login
+describe('LOGIN', () => {
+  it('should sign users into an account', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(newUser)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.have.property('message');
+        res.body.message.should.equal('You have successfully signed in!');
         done(err);
       });
   });
