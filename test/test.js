@@ -49,7 +49,7 @@ describe('LOGIN', () => {
       });
   });
 });
-
+// party test
 describe('Party /GET', () => {
   it('should GET the list of all political parties', (done) => {
     chai.request(app)

@@ -7,7 +7,7 @@ const SECRET = process.env.SECERET;
 
 const Auth = {
   async verifyToken(req, res, next) {
-    const token = req.headers.authorization;
+    const token = req.headers['x-access-token'];
     if (!token) {
       return res.status(403).json({
         error: 'Token is not provided',
@@ -23,11 +23,10 @@ const Auth = {
         });
       }
       req.user = { id: decoded.userId };
-      next();
+      return next();
     } catch (error) {
       return res.status(403).json(error);
     }
-    return null;
   },
 };
 
