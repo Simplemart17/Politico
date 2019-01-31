@@ -2,7 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app/app';
 import db from '../app/model/db';
-import createUsersTable, { dropUsersTable } from '../app/model/queries';
 
 chai.use(chaiHttp);
 
@@ -30,6 +29,22 @@ describe('SIGNUP', () => {
         res.should.be.json;
         res.body.should.have.property('message');
         res.body.message.should.equal('You have successfully registered!');
+        done(err);
+      });
+  });
+});
+
+// user login
+describe('LOGIN', () => {
+  it('should sign users into an account', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(newUser)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.have.property('message');
+        res.body.message.should.equal('You have successfully signed in!');
         done(err);
       });
   });

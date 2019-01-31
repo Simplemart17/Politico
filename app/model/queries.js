@@ -89,6 +89,8 @@ const deleteParty = () => 'DELETE FROM parties WHERE id = $1 returning *';
 
 const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING *';
 
+const addUser = () => `INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
+
 export {
   createUsersTable,
   dropUsersTable,

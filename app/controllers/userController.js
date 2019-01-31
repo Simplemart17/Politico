@@ -45,6 +45,34 @@ const Users = {
       return res.json(error);
     }
   },
+
+  async userSignIn(req, res) {
+    const text = 'SELECT * FROM users WHERE   EMAIL = $1';
+    try {
+      const { rows } = await dBase.query(text, [req.body.email]);
+      if (!rows[0]) {
+        return res.status(406).json({
+          error: 'Incorrect email address',
+        });
+      }
+      if (!comparePassword(rows[0].password, req.body.password)) {
+        return res.status(406).json({
+          error: 'Incorrect password!',
+        });
+      }
+      const token = generateToken(rows[0].id);
+      delete rows[0].password;
+      return res.status(200).json({
+        message: 'You have successfully signed in!',
+        data: [{
+          token,
+          user: rows[0],
+        }],
+      });
+    } catch (error) {
+      return res.json(error);
+    }
+  },
 };
 
 export default Users;
