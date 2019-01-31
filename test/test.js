@@ -2,7 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app/app';
 import db from '../app/model/db';
-import createUsersTable, { dropUsersTable } from '../app/model/queries';
 
 chai.use(chaiHttp);
 
@@ -119,11 +118,11 @@ describe('Party /POST', () => {
         res.body.should.have.property('data');
         res.body.data.should.be.a('object');
         res.body.data.should.have.property('name');
-        res.body.data.name.should.equal('Nigeria Civil Party');
+        res.body.data[0].name.should.equal('Nigeria Civil Party');
         res.body.data.should.have.property('hqAddress');
-        res.body.data.hqAddress.should.equal('Victoria Island, Lagos');
+        res.body.data[0].hqAddress.should.equal('Victoria Island, Lagos');
         res.body.data.should.have.property('logoUrl');
-        res.body.data.logoUrl.should.equal('www.image.com/image3');
+        res.body.data[0].logoUrl.should.equal('www.image.com/image3');
         done(err);
       });
   });
