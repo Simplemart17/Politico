@@ -2,6 +2,7 @@ import express from 'express';
 import partyController from '../controllers/partyController';
 import officeController from '../controllers/officeController';
 import candidate from '../controllers/candidateController';
+import vote from '../controllers/voteController';
 import validation from '../middleware/validation';
 
 const router = express.Router();
@@ -23,5 +24,7 @@ router.get('/office', officeController.getAllOffice);
 router.get('/office/:id', officeController.getOffice);
 
 router.post('/office/:id/register', candidate.registerCandidate);
+
+router.post('/votes', vote.voteCandidate);
 
 export default router;
