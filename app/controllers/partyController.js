@@ -23,7 +23,7 @@ const PartyController = {
       return res.status(422).json({
         status: 422,
         error,
-        message: 'Party list was was fecthed',
+        message: 'Party list was fecthed',
       });
     }
   },
