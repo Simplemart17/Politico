@@ -3,28 +3,31 @@ import partyController from '../controllers/partyController';
 import officeController from '../controllers/officeController';
 import candidate from '../controllers/candidateController';
 import vote from '../controllers/voteController';
+import Auth from '../middleware/Auth';
 import validation from '../middleware/validation';
 
 const router = express.Router();
 
-router.get('/party', partyController.getAllParty);
+router.get('/party', Auth.verifyToken, partyController.getAllParty);
 
-router.get('/party/:id', partyController.getParty);
+router.get('/party/:id', Auth.verifyToken, partyController.getParty);
 
-router.post('/party', validation.input, partyController.createParty);
+router.post('/party', Auth.verifyToken, Auth.verifyIsAdmin, validation.input, partyController.createParty);
 
-router.delete('/party/:id', partyController.deleteParty);
+router.delete('/party/:id', Auth.verifyToken, Auth.verifyIsAdmin, partyController.deleteParty);
 
-router.patch('/party/:id/name', partyController.editParty);
+router.patch('/party/:id/name', Auth.verifyToken, Auth.verifyIsAdmin, partyController.editParty);
 
-router.post('/office', officeController.createOffice);
+router.post('/office', Auth.verifyToken, Auth.verifyIsAdmin, officeController.createOffice);
 
-router.get('/office', officeController.getAllOffice);
+router.get('/office', Auth.verifyToken, officeController.getAllOffice);
 
-router.get('/office/:id', officeController.getOffice);
+router.get('/office/:id', Auth.verifyToken, officeController.getOffice);
 
-router.post('/office/:id/register', candidate.registerCandidate);
+router.post('/office/:id/register', Auth.verifyToken, Auth.verifyIsAdmin, candidate.registerCandidate);
 
-router.post('/votes', vote.voteCandidate);
+router.post('/votes', Auth.verifyToken, vote.voteCandidate);
+
+router.get('/office/:id/result', Auth.verifyToken, vote.voteResult);
 
 export default router;

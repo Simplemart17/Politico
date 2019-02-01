@@ -20,7 +20,11 @@ const PartyController = {
         Total: rowCount,
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(422).json({
+        status: 422,
+        error,
+        message: 'Party list was fecthed',
+      });
     }
   },
 
@@ -41,7 +45,11 @@ const PartyController = {
         ],
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(422).json({
+        status: 422,
+        error,
+        message: 'Party list was fecthed',
+      });
     }
   },
 
@@ -62,7 +70,11 @@ const PartyController = {
         ],
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(400).json({
+        status: 400,
+        error,
+        message: 'Party cannot be created!',
+      });
     }
   },
 
@@ -80,7 +92,11 @@ const PartyController = {
         message: 'Political Party was successfully deleted!',
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(400).json({
+        status: 400,
+        error,
+        message: 'Party cannot be deleted!',
+      });
     }
   },
 
@@ -103,7 +119,11 @@ const PartyController = {
         data: rows,
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(400).json({
+        status: 400,
+        error,
+        message: 'Party was was not updated!',
+      });
     }
   },
 };

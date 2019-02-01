@@ -92,6 +92,14 @@ const deleteParty = () => 'DELETE FROM parties WHERE id = $1 returning *';
 
 const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING *';
 
+const getUsers = () => 'SELECT * FROM users WHERE id = $1';
+
+const getResults = () => `SELECT DISTINCT ON (office) office, candidate,  count(candidate) result
+FROM votes
+GROUP BY ((office, candidate), (office))
+ORDER BY office, result DESC
+`;
+
 export {
   createUsersTable,
   dropUsersTable,
@@ -114,4 +122,6 @@ export {
   updateParty,
   getParty,
   newVote,
+  getUsers,
+  getResults,
 };

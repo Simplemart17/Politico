@@ -17,7 +17,11 @@ export default {
         ],
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(422).json({
+        status: 422,
+        error,
+        message: 'The submission was not accepted!',
+      });
     }
   },
 };

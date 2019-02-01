@@ -14,9 +14,10 @@ const comparePassword = (hashPassword, password) => {
   return bcrypt.compareSync(password, hashPassword);
 };
 
-const generateToken = (id) => {
+const generateToken = (id, isAdmin) => {
   const token = jwt.sign({
-    userId: id,
+    id,
+    isAdmin,
   },
   SECRET, { expiresIn: '24h' });
   return token;
