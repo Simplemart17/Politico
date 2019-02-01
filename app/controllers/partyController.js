@@ -44,11 +44,12 @@ const PartyController = {
           rows[0],
         ],
       });
-    } catch (error) {return res.status(422).json({
-      status: 422,
-      error,
-      message: 'Party list was was fecthed',
-    });
+    } catch (error) {
+      return res.status(422).json({
+        status: 422,
+        error,
+        message: 'Party list was fecthed',
+      });
     }
   },
 
