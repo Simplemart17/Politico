@@ -20,7 +20,7 @@ const Users = {
     ];
     try {
       const { rows } = await dBase.query(queries.addUser(), values);
-      const token = generateToken(rows[0].id);
+      const token = generateToken(rows[0].id, rows[0].isadmin);
       delete rows[0].password;
       return res.status(201).json({
         status: 201,
@@ -42,7 +42,11 @@ const Users = {
           error: 'Username already exist!',
         });
       }
-      return res.json(error);
+      return res.status(400).json({
+        status: 400,
+        error,
+        message: 'Account cannot be created!',
+      });
     }
   },
 
@@ -60,7 +64,7 @@ const Users = {
           error: 'Incorrect password!',
         });
       }
-      const token = generateToken(rows[0].id);
+      const token = generateToken(rows[0].id, rows[0].isadmin);
       delete rows[0].password;
       return res.status(200).json({
         message: 'You have successfully signed in!',
@@ -70,7 +74,11 @@ const Users = {
         }],
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(401).json({
+        status: 401,
+        error,
+        message: 'You are denied access!',
+      });
     }
   },
 };

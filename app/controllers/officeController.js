@@ -18,7 +18,11 @@ const officeController = {
         ],
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(422).json({
+        status: 422,
+        error,
+        message: 'Office cannot be created!',
+      });
     }
   },
 
@@ -40,7 +44,11 @@ const officeController = {
         Total: rowCount,
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(422).json({
+        status: 422,
+        error,
+        message: 'Office list was was fecthed',
+      });
     }
   },
 
@@ -61,7 +69,11 @@ const officeController = {
         ],
       });
     } catch (error) {
-      return res.json(error);
+      return res.status(422).json({
+        status: 422,
+        error,
+        message: 'Office list was was fecthed',
+      });
     }
   },
 };
