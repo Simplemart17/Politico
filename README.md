@@ -4,63 +4,62 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Politico
-This is a platform which both the politicians and citizens can use.
 
-## About
-Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
+Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.This is a platform which both the politicians and citizens can use.
 
 
-# The API Endpoints Documentation
+## Getting Started
 
-**URL**
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-/api/v1/
+### Prerequisites
 
-**Method:**
+You need to install the following software 
 
-```GET/party```
+```
+node.js
+IDE - VScode, Atom etc.
+Browser - Chrome, Mozilla,
+```
 
-```GET/party/:id```
+### Installing
 
-```POST/party```
+A step by step series of examples that tell you how to get a development env running
 
-```PATCH/party/:id/name```
+Run the following command in your terminal to clone this repository 
 
-```DELETE/party```
+```
+git  clone https://github.com/Simplemart17/Politico.git
+```
 
-```GET/office```
+Navigate to the folder politico and run
 
-```GET/office/:id```
+```
+npm install
+```
 
-```POST/office```
+## Running the tests
 
-**URL Params**
+To run the test, run the following command in your terminal
+```
+npm test
+```
 
-```id=[integer]```
+## Deployment
 
-**Data Params**
+The app is depolyed on heroku. [App link](https://mart-politico-app.herokuapp.com/)
 
-_When making a POST for party request, the payload should be_
 
-  ````
-  {
-    "name": "String",
-    "hqAddress": "String",
-    "logoUrl": "String"
-  }
-  ````
-  
-  **Success Response:**
-  
-  ````
-  message: "String"
-  status: 201
-  Data: [{ }]
-  ````
-  
-  **Error Response:**
-  
-  ````
-  error: "String"
-  code: 404
-  ````
+## Author
+
+* [Martins Aloba](https://github.com/Simplemart17)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## External link
+
+* [Pivotal tracker Board](https://www.pivotaltracker.com/n/projects/2239033)
+
+* [Github pages](https://simplemart17.github.io/Politico/)
