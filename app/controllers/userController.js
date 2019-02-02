@@ -6,7 +6,7 @@ const Users = {
   async signUpUsers(req, res) {
     const hashPassword = generateHashPassword(req.body.password);
     const {
-      firstname, lastname, othernames, email, phonenumber, username, passportUrl,
+      firstname, lastname, othernames, email, phonenumber, username, passportUrl, isadmin,
     } = req.body;
     const values = [
       firstname,
@@ -17,6 +17,7 @@ const Users = {
       username,
       hashPassword,
       passportUrl,
+      isadmin,
     ];
     try {
       const { rows } = await dBase.query(queries.addUser(), values);

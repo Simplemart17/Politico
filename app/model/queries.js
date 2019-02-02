@@ -70,7 +70,7 @@ const createVoteTable = () => {
 };
 const dropVoteTable = () => 'DROP TABLE IF EXISTS votes';
 
-const addUser = () => `INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
+const addUser = () => `INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl, isadmin) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`;
 
 const newCandidate = () => `INSERT INTO candidates(office, candidate) VALUES($1, $2) RETURNING *`;
 
