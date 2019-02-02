@@ -55,7 +55,8 @@
     "nyc": "^13.1.0",
     "pg": "^7.8.0",
     "request": "^2.88.0",
-    "supertest": "^3.4.2"
+    "supertest": "^3.4.2",
+    "swagger-ui-express": "^4.0.2"
   },
   "devDependencies": {
     "eslint": "^5.12.1",

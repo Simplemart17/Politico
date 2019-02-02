@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/Simplemart17/Politico.svg?branch=develop)](https://travis-ci.org/Simplemart17/Politico)
 [![Coverage Status](https://coveralls.io/repos/github/Simplemart17/Politico/badge.svg?branch=ft-delete-party-api-163446193)](https://coveralls.io/github/Simplemart17/Politico?branch=ft-delete-party-api-163446193)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5c29b768b40a1a380cd2/maintainability)](https://codeclimate.com/github/Simplemart17/Politico/maintainability)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 # Politico
 
