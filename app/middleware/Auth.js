@@ -25,8 +25,7 @@ const Auth = {
       return next();
     } catch (error) {
       return res.status(403).json({
-        error,
-        messsage: 'Authentication fails!',
+        error: 'Authentication fails!',
       });
     }
   },
