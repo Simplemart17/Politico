@@ -122,7 +122,7 @@ const PartyController = {
       return res.status(400).json({
         status: 400,
         error,
-        message: 'Party was was not updated!',
+        message: 'Party name cannot be updated!',
       });
     }
   },

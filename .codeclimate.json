@@ -1,0 +1,24 @@
+{
+  "version": "2",
+  "checks": {
+    "method-lines": {
+      "config": {
+        "threshold": 100
+      }
+    },
+    "argument-count": {
+      "enabled": false
+    },
+    "similar-code": {
+      "enable": false
+    },
+    "identical-code": {
+      "enabled": false
+    }
+  },
+  "exclude_patterns": [
+    "UI/",
+    "test/**/*.js",
+    "**/node_modules/"
+  ]
+}

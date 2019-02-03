@@ -32,12 +32,12 @@ const Users = {
         }],
       });
     } catch (error) {
-      if (error.constrainst === 'users_email_key') {
+      if (error.constraint === 'users_email_key') {
         return res.status(400).json({
           status: 400,
           error: 'Email already exist!',
         });
-      } if (error === 'users_username_key') {
+      } if (error.constraint === 'users_username_key') {
         return res.status(400).json({
           status: 400,
           error: 'Username already exist!',
