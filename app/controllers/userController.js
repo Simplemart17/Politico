@@ -32,15 +32,10 @@ const Users = {
         }],
       });
     } catch (error) {
-      if (error.constraint === 'users_email_key') {
+      if (error.routine === '_bt_check_unique') {
         return res.status(400).json({
           status: 400,
           error: 'Email already exist!',
-        });
-      } if (error.constraint === 'users_username_key') {
-        return res.status(400).json({
-          status: 400,
-          error: 'Username already exist!',
         });
       }
       return res.status(400).json({

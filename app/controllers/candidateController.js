@@ -6,15 +6,17 @@ export default {
     const { office, candidate } = req.body;
     const values = [
       office,
-      candidate,
+      req.params.id,
     ];
     try {
       const { rows } = await dBase.query(queries.newCandidate(), values);
       return res.status(201).json({
         message: 'You have successfully registered as candidate!',
-        data: [
-          rows[0],
-        ],
+        data: [{
+          id: rows[0].id,
+          office: rows[0].office,
+          user: rows[0].candidate,
+        }],
       });
     } catch (error) {
       return res.status(422).json({

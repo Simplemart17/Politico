@@ -7,7 +7,7 @@ const createUsersTable = () => {
             othernames VARCHAR(128) NOT NULL,
             email VARCHAR(128) UNIQUE NOT NULL,
             phonenumber BIGINT,
-            username VARCHAR(128) UNIQUE NOT NULL,
+            username VARCHAR(128) NOT NULL,
             registered DATE DEFAULT CURRENT_DATE,
             password VARCHAR(128) NOT NULL,
             passportUrl VARCHAR(128),
@@ -94,11 +94,10 @@ const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING 
 
 const getUsers = () => 'SELECT * FROM users WHERE id = $1';
 
-const getResults = () => `SELECT DISTINCT ON (office) office, candidate,  count(candidate) result
+const getResults = () => `SELECT candidate, COUNT (candidate)
 FROM votes
-GROUP BY ((office, candidate), (office))
-ORDER BY office, result DESC
-`;
+WHERE office = $1
+GROUP BY candidate`;
 
 export {
   createUsersTable,

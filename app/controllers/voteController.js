@@ -27,7 +27,7 @@ const voteController = {
 
   async voteResult(req, res) {
     try {
-      const { rows } = await dBase.query(queries.getResults());
+      const { rows } = await dBase.query(queries.getResults(), [req.params.id]);
       if (!rows[0]) {
         return res.status(404).json({
           status: 404,
@@ -42,6 +42,7 @@ const voteController = {
         ],
       });
     } catch (error) {
+      console.log(error);
       return res.status(404).json({
         status: 404,
         error,

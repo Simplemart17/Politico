@@ -116,27 +116,6 @@ describe('POLITICO APP TEST', () => {
           done(err);
         });
     });
-    it('should return error for existing username', (done) => {
-      chai.request(app)
-        .post('/api/v1/auth/signup')
-        .send({
-          firstname: 'Martins',
-          lastname: 'Aloba',
-          othernames: 'Crown',
-          email: 'crown@gmail.com',
-          phonenumber: '08012345678',
-          username: 'simplemart',
-          password: 'mypassword',
-          passportUrl: 'www.image1.com',
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.should.be.json;
-          res.body.should.have.property('error');
-          res.body.error.should.equal('Username already exist!');
-          done(err);
-        });
-    });
   });
 
   // user login
@@ -591,7 +570,7 @@ describe('POLITICO APP TEST', () => {
           res.should.have.status(201);
           res.should.be.json;
           res.body.data[0].office.should.equal(1);
-          res.body.data[0].candidate.should.equal(1);
+          res.body.data[0].user.should.equal(1);
           res.body.message.should.equal('You have successfully registered as candidate!');
           done(err);
         });
@@ -732,7 +711,16 @@ describe('POLITICO APP TEST', () => {
           done(err);
         });
     });
-
+    it('should return error when result cannot be fetched', (done) => {
+      chai.request(app)
+        .get('/api/v1/office/2/result')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.error.should.equal('Result for election not found!');
+          done(err);
+        });
+    });
     it('should return error when token is not provided', (done) => {
       chai.request(app)
         .get('/api/v1/office/1/result')
