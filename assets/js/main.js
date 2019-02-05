@@ -116,7 +116,6 @@ const login = () => {
     email,
     password,
   };
-  console.log(data);
   const request = new Request(url, {
     method: 'post',
     body: JSON.stringify(data),
@@ -129,7 +128,7 @@ const login = () => {
     try {
       const resp = await fetch(payLoad);
       const data = await resp.json();
-      console.log(data);
+      console.log(resp.data);
       // window.location.href = '/index.hmtl';
       // return resp.status;
     } catch (err) {
