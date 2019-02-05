@@ -105,3 +105,35 @@ const signUp = () => {
 
   postSignup(request);
 };
+
+const login = () => {
+  event.preventDefault();
+  const url = 'http://localhost:8000/api/v1/auth/login';
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  const data = {
+    email,
+    password,
+  };
+  const request = new Request(url, {
+    method: 'post',
+    body: JSON.stringify(data),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+  });
+  async function postLogin(payLoad) {
+    try {
+      const resp = await fetch(payLoad);
+      const data = await resp.json();
+      console.log(data);
+      //   window.location.href = '/index.hmtl';
+      return resp.status;
+    } catch (err) {
+      throw err;
+    }
+  }
+  postLogin(request);
+};
