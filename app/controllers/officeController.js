@@ -20,7 +20,6 @@ const officeController = {
     } catch (error) {
       return res.status(422).json({
         status: 422,
-        error,
         message: 'Office cannot be created!',
       });
     }
@@ -33,20 +32,20 @@ const officeController = {
         return res.status(404).json({
           status: 404,
           message: 'No record found!',
+          data: [
+            {},
+          ],
         });
       }
       return res.status(200).json({
         status: 200,
         message: 'Government office lists was successfully retrieved',
-        data: [
-          rows,
-        ],
+        data: rows,
         Total: rowCount,
       });
     } catch (error) {
       return res.status(422).json({
         status: 422,
-        error,
         message: 'Office list was was fecthed',
       });
     }
@@ -71,7 +70,6 @@ const officeController = {
     } catch (error) {
       return res.status(422).json({
         status: 422,
-        error,
         message: 'Office list was was fecthed',
       });
     }

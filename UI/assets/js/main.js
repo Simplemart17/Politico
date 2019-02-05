@@ -63,3 +63,45 @@ const adminLogin = () => {
   }
   return null;
 };
+
+
+const signUp = () => {
+  event.preventDefault();
+  const url = 'http://localhost:8000/api/v1/auth/signup';
+  const firstname = document.getElementById('user_firstname').value;
+  const lastname = document.getElementById('user_lastname').value;
+  const othername = document.getElementById('user_othername').value;
+  const email = document.getElementById('user_email').value;
+  const username = document.getElementById('user_username').value;
+  const phonenumber = document.getElementById('user_phonenumber').value;
+  const password = document.getElementById('user_password').value;
+
+  const data = {
+    firstname,
+    lastname,
+    othername,
+    email,
+    username,
+    phoneNumber: phonenumber,
+    password,
+  };
+  const request = new Request(url, {
+    method: 'post',
+    body: JSON.stringify(data),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+  });
+  async function postSignup(payLoad) {
+    try {
+      const resp = await fetch(payLoad);
+      const data = await resp.json();
+      window.location.href = 'index.html';
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  postSignup(request);
+};

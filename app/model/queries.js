@@ -4,14 +4,14 @@ const createUsersTable = () => {
             id SERIAL PRIMARY KEY,
             firstname VARCHAR(128) NOT NULL,
             lastname VARCHAR(128) NOT NULL,
-            othernames VARCHAR(128) NOT NULL,
+            othername VARCHAR(128) NOT NULL,
             email VARCHAR(128) UNIQUE NOT NULL,
-            phonenumber BIGINT,
+            phoneNumber BIGINT,
             username VARCHAR(128) NOT NULL,
             registered DATE DEFAULT CURRENT_DATE,
             password VARCHAR(128) NOT NULL,
             passportUrl VARCHAR(128),
-            isadmin BOOLEAN DEFAULT FALSE
+            isAdmin BOOLEAN DEFAULT FALSE
             
           )`;
   return text;
@@ -35,7 +35,6 @@ const createOfficeTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
             offices(
               id SERIAL PRIMARY KEY UNIQUE,
-              createdon DATE DEFAULT CURRENT_DATE,
               type VARCHAR(128) NOT NULL,
               name VARCHAR(128) UNIQUE NOT NULL
             )`;
@@ -48,6 +47,7 @@ const createCandidateTable = () => {
               candidates(
                 id SERIAL UNIQUE,
                 createdon DATE DEFAULT CURRENT_DATE,
+                party INTEGER NOT NULL REFERENCES parties (id),
                 office INTEGER NOT NULL REFERENCES offices (id),
                 candidate INTEGER NOT NULL REFERENCES users (id),
                 PRIMARY KEY (office, candidate)
@@ -60,7 +60,7 @@ const createVoteTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
               votes(
                 id SERIAL,
-                createdon DATE DEFAULT CURRENT_DATE,
+                createdOn DATE DEFAULT CURRENT_DATE,
                 office INTEGER NOT NULL REFERENCES offices (id),
                 candidate INTEGER NOT NULL REFERENCES candidates (id),
                 voter INTEGER NOT NULL REFERENCES users (id),
@@ -70,9 +70,9 @@ const createVoteTable = () => {
 };
 const dropVoteTable = () => 'DROP TABLE IF EXISTS votes';
 
-const addUser = () => 'INSERT INTO users(firstname, lastname, othernames, email, phonenumber, username, password, passportUrl, isadmin) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *';
+const addUser = () => 'INSERT INTO users(firstname, lastname, othername, email, phoneNumber, username, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
 
-const newCandidate = () => 'INSERT INTO candidates(office, candidate) VALUES($1, $2) RETURNING *';
+const newCandidate = () => 'INSERT INTO candidates(party, office, candidate) VALUES($1, $2, $3) RETURNING *';
 
 const newVote = () => 'INSERT INTO votes(office, candidate, voter) VALUES($1, $2, $3) RETURNING *';
 
@@ -94,7 +94,7 @@ const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING 
 
 const getUsers = () => 'SELECT * FROM users WHERE id = $1';
 
-const getResults = () => `SELECT candidate, COUNT (candidate)
+const getResults = () => `SELECT candidate, COUNT (candidate) AS result
 FROM votes
 WHERE office = $1
 GROUP BY candidate`;

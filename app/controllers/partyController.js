@@ -9,6 +9,7 @@ const PartyController = {
         return res.status(404).json({
           status: 404,
           message: 'No record found!',
+          data: [{ }],
         });
       }
       return res.status(200).json({
@@ -22,7 +23,6 @@ const PartyController = {
     } catch (error) {
       return res.status(422).json({
         status: 422,
-        error,
         message: 'Party list was fecthed',
       });
     }
@@ -35,6 +35,9 @@ const PartyController = {
         return res.status(404).json({
           status: 404,
           message: 'Party record does not exist!',
+          data: [
+            {},
+          ],
         });
       }
       return res.status(200).json({
@@ -47,8 +50,7 @@ const PartyController = {
     } catch (error) {
       return res.status(422).json({
         status: 422,
-        error,
-        message: 'Party list was fecthed',
+        message: 'Party list cannot be fecthed',
       });
     }
   },
@@ -65,14 +67,14 @@ const PartyController = {
       return res.status(201).json({
         status: 201,
         message: 'political Party was successfully created!',
-        data: [
-          rows[0],
-        ],
+        data: [{
+          id: rows[0].id,
+          name: rows[0].name,
+        }],
       });
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error,
         message: 'Party cannot be created!',
       });
     }
@@ -89,12 +91,13 @@ const PartyController = {
       }
       return res.status(200).json({
         status: 200,
-        message: 'Political Party was successfully deleted!',
+        data: [{
+          message: 'Political Party was successfully deleted!',
+        }],
       });
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error,
         message: 'Party cannot be deleted!',
       });
     }
@@ -116,12 +119,14 @@ const PartyController = {
       return res.status(200).json({
         status: 200,
         message: `Party name was successfully changed to '${rows[0].name}'`,
-        data: rows,
+        data: [{
+          id: rows[0].id,
+          name: rows[0].name,
+        }],
       });
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error,
         message: 'Party name cannot be updated!',
       });
     }
