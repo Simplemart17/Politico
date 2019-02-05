@@ -128,8 +128,7 @@ const login = () => {
     try {
       const resp = await fetch(payLoad);
       const data = await resp.json();
-      console.log(data);
-      //   window.location.href = '/index.hmtl';
+      window.location.href = 'admin.hmtl';
       return resp.status;
     } catch (err) {
       throw err;
