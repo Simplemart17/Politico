@@ -157,29 +157,29 @@
       <!-- Create Party Modal Section -->
       <div id="partyModal" class="partyModal">
         <span onclick="closePartyModal()" class="close" title="Close Modal">&times;</span>
-        <form action class="modal-content" onsubmit="return createParty()">
+        <form class="modal-content">
             <div class="modal-container">
                 <h1>Create Political Party</h1>
                 <hr>
                 <label for="name"><b>Registered Party Name<span class="col-red">*</span></b></label>
-                <input type="text" name="pname" id="party_name">
+                <input type="text" name="pname">
 
                 <label for="acronm"><b>Party Acronym<span class="col-red">*</span></b></label>
                 <input type="text" name="acronm">
 
                 <label for="party"><b>Party Logo<span class="col-red">*</span></b></label>
-                <input type="file" name="partylogo" id="party_logo">
+                <input type="file" name="partylogo">
           
                 <label for="padd"><b>Headquarter Address<span class="col-red">*</span></b></label>
-                <input type="text" name="hqadd" id="party_hq">
-<!-- onclick="closePartyModal()" -->
+                <input type="text" name="hqadd">
+
                 <div class="reg-btn center">
                     <div class="inline">
-                        <input class="col-white bg-green" name="submit"  type="submit" value="Create">
+                        <input class="col-white bg-green" onclick="closePartyModal()" type="button" value="Create">
                     </div>
-                    <!-- <div class="inline ">
+                    <div class="inline ">
                         <input class="col-white bg-grey" onclick="closePartyModal()" type="button" value="Cancel">
-                    </div>  -->
+                    </div> 
                 </div>
             </div>
         </form>
