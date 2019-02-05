@@ -131,7 +131,9 @@ const login = () => {
       if (resp.data) {
         localStorage.setItem('token', resp.data[0].token);
         localStorage.setItem('user', JSON.stringify(resp.data[0].user));
-        resp.data[0].user.isadmin ? window.location.assign('admin.html') : window.location.assign('citizen-profile.html');
+        if (resp.data[0].user.isadmin) {window.location.assign('admin.html')};
+      } else {
+        window.location.assign('citizen-profile.html');
       }
     } catch (err) {
       throw err;
