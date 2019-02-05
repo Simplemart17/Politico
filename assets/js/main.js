@@ -108,7 +108,7 @@ const signUp = () => {
 
 const login = () => {
   event.preventDefault();
-  const url = 'http://localhost:8000/api/v1/auth/login';
+  const url = 'https://mart-politico-app.herokuapp.com/api/v1/auth/login';
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
@@ -128,9 +128,11 @@ const login = () => {
     try {
       const resp = await fetch(payLoad);
       const data = await resp.json();
-      console.log(data);
-      //   window.location.href = '/index.hmtl';
-      return resp.status;
+      if (resp.data) {
+        localStorage.setItem('token', resp.data[0].token);
+        localStorage.setItem('user', JSON.stringify(resp.data[0].user));
+        resp.data[0].user.isadmin ? window.location.assign('admin.html') : window.location.assign('citizen-profile.html');
+      }
     } catch (err) {
       throw err;
     }
