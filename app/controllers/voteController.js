@@ -3,7 +3,8 @@ import * as queries from '../model/queries';
 
 const voteController = {
   async voteCandidate(req, res) {
-    const { office, candidate, voter } = req.body;
+    const voter = req.user.id;
+    const { office, candidate } = req.body;
     const values = [
       office,
       candidate,
@@ -13,13 +14,15 @@ const voteController = {
       const { rows } = await dBase.query(queries.newVote(), values);
       return res.status(201).json({
         message: 'Your vote successfully submitted!',
-        data: [
-          rows[0],
-        ],
+        data: [{
+          office: rows[0].office,
+          candidate: rows[0].candidate,
+          voter: rows[0].voter,
+        }],
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).json({
-        error,
         message: 'Submission fails!',
       });
     }
@@ -42,10 +45,8 @@ const voteController = {
         ],
       });
     } catch (error) {
-      console.log(error);
       return res.status(404).json({
         status: 404,
-        error,
         message: 'Election result could not be fetched!',
       });
     }

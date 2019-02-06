@@ -3,17 +3,18 @@ import * as queries from '../model/queries';
 
 export default {
   async registerCandidate(req, res) {
-    const { office, candidate } = req.body;
+    const candidate = req.params.id;
+    const { party, office } = req.body;
     const values = [
+      party,
       office,
-      req.params.id,
+      candidate,
     ];
     try {
       const { rows } = await dBase.query(queries.newCandidate(), values);
       return res.status(201).json({
         message: 'You have successfully registered as candidate!',
         data: [{
-          id: rows[0].id,
           office: rows[0].office,
           user: rows[0].candidate,
         }],
@@ -21,7 +22,6 @@ export default {
     } catch (error) {
       return res.status(422).json({
         status: 422,
-        error,
         message: 'The submission was not accepted!',
       });
     }

@@ -6,18 +6,17 @@ const Users = {
   async signUpUsers(req, res) {
     const hashPassword = generateHashPassword(req.body.password);
     const {
-      firstname, lastname, othernames, email, phonenumber, username, passportUrl, isadmin,
+      firstname, lastname, othername, email, phoneNumber, username, passportUrl,
     } = req.body;
     const values = [
       firstname,
       lastname,
-      othernames,
+      othername,
       email,
-      phonenumber,
+      phoneNumber,
       username,
       hashPassword,
       passportUrl,
-      isadmin,
     ];
     try {
       const { rows } = await dBase.query(queries.addUser(), values);
@@ -40,7 +39,6 @@ const Users = {
       }
       return res.status(400).json({
         status: 400,
-        error,
         message: 'Account cannot be created!',
       });
     }
@@ -72,7 +70,6 @@ const Users = {
     } catch (error) {
       return res.status(401).json({
         status: 401,
-        error,
         message: 'You are denied access!',
       });
     }

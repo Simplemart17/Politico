@@ -8,21 +8,21 @@ import validation from '../middleware/validation';
 
 const router = express.Router();
 
-router.get('/party', Auth.verifyToken, partyController.getAllParty);
+router.get('/parties', Auth.verifyToken, partyController.getAllParty);
 
-router.get('/party/:id', Auth.verifyToken, partyController.getParty);
+router.get('/parties/:id', Auth.verifyToken, partyController.getParty);
 
-router.post('/party', Auth.verifyToken, Auth.verifyIsAdmin, validation.input, partyController.createParty);
+router.post('/parties', Auth.verifyToken, Auth.verifyIsAdmin, validation.inputName, validation.inputParties, partyController.createParty);
 
-router.delete('/party/:id', Auth.verifyToken, Auth.verifyIsAdmin, partyController.deleteParty);
+router.delete('/parties/:id', Auth.verifyToken, Auth.verifyIsAdmin, partyController.deleteParty);
 
-router.patch('/party/:id/name', Auth.verifyToken, Auth.verifyIsAdmin, partyController.editParty);
+router.patch('/parties/:id/name', Auth.verifyToken, Auth.verifyIsAdmin, validation.inputName, partyController.editParty);
 
-router.post('/office', Auth.verifyToken, Auth.verifyIsAdmin, officeController.createOffice);
+router.post('/offices', Auth.verifyToken, Auth.verifyIsAdmin, validation.inputName, validation.officeType, officeController.createOffice);
 
-router.get('/office', Auth.verifyToken, officeController.getAllOffice);
+router.get('/offices', Auth.verifyToken, officeController.getAllOffice);
 
-router.get('/office/:id', Auth.verifyToken, officeController.getOffice);
+router.get('/offices/:id', Auth.verifyToken, officeController.getOffice);
 
 router.post('/office/:id/register', Auth.verifyToken, Auth.verifyIsAdmin, candidate.registerCandidate);
 
