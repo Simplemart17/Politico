@@ -9,6 +9,19 @@ body {
     line-height: 1.5;
 }
 
+#success {
+    display: none;
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 3px;
+    width: 90%;
+    background-color: #86ca91;
+}
+
+.error {
+    font-size: 12px;
+}
+
 .marquee {
     background: #dfdfdf;
     height: 30px;
