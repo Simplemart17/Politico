@@ -60,16 +60,10 @@
           <input type="number" name="phone" id="user_phonenumber">
 
           <label for="password">Password<span class="col-red">*</span> </label>
-          <input type="password" name="password" id="user_password">
+          <input type="password" name="password" id="user_password" onkeyup="passwordCheck()">
 
           <label for="confirm">Confirm Password<span class="col-red">*</span> </label>
-          <input type="password" name="confirm_pass" id="user_confirm_password">
-          
-          <!-- <label for="type">User type<span class="col-red">*</span></label> -->
-          <!-- <div class="radio">
-            <div class="inline"><input type="radio" name="type" value="politician" checked> Politician</div>
-            <div class="inline"><input type="radio" name="type" value="citizen"> Citizen</div>
-          </div> -->
+          <input type="password" name="confirm_pass" id="user_confirm_password" onkeyup="passwordCheck()">
           
           <div class="upload">
             <label for="media">Upload Passport<span class="col-red">*</span></label>
@@ -78,7 +72,7 @@
           <p id="success" class="center col-white">You have successfully registered</p>
           <div class="reg-btn center">
             <div class="inline">
-              <input class="col-white bg-green" name="submit" type="submit" value="Register">
+              <input class="col-white bg-green" name="submit" type="submit" id="register_btn" value="Register">
             </div>
             <div class="inline ">
               <input class="col-white bg-grey" onclick="reset()" type="button" value="Reset">

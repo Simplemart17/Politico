@@ -56,3 +56,15 @@ const removeParty = () => {
   const elem = document.getElementById('remove');
   elem.parentNode.removeChild(elem);
 };
+
+const passwordCheck = () => {
+  const password1 = document.getElementById('user_password').value;
+  const password2 = document.getElementById('user_confirm_password').value;
+  if (password1 !== password2) {
+    document.getElementById('user_confirm_password').style.borderColor = 'red';
+    document.getElementById('register_btn').disabled = true;
+  } else {
+    document.getElementById('user_confirm_password').style.borderColor = 'green';
+    document.getElementById('register_btn').disabled = false;
+  }
+};

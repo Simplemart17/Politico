@@ -30,7 +30,6 @@ const signUp = () => {
     try {
       const response = await fetch(payLoad);
       const data = await response.json();
-      console.log(data);
       if (data.error === 'Email already exist!') {
         errMsg.innerHTML = data.error;
       }
@@ -39,8 +38,9 @@ const signUp = () => {
         return response.status;
       }
       if (response.status === 201) {
-        window.location.href = 'citizen-signin.html';
-        console.log(data);
+        setTimeout(() => {
+          window.location.href = 'citizen-signin.html';
+        }, 2000);
       }
     } catch (err) {
       throw err;
@@ -51,8 +51,8 @@ const signUp = () => {
 
 const signinForm = document.getElementById('signin-form');
 const url = 'http://localhost:8000/api/v1/auth/login';
-signinForm.onsubmit = (e) => {
-  e.preventDefault();
+signinForm.onsubmit = () => {
+  event.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
   const emailError = document.getElementById('email_error');
