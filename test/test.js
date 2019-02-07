@@ -21,45 +21,19 @@ chai.use(chaiHttp);
 const should = chai.should();
 
 describe('POLITICO APP TEST', () => {
-  before(async () => {
-    try {
-      await db.query(createUsersTable());
-      await db.query(createPartyTable());
-      await db.query(createOfficeTable());
-      await db.query(createCandidateTable());
-      await db.query(createVoteTable());
-      await db.query(addTestAdmin());
-      console.log('created tables');
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
-  after(async () => {
-    try {
-      await db.query(dropVoteTable());
-      await db.query(dropCandidateTable());
-      await db.query(dropOfficeTable());
-      await db.query(dropPartyTable());
-      await db.query(dropUsersTable());
-    } catch (error) {
-      console.log(error);
-    }
-  });
-
   const newUser = {
     firstname: 'Martins',
     lastname: 'Aloba',
     othername: 'Crown',
-    email: 'crown-mart@gmail.com',
+    email: 'testmail@gmail.com',
     phoneNumber: '08012345678',
     password: 'mypassword',
     passportUrl: 'www.image1.com',
   };
 
   const loginUser = {
-    email: 'simplemart@gmail.com',
-    password: 'admin',
+    email: 'test@politico.com',
+    password: 'test',
   };
 
   let token;
@@ -75,23 +49,6 @@ describe('POLITICO APP TEST', () => {
           res.should.be.json;
           res.body.should.have.property('message');
           res.body.message.should.equal('Welcome to politico');
-          done(err);
-        });
-    });
-  });
-  // admin login to generate token
-  describe('LOGIN ADMIN', () => {
-    it('should sign admin in to an account', (done) => {
-      chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(loginUser)
-        .end((err, res) => {
-          const { body } = res;
-          // eslint-disable-next-line prefer-destructuring
-          token = body.data[0].token;
-          res.should.have.status(200);
-          res.should.be.json;
-          res.body.message.should.equal('You have successfully signed in!');
           done(err);
         });
     });
@@ -117,7 +74,7 @@ describe('POLITICO APP TEST', () => {
           firstname: 'Martins',
           lastname: 'Aloba',
           othername: 'Crown',
-          email: 'crown-mart@gmail.com',
+          email: 'testmail@gmail.com',
           phoneNumber: '08012345678',
           password: 'mypassword',
           passportUrl: 'www.image1.com',
@@ -158,6 +115,23 @@ describe('POLITICO APP TEST', () => {
           res.should.have.status(406);
           res.should.be.json;
           res.body.error.should.equal('Incorrect password!');
+          done(err);
+        });
+    });
+    it('should sign admin in to an account', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(loginUser)
+        .end((err, res) => {
+          console.log(`--------->${res.body}`);
+          console.log(`----------------->${loginUser}`);
+          const { body } = res;
+          // eslint-disable-next-line prefer-destructuring
+          token = body.data[0].token;
+          console.log(token);
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.message.should.equal('You have successfully signed in!');
           done(err);
         });
     });

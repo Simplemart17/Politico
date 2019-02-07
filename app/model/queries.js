@@ -11,7 +11,6 @@ const createUsersTable = () => {
             password VARCHAR(128) NOT NULL,
             passportUrl VARCHAR(128),
             isAdmin BOOLEAN DEFAULT FALSE
-            
           )`;
   return text;
 };

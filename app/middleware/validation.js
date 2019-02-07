@@ -11,18 +11,27 @@ const validatorFunction = (req, res, next) => {
   return next();
 };
 
+const candidateInputCheck = (arg, min, max) => check(arg)
+  .trim()
+  .isInt()
+  .withMessage('This field is required to be an integer!');
+
+const idCheck = (arg, min, max) => check(arg)
+  .trim()
+  .isInt()
+  .withMessage('Id should be an integer');
+
 const integerCheck = (arg, min, max) => check(arg)
-  .escape()
   .trim()
   .isLength({ min, max })
-  .withMessage(`Phone number must be between ${min} -${max}`, 11, 13)
+  .withMessage(`Phone number must be between ${min} - ${max}`)
   .isInt()
   .withMessage('The field must be an integer');
 
 const inputCheck = (arg, min, max) => check(arg)
-  .escape()
   .trim()
   .isLength({ min, max })
+  .withMessage(`Input must be between ${min} - ${max} character`)
   .isString()
   .withMessage('This field is required!');
 const middleware = {
@@ -52,7 +61,18 @@ const middleware = {
     validatorFunction,
   ],
   editParty: [
-    inputCheck('name'),
+    inputCheck('name', 8, 20),
+    validatorFunction,
+  ],
+
+  idParamsCheck: [
+    idCheck('id'),
+    validatorFunction,
+  ],
+
+  candidateInput: [
+    candidateInputCheck('party'),
+    candidateInputCheck('office'),
     validatorFunction,
   ],
 };
