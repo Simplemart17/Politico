@@ -26,7 +26,7 @@ router.get('/offices/:id', Auth.verifyToken, validation.idParamsCheck, officeCon
 
 router.post('/office/:id/register', Auth.verifyToken, Auth.verifyIsAdmin, validation.idParamsCheck, validation.candidateInput, candidate.registerCandidate);
 
-router.post('/votes', Auth.verifyToken, vote.voteCandidate);
+router.post('/votes', Auth.verifyToken, validation.voteInput, vote.voteCandidate);
 
 router.get('/office/:id/result', Auth.verifyToken, validation.idParamsCheck, vote.voteResult);
 

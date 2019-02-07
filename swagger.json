@@ -1,612 +1,705 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "description": "Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency. This is a platform which both the politicians and citizens can use.",
-    "version": "1.0.0",
-    "title": "Politico",
-    "contact": {
-      "email": "martins.aloba@gmail.com"
+  "openapi" : "3.0.1",
+  "info" : {
+    "description" : "Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency. This is a platform which both the politicians and citizens can use.",
+    "version" : "1.0.0",
+    "title" : "Politico",
+    "contact" : {
+      "email" : "martins.aloba@gmail.com"
     },
-    "license": {
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
+    "license" : {
+      "name" : "MIT",
+      "url" : "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "mart-politico-app.herokuapp.com",
-  "basePath": "/api/v1",
-  "tags": [
-    {
-      "name": "party",
-      "description": "Route for political party"
-    },
-    {
-      "name": "office",
-      "description": "Route for government office"
-    },
-    {
-      "name": "vote",
-      "description": "Route to cast vote"
-    },
-    {
-      "name": "user",
-      "description": "Route for users"
-    }
-  ],
-  "schemes": [
-    "https",
-    "http"
-  ],
-  "paths": {
-    "/party": {
-      "post": {
-        "tags": [
-          "party"
-        ],
-        "summary": "Add a new political party to the database",
-        "description": "",
-        "operationId": "addParty",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Party object that needs to be added to the database",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Party"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "political Party was successfully created!"
+  "tags" : [ {
+    "name" : "user",
+    "description" : "Route for users"
+  }, {
+    "name" : "party",
+    "description" : "Route for political party"
+  }, {
+    "name" : "office",
+    "description" : "Route for government office"
+  }, {
+    "name" : "vote",
+    "description" : "Route to cast vote"
+  }, {
+    "name" : "result",
+    "description" : "Route to cast vote"
+  } ],
+  "servers" : [ {
+    "url" : "https://mart-politico-app.herokuapp.com"
+  } ],
+  "paths" : {
+    "/api/v1/parties" : {
+      "post" : {
+        "tags" : [ "party" ],
+        "description" : "This display the full lists of all registered political parties",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
           },
-          "400": {
-            "description": "Party cannot be created!"
-          },
-          "403": {
-            "description": "Token is not provided"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "party"
-        ],
-        "summary": "Find all parties",
-        "description": "Returns all party",
-        "operationId": "getParty",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "partyId",
-            "in": "path",
-            "description": "party to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Party record retrieved successfully!",
-            "schema": {
-              "$ref": "#/definitions/Party"
-            }
-          },
-          "404": {
-            "description": "Party record does not exist!"
-          },
-          "422": {
-            "description": "Party list was fecthed"
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "party"
-        ],
-        "summary": "Deletes a party",
-        "description": "",
-        "operationId": "deletePary",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api_key",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "partyId",
-            "in": "path",
-            "description": "Party id to delete",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Political Party record cannot be found!"
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
-    "/party/{partyId}": {
-      "get": {
-        "tags": [
-          "party"
-        ],
-        "summary": "Find party by ID",
-        "description": "Returns a single party",
-        "operationId": "getPartyById",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "partyId",
-            "in": "path",
-            "description": "ID of party to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Party record retrieved successfully!",
-            "schema": {
-              "$ref": "#/definitions/Party"
-            }
-          },
-          "404": {
-            "description": "Party record does not exist!"
-          },
-          "422": {
-            "description": "Party list was fecthed"
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
-    "/party/{partyId}/name": {
-      "patch": {
-        "tags": [
-          "office"
-        ],
-        "summary": "Update party name",
-        "description": "Returns party by id",
-        "operationId": "getOfficeId",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "partyId",
-            "in": "path",
-            "description": "ID of office",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Party name was successfully changed to"
-          },
-          "404": {
-            "description": "Party was was not updated!"
-          }
-        }
-      }
-    },
-    "/office/": {
-      "get": {
-        "tags": [
-          "office"
-        ],
-        "summary": "Returns all offices",
-        "description": "return list of all offices",
-        "operationId": "getOffice",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Government offices successfully retrieved",
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "office"
-        ],
-        "summary": "Create new office",
-        "description": "",
-        "operationId": "createOffice",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "officeId",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Office successfully created"
-          }
-        }
-      }
-    },
-    "/office/{officeId}/register": {
-      "post": {
-        "tags": [
-          "office"
-        ],
-        "summary": "Find office ID",
-        "description": "Returns office by id",
-        "operationId": "OfficeId",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "officeId",
-            "in": "path",
-            "description": "ID of office",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "You have successfully registered",
-            "schema": {
-              "$ref": "#/definitions/Office"
-            }
-          },
-          "400": {
-            "description": "Your form cannot be submitted"
-          }
-        }
-      }
-    },
-    "/office/{officeId}": {
-      "get": {
-        "tags": [
-          "office"
-        ],
-        "summary": "Find office ID",
-        "description": "Returns office by id",
-        "operationId": "getOfficeById",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "officeId",
-            "in": "path",
-            "description": "ID of office",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Government office successfully retrieved",
-            "schema": {
-              "$ref": "#/definitions/Office"
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Government office does not exist"
-          }
-        }
-      }
-    },
-    "/office/{officeId}/result": {
-      "get": {
-        "tags": [
-          "office"
-        ],
-        "summary": "Find office ID",
-        "description": "Returns office by id",
-        "operationId": "getOfficeResult",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "officeId",
-            "in": "path",
-            "description": "ID of office",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Government office successfully retrieved",
-            "schema": {
-              "$ref": "#/definitions/Office"
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Government office does not exist"
-          }
-        }
-      }
-    },
-    "/votes/": {
-      "post": {
-        "tags": [
-          "vote"
-        ],
-        "summary": "Vote candidate",
-        "description": "This create vote for government office",
-        "operationId": "createUser",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Create vote for candidate",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/vote"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "successful operation"
-          }
-        }
-      }
-    },
-    "/auth/signup": {
-      "post": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Create user",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "NewUser",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Created user object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "You have successfully registered"
-          }
-        }
-      }
-    },
-    "/auth/login": {
-      "get": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Logs user into the system",
-        "description": "",
-        "operationId": "loginUser",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "email",
-            "in": "query",
-            "description": "The eamil for user",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "password",
-            "in": "query",
-            "description": "The password for login",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "You have successfully login",
-            "schema": {
-              "type": "string"
-            },
-            "headers": {
-              "X-Rate-Limit": {
-                "type": "integer",
-                "format": "int32",
-                "description": "calls per hour allowed by the user"
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "hqAddress" : {
+                    "type" : "string"
+                  },
+                  "logoUrl" : {
+                    "type" : "string"
+                  }
+                }
               },
-              "X-Expires-After": {
-                "type": "string",
-                "format": "date-time",
-                "description": "date in UTC when token expires"
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"name\": \"New Democratic Party\",\n    \"hqAddress\": \"Glass house, Abuja\",\n    \"logoUrl\": \"image.com\"\n}"
+                },
+                "1" : {
+                  "value" : "{\n    \"name\": \"New Democratic Party\",\n    \"hqAddress\": \"Glass house, Abuja\",\n    \"logoUrl\": \"image.com\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Political parties are successfully retrieved",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
               }
             }
           },
-          "400": {
-            "description": "Invalid email/password supplied"
+          "403" : {
+            "description" : "Authentication is required",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
           }
-        }
-      }
-    }
-  },
-  "securityDefinitions": {
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
-    }
-  },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
         },
-        "firstname": {
-          "type": "string"
-        },
-        "lastname": {
-          "type": "string"
-        },
-        "othername": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "phonenumber": {
-          "type": "string"
-        },
-        "registered": {
-          "format": "date-type"
-        },
-        "passporturl": {
-          "type": "string"
-        }
-      }
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
     },
-    "Office": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
+    "/api/v1/auth/login" : {
+      "post" : {
+        "tags" : [ "user" ],
+        "description" : "The registered candidate is logged in to their account",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "paswword" : {
+                    "type" : "string"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \n    \"email\": \"tests@mail.com\",\n    \"password\": \"newpass\"\n}"
+                },
+                "1" : {
+                  "value" : "{\n    \"email\": \"simplemart\",\n    \"paswword\": \"test\"\n}"
+                },
+                "2" : {
+                  "value" : "{\n    \"email\": \"simplemart@gmail.com\",\n    \"paswword\": \"test\"\n}"
+                },
+                "3" : {
+                  "value" : "{\n    \"email\": \"test@politico.com\",\n    \"password\": \"test\"\n}"
+                }
+              }
+            }
+          }
         },
-        "createdon": {
-          "type": "string",
-          "format": "date-type"
+        "responses" : {
+          "200" : {
+            "description" : "You have successfully logged in!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          },
+          "400" : {
+            "description" : "The page cannot be found!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          },
+          "401" : {
+            "description" : "You are denied access!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
         },
-        "type": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      }
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
     },
-    "vote": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
+    "/api/v1/auth/signup" : {
+      "post" : {
+        "tags" : [ "user" ],
+        "description" : "A user is registered to use the app",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "firstname" : {
+                    "type" : "string"
+                  },
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "phoneNumber" : {
+                    "type" : "string"
+                  },
+                  "othername" : {
+                    "type" : "string"
+                  },
+                  "passportUrl" : {
+                    "type" : "string"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "lastname" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"firstname\": \"Alex\",\n    \"lastname\": \"Sandra\",\n    \"othername\": \"Kingsley\",\n    \"email\": \"test@mail.com\",\n    \"phoneNumber\": \"080234564567\",\n    \"password\": \"newpass\",\n    \"passportUrl\": \"image.jpg\"\n}"
+                },
+                "1" : {
+                  "value" : "{\n    \"firstname\": \"Alex\",\n    \"lastname\": \"Sandra\",\n    \"othername\": \"Kingsley\",\n    \"email\": \"tests@mail.com\",\n    \"phoneNumber\": \"080234564567\",\n    \"password\": \"newpass\",\n    \"passportUrl\": \"image.jpg\"\n}"
+                }
+              }
+            }
+          }
         },
-        "createdon": {
-          "type": "string",
-          "format": "date-type"
+        "responses" : {
+          "201" : {
+            "description" : "You have successfully registered!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
         },
-        "office": {
-          "type": "integer"
-        },
-        "candidate": {
-          "type": "integer"
-        },
-        "voter": {
-          "type": "integer"
-        }
-      }
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
     },
-    "Party": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "example": 1
+    "/api/v1/parties/1/name" : {
+      "patch" : {
+        "tags" : [ "party" ],
+        "description" : "This endpoint edit the name of a registered political party",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "hqAddress" : {
+                    "type" : "string"
+                  },
+                  "logoUrl" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"name\": \"Another Generation Party\",\n    \"hqAddress\": \"Glass house, Abuja\",\n    \"logoUrl\": \"image.com\"\n}"
+                },
+                "1" : {
+                  "value" : "{\n    \"name\": \" \",\n    \"hqAddress\": \"Glass house, Abuja\",\n    \"logoUrl\": \"image.com\"\n}"
+                }
+              }
+            }
+          }
         },
-        "name": {
-          "type": "string",
-          "example": "doggie"
+        "responses" : {
+          "200" : {
+            "description" : "Political party name was successfully changed!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Party name cannot be updated!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
         },
-        "hqAddress": {
-          "type": "string"
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
+    },
+    "/api/v1/parties/2" : {
+      "get" : {
+        "tags" : [ "party" ],
+        "description" : "The endpoint return a registered political party by ID",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "responses" : {
+          "404" : {
+            "description" : "The political party record cannot be found!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
         },
-        "logoUrl": {
-          "type": "string"
-        }
-      }
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
+    },
+    "/api/v1/parties/1" : {
+      "get" : {
+        "tags" : [ "party" ],
+        "description" : "The endpoint return the registered political party by ID",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Political party was successfully retrieved!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "delete" : {
+        "tags" : [ "party" ],
+        "description" : "This endpoint delete a political party",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Political party was successfully deleted!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
+    },
+    "paths" : null,
+    "/api/v1/office/1/result" : {
+      "get" : {
+        "tags" : [ "result" ],
+        "description" : "The endpoint return the result of concluded election result by office",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU0OTU2ODI2NywiZXhwIjoxNTQ5NzQxMDY3fQ.fN9kcB38_nzSf5ouZ81x-PcyH2EZHqvvJcmZm2q92vc"
+        } ],
+        "responses" : {
+          "403" : {
+            "description" : "Please provide token/Invalid token/expired token",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          },
+          "404" : {
+            "description" : "The election result cannot be found!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
+    },
+    "/api/v1/offices/" : {
+      "get" : {
+        "tags" : [ "office" ],
+        "description" : "The endpoint returns the list of registered government office",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Government offices was successfully retrieved!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
+    },
+    "/api/v1/offices/1" : {
+      "get" : {
+        "tags" : [ "office" ],
+        "description" : "The endpoint return a government office by ID",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Government office was successfully retrieved",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
+    },
+    "/api/v1/votes" : {
+      "post" : {
+        "tags" : [ "vote" ],
+        "description" : "This endpoint is used to vote for candidate contesting for government office",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU2MjMzLCJleHAiOjE1NDk3MjkwMzN9.pggN42XgaC5yaJED9R4nGEVMe7aYNotFvu1chFYM_4E"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "candidate" : {
+                    "type" : "integer"
+                  },
+                  "office" : {
+                    "type" : "integer"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"office\": 2,\n    \"candidate\": 1\n}"
+                },
+                "1" : {
+                  "value" : "{\n    \"office\": 2,\n    \"candidate\": 1\n}"
+                },
+                "2" : {
+                  "value" : "{\n    \"office\": 2,\n    \"candidate\": 1\n}"
+                },
+                "3" : {
+                  "value" : "{\n    \"office\": 1,\n    \"candidate\": 1\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "400" : {
+            "description" : "You are allowed to vote once for a candidate",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
+    },
+    "/api/v1/office/1/register" : {
+      "post" : {
+        "tags" : [ "office" ],
+        "description" : "The endpoint registers a candidate that indicate interest in running for government office",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "office" : {
+                    "type" : "integer"
+                  },
+                  "party" : {
+                    "type" : "integer"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"party\": 2,\n    \"office\": 1\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "You have successfully registered as a candidate",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
+    },
+    "/api/v1/offices" : {
+      "post" : {
+        "tags" : [ "office" ],
+        "description" : "This endpoint creates government office",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTQ5NTU0MTk2LCJleHAiOjE1NDk3MjY5OTZ9.Dt8kbTDbBIEh3zjjCpoKCjcpww24wa1TdBJAyNAho3g"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "type" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"type\": \"Federal\",\n    \"name\": \"President\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Government office successfully created",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://mart-politico-app.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://mart-politico-app.herokuapp.com"
+      } ]
     }
   }
 }

@@ -75,5 +75,11 @@ const middleware = {
     candidateInputCheck('office'),
     validatorFunction,
   ],
+
+  voteInput: [
+    candidateInputCheck('office'),
+    candidateInputCheck('candidate'),
+    validatorFunction,
+  ],
 };
 export default middleware;
