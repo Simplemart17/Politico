@@ -1,20 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app/app';
-import db from '../app/model/db';
-import addTestAdmin from '../app/model/createTables';
-import {
-  createUsersTable,
-  createPartyTable,
-  createOfficeTable,
-  createCandidateTable,
-  createVoteTable,
-  dropCandidateTable,
-  dropOfficeTable,
-  dropPartyTable,
-  dropUsersTable,
-  dropVoteTable,
-} from '../app/model/queries';
 
 chai.use(chaiHttp);
 
@@ -123,12 +109,9 @@ describe('POLITICO APP TEST', () => {
         .post('/api/v1/auth/login')
         .send(loginUser)
         .end((err, res) => {
-          console.log(`--------->${res.body}`);
-          console.log(`----------------->${loginUser}`);
           const { body } = res;
           // eslint-disable-next-line prefer-destructuring
           token = body.data[0].token;
-          console.log(token);
           res.should.have.status(200);
           res.should.be.json;
           res.body.message.should.equal('You have successfully signed in!');
@@ -593,7 +576,7 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.should.be.json;
-          res.body.message.should.equal('Submission fails!');
+          res.body.message.should.equal('You are allowed to vote once for a candidate');
           done(err);
         });
     });

@@ -31,7 +31,7 @@ const integerCheck = (arg, min, max) => check(arg)
 const inputCheck = (arg, min, max) => check(arg)
   .trim()
   .isLength({ min, max })
-  .withMessage(`Input must be between ${min} - ${max} character`)
+  .withMessage(`Input must be minimum of ${min} character`)
   .isString()
   .withMessage('This field is required!');
 const middleware = {
@@ -61,7 +61,7 @@ const middleware = {
     validatorFunction,
   ],
   editParty: [
-    inputCheck('name', 8, 20),
+    inputCheck('name', 8),
     validatorFunction,
   ],
 

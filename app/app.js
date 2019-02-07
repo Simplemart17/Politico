@@ -28,7 +28,7 @@ app.get('/api/v1', (req, res) => {
   });
 });
 
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs));
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
 
 app.get('*', (req, res) => {
   res.status(404).json({ error: 'The page cannot be found!' });

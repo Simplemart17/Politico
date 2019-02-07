@@ -22,7 +22,7 @@ const voteController = {
       });
     } catch (error) {
       return res.status(400).json({
-        message: 'You are allowed to vote once for an candidate',
+        message: 'You are allowed to vote once for a candidate',
       });
     }
   },
