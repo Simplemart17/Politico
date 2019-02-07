@@ -354,6 +354,7 @@ a {
 .form-btn input {
     cursor: pointer;
     border: none;
+    margin-top: 24px;
 }
 
 .form-btn input:hover {

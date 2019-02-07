@@ -30,6 +30,7 @@ const signUp = () => {
     try {
       const response = await fetch(payLoad);
       const data = await response.json();
+      console.log(data);
       if (data.error === 'Email already exist!') {
         errMsg.innerHTML = data.error;
       }
@@ -38,11 +39,8 @@ const signUp = () => {
         return response.status;
       }
       if (response.status === 201) {
-        document.getElementById('success').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('success').style.display = 'none';
-        }, 5000);
-        window.location.href = 'index.html';
+        window.location.href = 'citizen-signin.html';
+        console.log(data);
       }
     } catch (err) {
       throw err;
@@ -51,42 +49,54 @@ const signUp = () => {
   postSignup(request);
 };
 
-const login = () => {
-  event.preventDefault();
-  const url = 'http://localhost:8000/api/v1/auth/login';
+const signinForm = document.getElementById('signin-form');
+const url = 'http://localhost:8000/api/v1/auth/login';
+signinForm.onsubmit = (e) => {
+  e.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
   const emailError = document.getElementById('email_error');
   const passwordError = document.getElementById('password_error');
-
-  const data = {
+  const errHeader = document.getElementById('error_header');
+  const login = {
     email,
     password,
   };
-  const request = new Request(url, {
-    method: 'post',
-    body: JSON.stringify(data),
+  fetch(url, {
+    method: 'POST',
     headers: {
-      Accept: 'application/json, text/plain, */*',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
     },
-  });
-  async function postLogin(payLoad) {
-    try {
-      const resp = await fetch(payLoad);
-      const data = await resp.json();
-      if (data.error === 'Incorrect email address') {
-        emailError.innerHTML = data.error;
+    body: JSON.stringify(login),
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      const isadmin = resp.data[0].user.isadmin;
+
+      console.log(isadmin);
+      if (resp.error === 'Incorrect email address') {
+        emailError.innerHTML = resp.error;
       }
-      if (data.error === 'Incorrect password!') {
-        console.log(data);
-        passwordError.innerHTML = data.error;
+      if (resp.error === 'Incorrect password!') {
+        passwordError.innerHTML = resp.error;
       }
-      window.location.href = 'UI/index.hmtl';
-      return resp.status;
-    } catch (err) {
-      throw err;
-    }
-  }
-  postLogin(request);
+      if (resp.message === 'You have successfully signed in!') {
+        const token = resp.data[0].token;
+        localStorage.setItem('token', token);
+        if (isadmin === true) {
+          setTimeout(() => {
+            window.location.href = 'admin.html';
+          }, 2000);
+        } else {
+          setTimeout(() => {
+            window.location.href = 'citizen-profile.html';
+          }, 2000);
+        }
+      } else {
+        errHeader.innerHTML = 'You cannot be logged in, try again!';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
