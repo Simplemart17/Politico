@@ -21,9 +21,8 @@ const voteController = {
         }],
       });
     } catch (error) {
-      console.log(error);
       return res.status(400).json({
-        message: 'Submission fails!',
+        message: 'You are allowed to vote once for a candidate',
       });
     }
   },

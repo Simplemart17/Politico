@@ -7,12 +7,10 @@ const createUsersTable = () => {
             othername VARCHAR(128) NOT NULL,
             email VARCHAR(128) UNIQUE NOT NULL,
             phoneNumber BIGINT,
-            username VARCHAR(128) NOT NULL,
             registered DATE DEFAULT CURRENT_DATE,
             password VARCHAR(128) NOT NULL,
             passportUrl VARCHAR(128),
             isAdmin BOOLEAN DEFAULT FALSE
-            
           )`;
   return text;
 };
@@ -70,7 +68,7 @@ const createVoteTable = () => {
 };
 const dropVoteTable = () => 'DROP TABLE IF EXISTS votes';
 
-const addUser = () => 'INSERT INTO users(firstname, lastname, othername, email, phoneNumber, username, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
+const addUser = () => 'INSERT INTO users(firstname, lastname, othername, email, phoneNumber, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
 
 const newCandidate = () => 'INSERT INTO candidates(party, office, candidate) VALUES($1, $2, $3) RETURNING *';
 

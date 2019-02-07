@@ -6,7 +6,7 @@ const Users = {
   async signUpUsers(req, res) {
     const hashPassword = generateHashPassword(req.body.password);
     const {
-      firstname, lastname, othername, email, phoneNumber, username, passportUrl,
+      firstname, lastname, othername, email, phoneNumber, passportUrl,
     } = req.body;
     const values = [
       firstname,
@@ -14,7 +14,6 @@ const Users = {
       othername,
       email,
       phoneNumber,
-      username,
       hashPassword,
       passportUrl,
     ];

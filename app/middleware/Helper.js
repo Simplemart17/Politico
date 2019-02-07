@@ -13,7 +13,7 @@ const generateToken = (id, isAdmin) => {
     id,
     isAdmin,
   },
-  process.env.SECRET, { expiresIn: '7d' });
+  process.env.SECRET, { expiresIn: '2d' });
   return token;
 };
 

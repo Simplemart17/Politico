@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import dbase from '../model/db';
@@ -7,7 +8,7 @@ dotenv.config();
 
 const Auth = {
   async verifyToken(req, res, next) {
-    const token = req.headers['x-access-token'];
+    const token = req.headers.token;
     if (!token) {
       return res.status(403).json({
         error: 'Token is not provided',
@@ -22,12 +23,12 @@ const Auth = {
         });
       }
       req.user = decoded;
-      return next();
     } catch (error) {
       return res.status(403).json({
         error: 'Authentication fails!',
       });
     }
+    return next();
   },
   verifyIsAdmin(req, res, next) {
     if (!req.user.isAdmin) {
