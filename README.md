@@ -38,16 +38,38 @@ Navigate to the folder politico and run
 npm install
 ```
 
+setup environmental variable in this following format:
+```
+DATABASE_URL = postgres://{your_database_user_name}:{your_database_password}@localhost:5432/{your_database_name}
+SECRET = {'any_combination_of_your_choice'}
+```
 ## Running the tests
 
 To run the test, run the following command in your terminal
 ```
 npm test
 ```
+## Testing the API Endpoints
+
+The following API's can be tested locally using Postman. Check API documentation for further information.
+```POST /api/v1/auth/signup```
+```POST /api/v1/auth/login```
+```POST /api/v1/parties/```
+```GET /api/v1/parties```
+```GET /api/v1/partes/:id```
+```PATCH /api/v1/partes/:id/name```
+```POST /api/v1/offices/```
+```GET /api/v1/offices/```
+```GET /api/v1/offices/:id```
+```POST /api/v1/office/{user_id}/register```
+```POST /api/v1/votes```
 
 ## Deployment
 
 The app is depolyed on heroku. [App link](https://mart-politico-app.herokuapp.com/)
+
+## Documentation
+https://mart-politico-app.herokuapp.com/docs
 
 
 ## Author
@@ -63,3 +85,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [Pivotal tracker Board](https://www.pivotaltracker.com/n/projects/2239033)
 
 * [Github pages](https://simplemart17.github.io/Politico/)
+
+## Acknowledgement
+
+* Andela Nigeria
+* Traversy Media
+* W3School
