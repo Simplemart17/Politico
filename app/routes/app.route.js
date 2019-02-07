@@ -12,13 +12,13 @@ router.get('/parties', Auth.verifyToken, partyController.getAllParty);
 
 router.get('/parties/:id', Auth.verifyToken, partyController.getParty);
 
-router.post('/parties', Auth.verifyToken, Auth.verifyIsAdmin, validation.inputName, validation.inputParties, partyController.createParty);
+router.post('/parties', Auth.verifyToken, Auth.verifyIsAdmin, validation.createParty, partyController.createParty);
 
 router.delete('/parties/:id', Auth.verifyToken, Auth.verifyIsAdmin, partyController.deleteParty);
 
-router.patch('/parties/:id/name', Auth.verifyToken, Auth.verifyIsAdmin, validation.inputName, partyController.editParty);
+router.patch('/parties/:id/name', Auth.verifyToken, Auth.verifyIsAdmin, validation.editParty, partyController.editParty);
 
-router.post('/offices', Auth.verifyToken, Auth.verifyIsAdmin, validation.inputName, validation.officeType, officeController.createOffice);
+router.post('/offices', Auth.verifyToken, Auth.verifyIsAdmin, validation.createOffice, officeController.createOffice);
 
 router.get('/offices', Auth.verifyToken, officeController.getAllOffice);
 

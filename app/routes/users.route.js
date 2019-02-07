@@ -4,8 +4,8 @@ import validation from '../middleware/validation';
 
 const userRouter = express.Router();
 
-userRouter.post('/auth/signup', validation.userSignUp, users.signUpUsers);
+userRouter.post('/auth/signup', validation.signUp, users.signUpUsers);
 
-userRouter.post('/auth/login', validation.userSignIn, users.userSignIn);
+userRouter.post('/auth/login', validation.signIn, users.userSignIn);
 
 export default userRouter;

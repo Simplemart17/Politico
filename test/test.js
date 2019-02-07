@@ -18,8 +18,7 @@ import {
 
 chai.use(chaiHttp);
 
-const { should } = chai;
-should();
+const should = chai.should();
 
 describe('POLITICO APP TEST', () => {
   before(async () => {
@@ -54,14 +53,13 @@ describe('POLITICO APP TEST', () => {
     othername: 'Crown',
     email: 'crown-mart@gmail.com',
     phoneNumber: '08012345678',
-    username: 'simplemart',
     password: 'mypassword',
     passportUrl: 'www.image1.com',
   };
 
   const loginUser = {
-    email: 'test@politico.com',
-    password: 'test',
+    email: 'simplemart@gmail.com',
+    password: 'admin',
   };
 
   let token;
@@ -81,6 +79,23 @@ describe('POLITICO APP TEST', () => {
         });
     });
   });
+  // admin login to generate token
+  describe('LOGIN ADMIN', () => {
+    it('should sign admin in to an account', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(loginUser)
+        .end((err, res) => {
+          const { body } = res;
+          // eslint-disable-next-line prefer-destructuring
+          token = body.data[0].token;
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.message.should.equal('You have successfully signed in!');
+          done(err);
+        });
+    });
+  });
 
   // User signup test
   describe('SIGNUP', () => {
@@ -91,7 +106,6 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           res.should.have.status(201);
           res.should.be.json;
-          res.body.should.have.property('message');
           res.body.message.should.equal('You have successfully registered!');
           done(err);
         });
@@ -105,14 +119,12 @@ describe('POLITICO APP TEST', () => {
           othername: 'Crown',
           email: 'crown-mart@gmail.com',
           phoneNumber: '08012345678',
-          username: 'ssimplemart',
           password: 'mypassword',
           passportUrl: 'www.image1.com',
         })
         .end((err, res) => {
           res.should.have.status(400);
           res.should.be.json;
-          res.body.should.have.property('error');
           res.body.error.should.equal('Email already exist!');
           done(err);
         });
@@ -126,12 +138,11 @@ describe('POLITICO APP TEST', () => {
         .post('/api/v1/auth/login')
         .send({
           email: 'testing@politico.com',
-          password: 'test',
+          password: 'admin',
         })
         .end((err, res) => {
           res.should.have.status(406);
           res.should.be.json;
-          res.body.should.have.property('error');
           res.body.error.should.equal('Incorrect email address');
           done(err);
         });
@@ -140,29 +151,13 @@ describe('POLITICO APP TEST', () => {
       chai.request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'test@politico.com',
+          email: 'simplemart@gmail.com',
           password: 'testing',
         })
         .end((err, res) => {
           res.should.have.status(406);
           res.should.be.json;
-          res.body.should.have.property('error');
           res.body.error.should.equal('Incorrect password!');
-          done(err);
-        });
-    });
-    it('should sign users into an account', (done) => {
-      chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(loginUser)
-        .end((err, res) => {
-          const { body } = res;
-          // eslint-disable-next-line prefer-destructuring
-          token = body.data[0].token;
-          res.should.have.status(200);
-          res.should.be.json;
-          res.body.should.have.property('message');
-          res.body.message.should.equal('You have successfully signed in!');
           done(err);
         });
     });
@@ -172,11 +167,10 @@ describe('POLITICO APP TEST', () => {
     it('should return error for empty database', (done) => {
       chai.request(app)
         .get('/api/v1/parties')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           res.should.have.status(404);
           res.should.be.a.json;
-          res.body.should.have.property('message');
           res.body.message.should.equal('No record found!');
           done(err);
         });
@@ -188,34 +182,32 @@ describe('POLITICO APP TEST', () => {
       const party1 = {
         name: 'Nigeria Civil Party',
         hqAddress: 'Victoria Island, Abuja',
-        logoUrl: 'www.image.com/image5',
+        logoUrl: 'www.image.com',
       };
       chai.request(app)
         .post('/api/v1/parties')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(party1)
         .end((err, res) => {
           res.should.have.status(201);
           res.should.be.json;
-          res.body.should.have.property('message');
           res.body.message.should.equal('political Party was successfully created!');
-          done(err);
+          done();
         });
     });
     it('should CREATE another political party', (done) => {
       const newParty = {
         name: 'New Convention Party',
         hqAddress: 'Victoria Island, Lagos',
-        logoUrl: 'www.image.com/image3',
+        logoUrl: 'www.image.com',
       };
       chai.request(app)
         .post('/api/v1/parties')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(newParty)
         .end((err, res) => {
           res.should.have.status(201);
           res.should.be.json;
-          res.body.should.have.property('message');
           res.body.message.should.equal('political Party was successfully created!');
           done(err);
         });
@@ -224,71 +216,16 @@ describe('POLITICO APP TEST', () => {
       const newParty = {
         name: 'Nigeria Civil Party',
         hqAddress: 'Victoria Island, Lagos',
-        logoUrl: 'www.image.com/image3',
+        logoUrl: 'www.image.com',
       };
       chai.request(app)
         .post('/api/v1/parties')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(newParty)
         .end((err, res) => {
           res.should.have.status(400);
           res.should.be.json;
-          res.body.should.have.property('message');
           res.body.message.should.equal('Party cannot be created!');
-          done(err);
-        });
-    });
-    it('should return error for name field is empty', (done) => {
-      const newParty = {
-        name: ' ',
-        hqAddress: 'Victoria Island, Lagos',
-        logoUrl: 'www.image.com/image3',
-      };
-      chai.request(app)
-        .post('/api/v1/parties')
-        .set('x-access-token', token)
-        .send(newParty)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.should.be.json;
-          res.body.should.have.property('error');
-          res.body.error.should.equal('Name field is required!');
-          done(err);
-        });
-    });
-    it('should return error for headquarter field is empty', (done) => {
-      const newParty = {
-        name: 'Community Pational Party',
-        hqAddress: '',
-        logoUrl: 'www.image.com/image3',
-      };
-      chai.request(app)
-        .post('/api/v1/parties')
-        .set('x-access-token', token)
-        .send(newParty)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.should.be.json;
-          res.body.should.have.property('error');
-          res.body.error.should.equal('Enter headquarter address of the party!');
-          done(err);
-        });
-    });
-    it('should return error for logo field is empty', (done) => {
-      const newParty = {
-        name: 'Community Pational Party',
-        hqAddress: 'Glass House, Abuja',
-        logoUrl: '',
-      };
-      chai.request(app)
-        .post('/api/v1/parties')
-        .set('x-access-token', token)
-        .send(newParty)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.should.be.json;
-          res.body.should.have.property('error');
-          res.body.error.should.equal('Please upload party logo!');
           done(err);
         });
     });
@@ -298,12 +235,11 @@ describe('POLITICO APP TEST', () => {
     it('should GET the list of all political parties', (done) => {
       chai.request(app)
         .get('/api/v1/parties')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.a.json;
           res.body.should.be.a('object');
-          res.body.should.have.property('message');
           res.body.message.should.equal('Political Party list was successfully retrieved');
           done(err);
         });
@@ -314,7 +250,6 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           res.should.have.status(404);
           res.should.be.a.json;
-          res.body.should.have.property('error');
           res.body.error.should.equal('The page cannot be found!');
           done(err);
         });
@@ -325,7 +260,7 @@ describe('POLITICO APP TEST', () => {
     it('should GET a specific political party', (done) => {
       chai.request(app)
         .get('/api/v1/parties/1')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.a.json;
@@ -336,7 +271,7 @@ describe('POLITICO APP TEST', () => {
     it('should return error when an id is not found', (done) => {
       chai.request(app)
         .get('/api/v1/parties/4')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           res.should.have.status(404);
           res.should.be.a.json;
@@ -356,7 +291,7 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           chai.request(app)
             .patch('/api/v1/parties/1/name')
-            .set('x-access-token', token)
+            .set('token', token)
             .send(newName)
             .end((err, res) => {
               res.should.have.status(200);
@@ -376,7 +311,7 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           chai.request(app)
             .patch('/api/v1/parties/2/name')
-            .set('x-access-token', token)
+            .set('token', token)
             .send(newName)
             .end((err, res) => {
               res.should.have.status(400);
@@ -392,11 +327,11 @@ describe('POLITICO APP TEST', () => {
       };
       chai.request(app)
         .get('/api/v1/parties')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           chai.request(app)
             .patch('/api/v1/parties/10/name')
-            .set('x-access-token', token)
+            .set('token', token)
             .send(emptyField)
             .end((err, res) => {
               res.should.have.status(404);
@@ -417,7 +352,7 @@ describe('POLITICO APP TEST', () => {
       };
       chai.request(app)
         .post('/api/v1/parties')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(newParty)
         .end((err, res) => {
           chai.request(app)
@@ -425,7 +360,7 @@ describe('POLITICO APP TEST', () => {
             .end((err, res) => {
               chai.request(app)
                 .delete('/api/v1/parties/1')
-                .set('x-access-token', token)
+                .set('token', token)
                 .end((err, res) => {
                   res.should.have.status(200);
                   res.should.be.json;
@@ -443,7 +378,7 @@ describe('POLITICO APP TEST', () => {
       };
       chai.request(app)
         .post('/api/v1/parties')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(newParty)
         .end((err, res) => {
           chai.request(app)
@@ -451,7 +386,7 @@ describe('POLITICO APP TEST', () => {
             .end((err, res) => {
               chai.request(app)
                 .delete('/api/v1/parties/6')
-                .set('x-access-token', token)
+                .set('token', token)
                 .end((err, res) => {
                   res.should.have.status(404);
                   res.should.be.json;
@@ -468,7 +403,7 @@ describe('POLITICO APP TEST', () => {
     it('should return error when there is no record in the database', (done) => {
       chai.request(app)
         .get('/api/v1/offices')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           res.should.have.status(404);
           res.should.be.a.json;
@@ -487,7 +422,7 @@ describe('POLITICO APP TEST', () => {
       };
       chai.request(app)
         .post('/api/v1/offices')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(newOffice)
         .end((err, res) => {
           res.should.have.status(201);
@@ -505,7 +440,7 @@ describe('POLITICO APP TEST', () => {
       };
       chai.request(app)
         .post('/api/v1/offices')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(newOffice)
         .end((err, res) => {
           res.should.have.status(422);
@@ -520,11 +455,10 @@ describe('POLITICO APP TEST', () => {
     it('should GET the list of all government office', (done) => {
       chai.request(app)
         .get('/api/v1/offices')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.a.json;
-          res.body.should.have.property('message');
           res.body.message.should.equal('Government office lists was successfully retrieved');
           done(err);
         });
@@ -535,7 +469,7 @@ describe('POLITICO APP TEST', () => {
     it('should GET a specific government office', (done) => {
       chai.request(app)
         .get('/api/v1/offices/1')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.a.json;
@@ -546,7 +480,7 @@ describe('POLITICO APP TEST', () => {
     it('should return error when an id is not found', (done) => {
       chai.request(app)
         .get('/api/v1/offices/5')
-        .set('x-access-token', token)
+        .set('token', token)
         .end((err, res) => {
           res.should.have.status(404);
           res.should.be.a.json;
@@ -558,29 +492,25 @@ describe('POLITICO APP TEST', () => {
 
   // Test for Candidate
   describe('Candidate /POST', () => {
-    // it('should CREATE a new political party candidate', (done) => {
-    //   const newCandidate = {
-    //     party: 1,
-    //     office: 1,
-    //   };
-    //   chai.request(app)
-    //     .post('/api/v1/office/1/register')
-    //     .set('x-access-token', token)
-    //     .send(newCandidate)
-    //     .end((err, res) => {
-    //       res.should.have.status(201);
-    //       res.should.be.json;
-    //       res.body.data[0].office.should.equal(1);
-    //       res.body.data[0].user.should.equal(1);
-    //       res.body.message.should.equal('You have successfully registered as candidate!');
-    //       done(err);
-    //     });
-    // });
-
+    it('should CREATE a new political party candidate', (done) => {
+      chai.request(app)
+        .post('/api/v1/office/2/register')
+        .set('token', token)
+        .send({
+          party: 2,
+          office: 1,
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.message.should.equal('You have successfully registered as candidate!');
+          done(err);
+        });
+    });
     it('should return error when token is not provided', (done) => {
       const newCandidate = {
+        party: 1,
         office: 1,
-        candidate: 1,
       };
       chai.request(app)
         .post('/api/v1/office/1/register')
@@ -594,12 +524,12 @@ describe('POLITICO APP TEST', () => {
     });
     it('should return error when invalid token is provided', (done) => {
       const newCandidate = {
+        party: 1,
         office: 1,
-        candidate: 1,
       };
       chai.request(app)
         .post('/api/v1/office/1/register')
-        .set('x-access-token', fakeToken)
+        .set('token', fakeToken)
         .send(newCandidate)
         .end((err, res) => {
           res.should.have.status(403);
@@ -610,12 +540,12 @@ describe('POLITICO APP TEST', () => {
     });
     it('should return error when the information is not processed', (done) => {
       const newCandidate = {
+        party: 1,
         office: 1,
-        candidate: 1,
       };
       chai.request(app)
         .post('/api/v1/office/1/register')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(newCandidate)
         .end((err, res) => {
           res.should.have.status(422);
@@ -628,24 +558,24 @@ describe('POLITICO APP TEST', () => {
 
   // Test for Voting candidate
   describe('Vote /POST', () => {
-    // it('submit vote for a candidate', (done) => {
-    //   const newVote = {
-    //     office: 1,
-    //     candidate: 1,
-    //   };
-    //   chai.request(app)
-    //     .post('/api/v1/votes')
-    //     .set('x-access-token', token)
-    //     .send(newVote)
-    //     .end((err, res) => {
-    //       res.should.have.status(201);
-    //       res.should.be.json;
-    //       res.body.data[0].office.should.equal(1);
-    //       res.body.data[0].candidate.should.equal(1);
-    //       res.body.message.should.equal('Your vote successfully submitted!');
-    //       done(err);
-    //     });
-    // });
+    it('submit vote for a candidate', (done) => {
+      const newVote = {
+        office: 1,
+        candidate: 1,
+      };
+      chai.request(app)
+        .post('/api/v1/votes')
+        .set('token', token)
+        .send(newVote)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.data[0].office.should.equal(1);
+          res.body.data[0].candidate.should.equal(1);
+          res.body.message.should.equal('Your vote successfully submitted!');
+          done(err);
+        });
+    });
 
     it('should return error when token is not provided', (done) => {
       const newVote = {
@@ -669,7 +599,7 @@ describe('POLITICO APP TEST', () => {
       };
       chai.request(app)
         .post('/api/v1/votes')
-        .set('x-access-token', fakeToken)
+        .set('token', fakeToken)
         .send(newVote)
         .end((err, res) => {
           res.should.have.status(403);
@@ -684,7 +614,7 @@ describe('POLITICO APP TEST', () => {
       };
       chai.request(app)
         .post('/api/v1/votes')
-        .set('x-access-token', token)
+        .set('token', token)
         .send(newVote)
         .end((err, res) => {
           res.should.have.status(400);
@@ -697,26 +627,26 @@ describe('POLITICO APP TEST', () => {
 
   // Test for vote results
   describe('Vote /GET', () => {
-    // it('should fetch results for election results', (done) => {
-    //   chai.request(app)
-    //     .get('/api/v1/office/1/result')
-    //     .set('x-access-token', token)
-    //     .end((err, res) => {
-    //       res.should.have.status(201);
-    //       res.body.message.should.equal('Election results was successfully retrieved');
-    //       done(err);
-    //     });
-    // });
-    // it('should return error when result cannot be fetched', (done) => {
-    //   chai.request(app)
-    //     .get('/api/v1/office/2/result')
-    //     .set('x-access-token', token)
-    //     .end((err, res) => {
-    //       res.should.have.status(404);
-    //       res.body.error.should.equal('Result for election not found!');
-    //       done(err);
-    //     });
-    // });
+    it('should fetch results for election results', (done) => {
+      chai.request(app)
+        .get('/api/v1/office/1/result')
+        .set('token', token)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.message.should.equal('Election results was successfully retrieved');
+          done(err);
+        });
+    });
+    it('should return error when result cannot be fetched', (done) => {
+      chai.request(app)
+        .get('/api/v1/office/2/result')
+        .set('token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.error.should.equal('Result for election not found!');
+          done(err);
+        });
+    });
     it('should return error when token is not provided', (done) => {
       chai.request(app)
         .get('/api/v1/office/1/result')
@@ -730,7 +660,7 @@ describe('POLITICO APP TEST', () => {
     it('should return error when invalid token is provided', (done) => {
       chai.request(app)
         .get('/api/v1/office/1/result')
-        .set('x-access-token', fakeToken)
+        .set('token', fakeToken)
         .end((err, res) => {
           res.should.have.status(403);
           res.should.be.json;

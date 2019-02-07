@@ -57,51 +57,14 @@ const removeParty = () => {
   elem.parentNode.removeChild(elem);
 };
 
-const adminLogin = () => {
-  if ((document.getElementById('password').value === 'admin') && (document.getElementById('username').value === 'admin')) {
-    location.href = 'admin.html';
+const passwordCheck = () => {
+  const password1 = document.getElementById('user_password').value;
+  const password2 = document.getElementById('user_confirm_password').value;
+  if (password1 !== password2) {
+    document.getElementById('user_confirm_password').style.borderColor = 'red';
+    document.getElementById('register_btn').disabled = true;
+  } else {
+    document.getElementById('user_confirm_password').style.borderColor = 'green';
+    document.getElementById('register_btn').disabled = false;
   }
-  return null;
-};
-
-
-const signUp = () => {
-  event.preventDefault();
-  const url = 'https://mart-politico-app.herokuapp.com/api/v1/auth/signup';
-  const firstname = document.getElementById('user_firstname').value;
-  const lastname = document.getElementById('user_lastname').value;
-  const othername = document.getElementById('user_othername').value;
-  const email = document.getElementById('user_email').value;
-  const username = document.getElementById('user_username').value;
-  const phonenumber = document.getElementById('user_phonenumber').value;
-  const password = document.getElementById('user_password').value;
-
-  const data = {
-    firstname,
-    lastname,
-    othername,
-    email,
-    username,
-    phoneNumber: phonenumber,
-    password,
-  };
-  const request = new Request(url, {
-    method: 'post',
-    body: JSON.stringify(data),
-    headers: {
-      Accept: 'application/json, text/plain, */*',
-      'Content-Type': 'application/json',
-    },
-  });
-  async function postSignup(payLoad) {
-    try {
-      const resp = await fetch(payLoad);
-      const data = await resp.json();
-      window.location.href = 'index.html';
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  postSignup(request);
 };

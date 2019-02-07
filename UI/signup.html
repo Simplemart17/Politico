@@ -41,50 +41,44 @@
         <div class="center">
             <h1>Register Here</h1>
         </div>
+        <p class="center col-red" id="error_header"></p>
         <form id="form_register" role="form" method="post" onsubmit="return signUp()" encrypt="multipart/form-data">
           <label for="name">First Name<span class="col-red">*</span></label>
           <input type="text" name="firstname" id="user_firstname">
 
-          <label for="name">Last Name<span class="col-red">*</span></label>
+          <label for="name">Last Name<span class="col-red">*</span> </label>
           <input type="text" name="lastname" id="user_lastname">
 
-          <label for="name">Other Name(s)<span class="col-red">*</span></label>
+          <label for="name">Other Name<span class="col-red">*</span> </label>
           <input type="text" name="othertnames" id="user_othername">
 
-          <label for="email">Email Address<span class="col-red">*</span></label>
+          <label for="email">Email Address<span class="col-red">*</span> </label>
           <input type="email" name="email" id="user_email">
+          <p id="err_msg" class="col-red error"></p>
 
-          <label for="name">Username<span class="col-red">*</span></label>
-          <input type="text" name="username" id="user_username">
-
-          <label for="phone">Phone Number<span class="col-red">*</span></label>
+          <label for="phone">Phone Number<span class="col-red">*</span> </label>
           <input type="number" name="phone" id="user_phonenumber">
 
-          <label for="password">Password<span class="col-red">*</span></label>
-          <input type="password" name="password" id="user_password">
+          <label for="password">Password<span class="col-red">*</span> </label>
+          <input type="password" name="password" id="user_password" onkeyup="passwordCheck()">
 
-          <label for="confirm">Confirm Password<span class="col-red">*</span></label>
-          <input type="password" name="confirm_pass" id="user_confirm_password">
-          
-          <!-- <label for="type">User type<span class="col-red">*</span></label> -->
-          <!-- <div class="radio">
-            <div class="inline"><input type="radio" name="type" value="politician" checked> Politician</div>
-            <div class="inline"><input type="radio" name="type" value="citizen"> Citizen</div>
-          </div> -->
+          <label for="confirm">Confirm Password<span class="col-red">*</span> </label>
+          <input type="password" name="confirm_pass" id="user_confirm_password" onkeyup="passwordCheck()">
           
           <div class="upload">
             <label for="media">Upload Passport<span class="col-red">*</span></label>
-            <input type="file" name="media">
+            <input type="file" accept="image/*" name="image">
           </div>
-          
+          <p id="success" class="center col-white">You have successfully registered</p>
           <div class="reg-btn center">
             <div class="inline">
-              <input class="col-white bg-green" name="submit" type="submit" value="Register">
+              <input class="col-white bg-green" name="submit" type="submit" id="register_btn" value="Register">
             </div>
             <div class="inline ">
               <input class="col-white bg-grey" onclick="reset()" type="button" value="Reset">
             </div>
           </div>
+          
         </form>
         <div class="links center">
           <p>Already have an account?<a href="citizen-signin.html">Signin</a></p>
@@ -98,5 +92,6 @@
       <div class="footer">Copyright &copy; 2018 Martins Aloba</div>
     </footer>
     <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript"src="assets/js/index.js"></script>
   </body>
 </html>

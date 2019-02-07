@@ -14,7 +14,6 @@ const Users = {
       othername,
       email,
       phoneNumber,
-      username,
       hashPassword,
       passportUrl,
     ];
