@@ -52,17 +52,19 @@ npm test
 ## Testing the API Endpoints
 
 The following API's can be tested locally using Postman. Check API documentation for further information.
-```POST /api/v1/auth/signup```
-```POST /api/v1/auth/login```
-```POST /api/v1/parties/```
-```GET /api/v1/parties```
-```GET /api/v1/partes/:id```
-```PATCH /api/v1/partes/:id/name```
-```POST /api/v1/offices/```
-```GET /api/v1/offices/```
-```GET /api/v1/offices/:id```
-```POST /api/v1/office/{user_id}/register```
-```POST /api/v1/votes```
+```
+POST /api/v1/auth/signup
+POST /api/v1/auth/login
+POST /api/v1/parties/
+GET /api/v1/parties
+GET /api/v1/partes/:id
+PATCH /api/v1/partes/:id/name
+POST /api/v1/offices/
+GET /api/v1/offices/
+GET /api/v1/offices/:id
+POST /api/v1/office/{user_id}/register
+POST /api/v1/votes
+```
 
 ## Deployment
 
