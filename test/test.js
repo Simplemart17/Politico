@@ -188,6 +188,7 @@ describe('POLITICO APP TEST', () => {
     });
   });
 
+  // Parties test
   describe('Party /GET', () => {
     it('should GET the list of all political parties', (done) => {
       chai.request(app)
