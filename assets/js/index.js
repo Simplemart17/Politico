@@ -38,8 +38,9 @@ const signUp = () => {
         return response.status;
       }
       if (response.status === 201) {
+        document.getElementById('success_header').innerHTML = 'You have successfully signup!';
         setTimeout(() => {
-          window.location.href = 'citizen-signin.html';
+          window.location.href = 'citizen-profile.html';
         }, 2000);
       }
     } catch (err) {
@@ -72,8 +73,6 @@ signinForm.onsubmit = () => {
     .then(response => response.json())
     .then((resp) => {
       const isadmin = resp.data[0].user.isadmin;
-
-      console.log(isadmin);
       if (resp.error === 'Incorrect email address') {
         emailError.innerHTML = resp.error;
       }
@@ -84,10 +83,12 @@ signinForm.onsubmit = () => {
         const token = resp.data[0].token;
         localStorage.setItem('token', token);
         if (isadmin === true) {
+          document.getElementById('success').style.display = 'block';
           setTimeout(() => {
             window.location.href = 'admin.html';
           }, 2000);
         } else {
+          document.getElementById('success').style.display = 'block';
           setTimeout(() => {
             window.location.href = 'citizen-profile.html';
           }, 2000);

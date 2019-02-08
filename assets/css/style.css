@@ -13,10 +13,12 @@ body {
 
 #success {
     display: none;
-    margin: 10px 0;
+    margin: auto;
+    margin-top: 78px;
+    margin-bottom: -58px;
     padding: 8px;
     border-radius: 3px;
-    width: 90%;
+    width: 50%;
     background-color: #86ca91;
 }
 
@@ -39,6 +41,10 @@ a {
 
 .col-green-black {
     color: #0f2e01;
+}
+
+.col-green {
+    color: #60fa19;
 }
 
 .col-white {
