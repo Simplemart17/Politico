@@ -39,20 +39,19 @@
     <!-- form Section -->
       <div class="form-header">
         <div class="form-grid">
-          <input class="center form-active col-white" onclick="location.href='politician-signin.html';"  value="POLITICIAN">
-          <input class="form-inactive center col-white" onclick="location.href='citizen-signin.html';" value="CITIZEN">
+          <input class="form-inactive center col-white" onclick="location.href='citizen-signin.html';" value="Enter Your Login Details">
         </div>
       </div>
-      <p id="success" class="center col-white">Login Successful!</p>
+      <p id="success" class="center col-white">Login was Successful!</p>
       <div class="form-wrapper login-form" id="citizen">
-        <div class="center"><p>Participate as Citizen</p></div>
+        <div class="center"></div>
         <p class="center col-red" id="error_header"></p>
         <form role="form" method="post" id="signin-form">
-          <label for="email">Email</label>
+          <label for="email">Email Address<span class="col-red">*</span></label>
           <input type="text" name="email" id="email">
           <div id="email_error" class="col-red error"></div>
 
-          <label for="password">Password</label>
+          <label for="password">Password<span class="col-red">*</span></label>
           <input type="password" name="password" id="password">
           <div id="password_error" class="col-red error"></div>
 
