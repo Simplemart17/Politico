@@ -1,6 +1,6 @@
 const signUp = () => {
   event.preventDefault();
-  const url = 'http://localhost:8000/api/v1/auth/signup';
+  const url = 'https://mart-politico-app.herokuapp.com/api/v1/auth/signup';
   const firstname = document.getElementById('user_firstname').value;
   const lastname = document.getElementById('user_lastname').value;
   const othername = document.getElementById('user_othername').value;
@@ -50,7 +50,7 @@ const signUp = () => {
 };
 
 const signinForm = document.getElementById('signin-form');
-const url = 'http://localhost:8000/api/v1/auth/login';
+const url = 'https://mart-politico-app.herokuapp.com/api/v1/auth/login';
 signinForm.onsubmit = () => {
   event.preventDefault();
   const email = document.getElementById('email').value;
