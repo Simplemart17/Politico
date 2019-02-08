@@ -38,7 +38,7 @@ Navigate to the folder politico and run
 npm install
 ```
 
-setup environmental variable in this following format:
+setup environmental variable in this format:
 ```
 DATABASE_URL = postgres://{your_database_user_name}:{your_database_password}@localhost:5432/{your_database_name}
 SECRET = {'any_combination_of_your_choice'}
