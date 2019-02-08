@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/Simplemart17/Politico.svg?branch=develop)](https://travis-ci.com/Simplemart17/Politico)
+[![Coverage Status](https://coveralls.io/repos/github/Simplemart17/Politico/badge.svg)](https://coveralls.io/github/Simplemart17/Politico)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5c29b768b40a1a380cd2/maintainability)](https://codeclimate.com/github/Simplemart17/Politico/maintainability)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
