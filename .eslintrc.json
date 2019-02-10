@@ -9,6 +9,9 @@
         "no-console": "off",
         "no-unused-vars": "off",
         "no-shadow": "off",
-        "no-unused-expressions": "off"
+        "no-unused-expressions": "off",
+        "prefer-destructuring": "off",
+        "no-restricted-globals": "off",
+        "consistent-return": "off"
     }
 }

@@ -60,6 +60,7 @@ const Users = {
       const token = generateToken(rows[0].id, rows[0].isadmin);
       delete rows[0].password;
       return res.status(200).json({
+        status: 200,
         message: 'You have successfully signed in!',
         data: [{
           token,

@@ -1,12 +1,51 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app/app';
+import db from '../app/model/db';
+import {
+  createUsersTable,
+  createPartyTable,
+  createOfficeTable,
+  createCandidateTable,
+  createVoteTable,
+  dropCandidateTable,
+  dropOfficeTable,
+  dropPartyTable,
+  dropUsersTable,
+  dropVoteTable,
+} from '../app/model/queries';
+
 
 chai.use(chaiHttp);
 
 const should = chai.should();
 
 describe('POLITICO APP TEST', () => {
+  before(async () => {
+    try {
+      await db.query(createUsersTable());
+      await db.query(createPartyTable());
+      await db.query(createOfficeTable());
+      await db.query(createCandidateTable());
+      await db.query(createVoteTable());
+      console.log('created tables');
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  after(async () => {
+    try {
+      await db.query(dropVoteTable());
+      await db.query(dropCandidateTable());
+      await db.query(dropOfficeTable());
+      await db.query(dropPartyTable());
+      await db.query(dropUsersTable());
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   const newUser = {
     firstname: 'Martins',
     lastname: 'Aloba',
@@ -22,8 +61,10 @@ describe('POLITICO APP TEST', () => {
     password: 'test',
   };
 
+  let userToken;
   let token;
   const fakeToken = { token: null };
+  const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU0OTcwNDcxNCwiZXhwIjoxNTQ5ODc3NTE0fQ.nogWAR5assT1LrObdk2a-1tgXA1tCUSKkrG8DNJw_Yw';
 
   // Homepage test
   describe('HOMEPAGE', () => {
@@ -47,6 +88,8 @@ describe('POLITICO APP TEST', () => {
         .post('/api/v1/auth/signup')
         .send(newUser)
         .end((err, res) => {
+          const { body } = res;
+          userToken = body.data[0].token;
           res.should.have.status(201);
           res.should.be.json;
           res.body.message.should.equal('You have successfully registered!');
@@ -69,6 +112,23 @@ describe('POLITICO APP TEST', () => {
           res.should.have.status(400);
           res.should.be.json;
           res.body.error.should.equal('Email already exist!');
+          done(err);
+        });
+    });
+    it('should return error for empty field', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/signup')
+        .send({
+          lastname: 'Aloba',
+          othername: 'Crown',
+          email: 'testmail@gmail.com',
+          phoneNumber: '08012345678',
+          password: 'mypassword',
+          passportUrl: 'www.image1.com',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.should.be.json;
           done(err);
         });
     });
@@ -169,6 +229,23 @@ describe('POLITICO APP TEST', () => {
           done(err);
         });
     });
+    it('should return an error for passing a user token', (done) => {
+      const party1 = {
+        name: 'Nigeria Another Confress',
+        hqAddress: 'Victoria Island, Abuja',
+        logoUrl: 'www.image.com',
+      };
+      chai.request(app)
+        .post('/api/v1/parties')
+        .set('token', userToken)
+        .send(party1)
+        .end((err, res) => {
+          res.should.have.status(403);
+          res.should.be.json;
+          res.body.error.should.equal('You cannot access this route!');
+          done();
+        });
+    });
     it('should return error for existing party name', (done) => {
       const newParty = {
         name: 'Nigeria Civil Party',
@@ -209,6 +286,17 @@ describe('POLITICO APP TEST', () => {
           res.should.have.status(404);
           res.should.be.a.json;
           res.body.error.should.equal('The page cannot be found!');
+          done(err);
+        });
+    });
+    it('should return an error for passing an invalid token', (done) => {
+      chai.request(app)
+        .get('/api/v1/parties')
+        .set('token', invalidToken)
+        .end((err, res) => {
+          res.should.have.status(403);
+          res.should.be.a.json;
+          res.body.error.should.equal('The token you provided is invalid');
           done(err);
         });
     });
