@@ -13,6 +13,7 @@ const voteController = {
     try {
       const { rows } = await dBase.query(queries.newVote(), values);
       return res.status(201).json({
+        status: 201,
         message: 'Your vote successfully submitted!',
         data: [{
           office: rows[0].office,

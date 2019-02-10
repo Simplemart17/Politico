@@ -13,6 +13,7 @@ export default {
     try {
       const { rows } = await dBase.query(queries.newCandidate(), values);
       return res.status(201).json({
+        status: 201,
         message: 'You have successfully registered as candidate!',
         data: [{
           office: rows[0].office,
@@ -20,7 +21,6 @@ export default {
         }],
       });
     } catch (error) {
-      console.log(error);
       return res.status(422).json({
         status: 422,
         message: 'The submission was not accepted!',
