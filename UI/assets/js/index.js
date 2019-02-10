@@ -1,6 +1,6 @@
 const signUp = () => {
   event.preventDefault();
-  const url = 'http://localhost:8000/api/v1/auth/signup';
+  const url = 'https://mart-politico-app.herokuapp.com/api/v1/auth/signup';
   const firstname = document.getElementById('user_firstname').value;
   const lastname = document.getElementById('user_lastname').value;
   const othername = document.getElementById('user_othername').value;
@@ -38,8 +38,9 @@ const signUp = () => {
         return response.status;
       }
       if (response.status === 201) {
+        document.getElementById('success_header').innerHTML = 'You have successfully signup!';
         setTimeout(() => {
-          window.location.href = 'citizen-signin.html';
+          window.location.href = 'citizen-profile.html';
         }, 2000);
       }
     } catch (err) {
@@ -49,8 +50,9 @@ const signUp = () => {
   postSignup(request);
 };
 
+const url = 'https://mart-politico-app.herokuapp.com/api/v1/auth/login';
 const signinForm = document.getElementById('signin-form');
-const url = 'http://localhost:8000/api/v1/auth/login';
+
 signinForm.onsubmit = () => {
   event.preventDefault();
   const email = document.getElementById('email').value;
@@ -72,25 +74,25 @@ signinForm.onsubmit = () => {
     .then(response => response.json())
     .then((resp) => {
       const isadmin = resp.data[0].user.isadmin;
-
-      console.log(isadmin);
       if (resp.error === 'Incorrect email address') {
-        emailError.innerHTML = resp.error;
+        emailError.innerHTML = 'Incorrect email address';
       }
       if (resp.error === 'Incorrect password!') {
-        passwordError.innerHTML = resp.error;
+        passwordError.innerHTML = 'Incorrect password';
       }
       if (resp.message === 'You have successfully signed in!') {
         const token = resp.data[0].token;
         localStorage.setItem('token', token);
         if (isadmin === true) {
+          document.getElementById('success').style.display = 'block';
           setTimeout(() => {
             window.location.href = 'admin.html';
-          }, 2000);
+          }, 3000);
         } else {
+          document.getElementById('success').style.display = 'block';
           setTimeout(() => {
             window.location.href = 'citizen-profile.html';
-          }, 2000);
+          }, 3000);
         }
       } else {
         errHeader.innerHTML = 'You cannot be logged in, try again!';

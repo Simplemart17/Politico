@@ -44,6 +44,14 @@ const closeEditModal = () => {
   document.getElementById('editModal').style.display = 'none';
 };
 
+const openDeleteModal = () => {
+  document.getElementById('deleteModal').style.display = 'block';
+};
+
+const closeDeleteModal = () => {
+  document.getElementById('deleteModal').style.display = 'none';
+};
+
 const openResultModal = () => {
   document.getElementById('resultModal').style.display = 'block';
 };
@@ -55,6 +63,7 @@ const closeResultModal = () => {
 const removeParty = () => {
   const elem = document.getElementById('remove');
   elem.parentNode.removeChild(elem);
+  closeDeleteModal();
 };
 
 const passwordCheck = () => {
