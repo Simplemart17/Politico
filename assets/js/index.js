@@ -50,8 +50,9 @@ const signUp = () => {
   postSignup(request);
 };
 
-const signinForm = document.getElementById('signin-form');
 const url = 'https://mart-politico-app.herokuapp.com/api/v1/auth/login';
+const signinForm = document.getElementById('signin-form');
+
 signinForm.onsubmit = () => {
   event.preventDefault();
   const email = document.getElementById('email').value;
@@ -74,10 +75,10 @@ signinForm.onsubmit = () => {
     .then((resp) => {
       const isadmin = resp.data[0].user.isadmin;
       if (resp.error === 'Incorrect email address') {
-        emailError.innerHTML = resp.error;
+        emailError.innerHTML = 'Incorrect email address';
       }
       if (resp.error === 'Incorrect password!') {
-        passwordError.innerHTML = resp.error;
+        passwordError.innerHTML = 'Incorrect password';
       }
       if (resp.message === 'You have successfully signed in!') {
         const token = resp.data[0].token;
@@ -86,12 +87,12 @@ signinForm.onsubmit = () => {
           document.getElementById('success').style.display = 'block';
           setTimeout(() => {
             window.location.href = 'admin.html';
-          }, 2000);
+          }, 3000);
         } else {
           document.getElementById('success').style.display = 'block';
           setTimeout(() => {
             window.location.href = 'citizen-profile.html';
-          }, 2000);
+          }, 3000);
         }
       } else {
         errHeader.innerHTML = 'You cannot be logged in, try again!';

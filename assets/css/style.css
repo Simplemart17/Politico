@@ -527,7 +527,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus {
 }
 
 .partyModal, .modal, .officeModal, .editModal, .petitionModal, .resultModal, .deleteModal {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -587,29 +587,29 @@ table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
-  th, td {
+th, td {
     padding: 15px;
     text-align: left;    
 }
 
-  table {
+table {
     table-layout:fixed;
     width: 100%;
 }
 
-  .table-area {
+.table-area {
     padding: 30px;
 }
 
-  th.col-10 {
+th.col-10 {
       width: 10%;
 }
 
-  th.col-15 {
+th.col-15 {
       width: 15%;
 }
 
-  th.col-20 {
+th.col-20 {
       width: 20%;
 } 
   
@@ -617,21 +617,21 @@ table, th, td {
     width: 30%;
 }
 
-  .candidate th {
+.candidate th {
       background-color: #1e3f0f88;
       color: #ffffff;
       font-size: 20px;
 }
 
-  .candidate-box:nth-child(even), .party-box:nth-child(even) {
+.candidate-box:nth-child(even), .party-box:nth-child(even) {
       background: #cfe9c4;
   }
 
-  .candidate-box:nth-child(odd), .party-box:nth-child(odd) {
+.candidate-box:nth-child(odd), .party-box:nth-child(odd) {
       background: #c8dacd;
 }
 
-  .candidate-box-area, .party-box-area {
+.candidate-box-area, .party-box-area {
     display: grid;
     grid-template-columns: 30% 70%;
 }
@@ -758,7 +758,7 @@ table, th, td {
       position: absolute;
       display: block;
       width: 100%;
-      background-color: #adc4af;
+      background-color: rgba(77, 99, 79, 0.5);
       transition: all 0.3s ease-in;
       overflow-y: hidden;
       left: 0px;
@@ -766,12 +766,10 @@ table, th, td {
     .nav .nav-center .nav-links a {
       display: block;
       width: 100%;
-      padding: 0px;
-      color: #efefef;
+      color: #eceaea;
       background: none;
       border: none;
-      margin-top: 10px;
-      height: 30px;
+      height: 35px;
     }
     .nav .nav-center .nav-links a:hover {
         color: #60fa19;
@@ -810,6 +808,35 @@ table, th, td {
     .form-wrapper {
         width: 90%;
     }
+    
+    .form-wrapper input, .modal-content input {
+        display: block;
+        width: 97%;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 2%;
+        border-left: 2px solid #888888;
+        font-size: 14px;
+    }
+
+    .form-wrapper label {
+        display: block;
+        margin-top: 3%;
+        font-size: 15px;
+    }
+
+    .reg-btn input {
+        cursor: pointer;
+        width: 100px;
+        height: 30px;
+        border: none;
+        margin-top: 20px;
+    }
+    
+    .reg-btn input:hover {
+        opacity: 0.8;
+        transition: 0.7s;
+    }
 
     .form-header {
         width: 90%;
@@ -836,12 +863,12 @@ table, th, td {
     }
 
     .main-area h2 {
-        margin-top: 10px;
-        margin-left: 55px;
-        font-size: 30px;
+        margin-top: 25px;
+        text-align: center;
+        font-size: 25px;
     }
 
-    .column {
+    .column, .column-profile {
         margin: 0px 50px;
         padding-bottom: 10px;
         grid-template-columns: 100%;
@@ -849,7 +876,6 @@ table, th, td {
      
     .profile-info {
         display: inline-block;
-        float: right;
         margin-top: 0px;
         margin-right: 60px;
     }
@@ -902,12 +928,50 @@ table, th, td {
     }
     
     .candidate-box-area h3, h4, .party-box-area h3, .federal h3, .legislative h3, .local h3, .state h3 {
-        font-size: 12px;
+        font-size: 16px;
     }
     
     .candidate-box-area img, .party-box-area img {
         border-radius: 60%;
         height: 60%;
         width: 60%;
-    }    
+    }
+
+    .modal-container {
+        padding: 40px 10px 10px 10px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 10% auto 15% auto;
+        border: none;
+        box-shadow: 2px 3px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 50px;
+        font-weight: bold;
+        color: #f8c2b4;
+    }
+      
+    .close:hover,
+    .close:focus {
+        color: #6fee8b;
+        cursor: pointer;
+    }
+
+    #success {
+        width: 90%;
+    }
+
+    .form-header {
+        margin-top: 15%
+    }
+
+
 }
