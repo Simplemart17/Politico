@@ -15,9 +15,7 @@ const PartyController = {
       return res.status(200).json({
         status: 200,
         message: 'Political Party list was successfully retrieved',
-        data: [
-          rows,
-        ],
+        data: rows,
         Total: rowCount,
       });
     } catch (error) {

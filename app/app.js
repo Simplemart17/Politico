@@ -16,6 +16,7 @@ const port = (process.env.PORT || 8000);
 app.use(cors());
 
 app.set('appVersion', '/api/v1');
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

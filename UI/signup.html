@@ -23,7 +23,9 @@
           </div>
           <div class="nav-btn">
             <label for="nav-check">
-              <span></span> <span></span> <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
             </label>
           </div>
             <input type="checkbox" id="nav-check" />
@@ -34,42 +36,84 @@
         </div>
       </div>
     </div>
-      
     <section>
-    <!-- Registeration form Section -->
-      <div class="form-wrapper">
-        <div class="center">
-            <h1>Register Here</h1>
-        </div>
+    <!-- Registration form Section -->
+    <div class="form-wrapper">
+      <div class="center">
+          <h1>Register Here</h1>
+      </div>
         <p class="center col-red" id="error_header"></p>
-        <form id="form_register" role="form" method="post" onsubmit="return signUp()" encrypt="multipart/form-data">
-          <label for="name">First Name<span class="col-red">*</span></label>
+        <form id="form_register" role="form" method="POST">
+          <label for="name">
+            First Name
+            <span class="col-red">
+              *
+            </span>
+          </label>
           <input type="text" name="firstname" id="user_firstname">
 
-          <label for="name">Last Name<span class="col-red">*</span> </label>
+          <label for="name">
+            Last Name
+            <span class="col-red">
+              *
+            </span>
+          </label>
           <input type="text" name="lastname" id="user_lastname">
 
-          <label for="name">Other Name<span class="col-red">*</span> </label>
-          <input type="text" name="othertnames" id="user_othername">
+          <label for="name">
+            Other Name
+            <span class="col-red">
+              *
+            </span>
+          </label>
+          <input type="text" name="othername" id="user_othername">
 
-          <label for="email">Email Address<span class="col-red">*</span> </label>
+          <label for="email">
+            Email Address
+            <span class="col-red">
+              *
+            </span>
+          </label>
           <input type="email" name="email" id="user_email">
-          <p id="err_msg" class="col-red error"></p>
+            <p id="err_msg" class="col-red error">
 
-          <label for="phone">Phone Number<span class="col-red">*</span> </label>
-          <input type="number" name="phone" id="user_phonenumber">
+            </p>
 
-          <label for="password">Password<span class="col-red">*</span> </label>
+          <label for="phone">
+            Phone Number
+            <span class="col-red">
+              *
+            </span>
+          </label>
+          <input type="number" name="phoneNumber" id="user_phonenumber">
+
+          <label for="password">
+            Password
+            <span class="col-red">
+              *
+            </span>
+          </label>
           <input type="password" name="password" id="user_password" onkeyup="passwordCheck()">
 
-          <label for="confirm">Confirm Password<span class="col-red">*</span> </label>
+          <label for="confirm">
+            Confirm Password
+            <span class="col-red">
+              *
+            </span>
+          </label>
           <input type="password" name="confirm_pass" id="user_confirm_password" onkeyup="passwordCheck()">
+            <p id="password_error_msg" class="error col-red">
+
+            </p>
           
-          <div class="upload">
-            <label for="media">Upload Passport<span class="col-red">*</span></label>
-            <input type="file" accept="image/*" name="image">
-          </div>
-          <p id="success" class="center col-white">You have successfully registered</p>
+          <label for="media">
+            Upload Passport
+            <span class="col-red">
+              *
+            </span>
+          </label>
+          <input type="file" accept="image/*" name="passportUrl" id="passportUrl">
+
           <div class="reg-btn center">
             <div class="inline">
               <input class="col-white bg-green" name="submit" type="submit" id="register_btn" value="Register">
@@ -78,21 +122,19 @@
               <input class="col-white bg-grey" onclick="reset()" type="button" value="Reset">
             </div>
           </div>
-          <p class="center col-green" id="success_header"></p>
-          
+            <p id="success" class="center col-white">You have successfully registered</p>
         </form>
-        <div class="links center">
-          <p>Already have an account?<a href="citizen-signin.html">Signin</a></p>
+          <div class="center">
+            <p>Already have an account?<a href="citizen-signin.html">Signin</a></p>
+          </div> 
         </div>
-      </div>
-      
     </section>
       
     <!-- Footer -->
     <footer>
       <div class="footer">Copyright &copy; 2018 Martins Aloba</div>
     </footer>
-    <script type="text/javascript" src="assets/js/main.js"></script>
-    <script type="text/javascript"src="assets/js/index.js"></script>
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/signup.js"></script>
   </body>
 </html>

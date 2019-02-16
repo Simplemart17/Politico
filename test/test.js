@@ -64,7 +64,7 @@ describe('POLITICO APP TEST', () => {
   let userToken;
   let token;
   const fakeToken = { token: null };
-  const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU0OTcwNDcxNCwiZXhwIjoxNTQ5ODc3NTE0fQ.nogWAR5assT1LrObdk2a-1tgXA1tCUSKkrG8DNJw_Yw';
+  const invalidToken = 'qwqeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU0OTcwNDcxNCwiZXhwIjoxNTQ5ODc3NTE0fQ.nogWAR5assT1LrObdk2a-1tgXA1tCUSKkrG8DNJw_Yw';
 
   // Homepage test
   describe('HOMEPAGE', () => {
@@ -296,7 +296,7 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.should.be.a.json;
-          res.body.error.should.equal('The token you provided is invalid');
+          res.body.error.should.equal('Authentication fails!');
           done(err);
         });
     });

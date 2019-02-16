@@ -5,6 +5,7 @@ import candidate from '../controllers/candidateController';
 import vote from '../controllers/voteController';
 import Auth from '../middleware/Auth';
 import validation from '../middleware/validation';
+import upload from '../middleware/multer';
 
 const router = express.Router();
 
