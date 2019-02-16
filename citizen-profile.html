@@ -37,202 +37,142 @@
       
     <section>
     <!-- Profile Section -->
-      <div class="profile-header">
-        <div class="profile-header-info">
-          <img src="assets/images/profile.jpg" alt="profile image">
+    <div class="profile-header">
+      <div class="profile-header-info">
+        <img src="assets/images/profile.jpg" alt="profile image" id="profile_image">
           <div class="profile-info">
-            <h2>Chika John</h2>
-            <h4>chika.john@gmail.com</h4>
-            <h4>+234 802 345 6789</h4>
+            <h2 id="profile_name">Chika John</h2>
+            <h4 id="profile_email">chika.john@gmail.com</h4>
+            <h4 id="profile_phone">+234 802 345 6789</h4>
           </div>
+      </div>
+    </div>
+
+    <div class="profile-content">
+      <div class="sidebar">
+        <div class="sidebar-menu">
+          <ul>
+            <li class="active"><a href="#">Dashboard</a></li>
+            <li><a href="candidate.html">The Candidates</a></li>
+            <li><a href="vote.html">Give Your Mandate</a></li>
+            <li class="modal-link" onclick="openModal()">Interest Form</li>
+            <li class="modal-link" onclick="openResultModal()">Election Result</li>
+          </ul>
         </div>
       </div>
-      <div class="profile-content">
-        <div class="sidebar">
-          <div class="sidebar-menu">
-            <ul>
-              <li class="active"><a href="#">Dashboard</a></li>
-              <li><a href="candidate.html">The Candidates</a></li>
-              <li><a href="vote.html">Give Your Mandate</a></li>
-              <li class="modal-link" onclick="openModal()">Interest Form</li>
-              <li class="modal-link" onclick="openResultModal()">Election Result</li>
-            </ul>
-          </div>
+
+      <div class="main-area bg-white">
+        <div>
+          <h2>Political Parties</h2>
         </div>
-        <div class="main-area bg-white">
-          <div>
-            <h2>Political Parties</h2>
+        <div class="center" id="empty_list">
           </div>
-          <div class="column-profile">
-            <div class="box even">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
+        <div class="column-profile" id="party_lists">
+
+          <!-- <div class="box">
+            <div class="box-inner">
+              <div class="logo-center">
+                <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
+              </div>
+              <div class="box-name"></div>
+              <div class="center box-info">
+                <h4>People party Congress</h4>
+              </div>
+              <div class="center box-info">
+                <h5>No 1, Sanusi Drive, Abuja</h5>
               </div>
             </div>
-            <div class="box odd">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box even">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box odd">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box odd">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box even">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box odd">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box even">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box even">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box odd">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box even">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
-            <div class="box odd">
-              <div class="box-inner">
-                <div class="logo-center">
-                  <img src="assets/images/ballot-box.png" alt="logo" class="box-logo">
-                </div>
-                <div class="box-name"></div>
-                <div class="center box-info"><h4>People party Congress</h4></div>
-                <div class="center box-info"><h5>No 1, Sanusi Drive, Abuja</h5></div>
-              </div>
-            </div>
+          </div> -->
         </div>
       </div>
+
       <!-- Interest form -->
       <div id="modal" class="modal">
-          <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
-          <form class="modal-content">
-              <div class="modal-container">
-                  <h1>Expression of Interest Form</h1>
-                  <hr>
-                  <label for="name"><b>Full Name<span class="col-red">*</span></b></label>
-                  <input type="text" placeholder="Enter Your Full Name" name="fname">
+        <span onclick="closeModal()" class="close" title="Close Modal">
+          &times;
+        </span>
+        <form class="modal-content">
+            <div class="modal-container">
+              <h1>
+                Expression of Interest Form
+              </h1>
+              <hr>
+              <label for="name">
+                <b>
+                  Full Name
+                  <span class="col-red">
+                    *
+                  </span>
+                </b>
+              </label>
+              <input type="text" placeholder="Enter Your Full Name" name="fname">
   
-                  <label for="party"><b>Political Party<span class="col-red">*</span></b></label>
-                  <input type="text" placeholder="Enter Your Political Party" name="party" required>
+              <label for="party">
+                <b>
+                  Political Party
+                  <span class="col-red">
+                    *
+                  </span>
+                </b>
+              </label>
+              <input type="text" placeholder="Enter Your Political Party" name="party" required>
             
-                  <label for="ptype"><b>Position Type<span class="col-red">*</span></b></label>
-                  <input type="text" placeholder="E.g Federal, Legislative, State or Local Governement" name="position">
+              <label for="ptype">
+                <b>
+                  Position Type
+                  <span class="col-red">
+                    *
+                  </span>
+                </b>
+              </label>
+              <input type="text" placeholder="E.g Federal, Legislative, State or Local Governement" name="position">
   
-                  <label for="ofname"><b>Office Name<span class="col-red">*</span></b></label>
-                  <input type="text" placeholder="Enter Office Name e.g President" name="name">
+              <label for="ofname">
+                <b>
+                  Office Name
+                  <span class="col-red">
+                    *
+                  </span>
+                </b>
+              </label>
+              <input type="text" placeholder="Enter Office Name e.g President" name="name">
                   
-                  <label>
-                    <input type="checkbox" checked="checked" name="confirm"> I confirm that the above details are correct
-                  </label>
-                  <div class="reg-btn center">
-                      <div class="inline">
-                          <input class="col-white bg-green" onclick="location.href='politician-profile.html';" type="button" value="Submit">
-                      </div>
-                      <div class="inline ">
-                          <input class="col-white bg-grey" onclick="closeModal()" type="button" value="Cancel">
-                      </div> 
-                  </div>
-                  </div>
-              </form>
-            </div>
+              <label>
+                <input type="checkbox" checked="checked" name="confirm"> I confirm that the above details are correct
+              </label>
 
+              <div class="reg-btn center">
+                <div class="inline">
+                    <input class="col-white bg-green" onclick="location.href='politician-profile.html';" type="button" value="Submit">
+                </div>
+                      
+                <div class="inline ">
+                  <input class="col-white bg-grey" onclick="closeModal()" type="button" value="Cancel">
+                </div> 
+              </div>
+            </div>
+        </form>
+      </div>
+
+      <!-- Result modal -->
       <div id="resultModal" class="resultModal">
-        <span onclick="closeResultModal()" class="close" title="Close Modal">&times;</span>
+        <span onclick="closeResultModal()" class="close" title="Close Modal">
+          &times;
+        </span>
         <div class="profile-header">
           <div class="main-area center">
-                  <div>
-                    <h2>See Your Result</h2>
-                  </div>
-                </div>
-    </div>
-    <div class="vote-area">
-      <div class="main-area table-area bg-white">
-          <table class="candidate">
-              <caption>You will find here who and position you voted for</caption>
+            <div>
+              <h2>See Your Result</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="vote-area">
+          <div class="main-area table-area bg-white">
+            <table class="candidate">
+              <caption>
+                You will find here who and position you voted for
+              </caption>
               <tr>
                 <th class="col-15">Type</th>
                 <th class="col-15">Office Name</th>
@@ -244,113 +184,147 @@
                 <td class="federal"><div><h3>FEDERAL</h3></div></td>
                 <td class="federal"><div><h3>PRESIDENT</h3></div></td>
                 <td class="candidate-box">
-                    <div class="candidate-box-area">
-                      <div >
-                          <img src="assets/images/politician1.jpg" alt="">
-                      </div>
-                      <div>
-                          <h3>Hillary Clinton</h3>
-                      </div>  
+                  <div class="candidate-box-area">
+                    <div>
+                      <img src="assets/images/politician1.jpg" alt="">
                     </div>
-                  
+                    <div>
+                      <h3>Hillary Clinton</h3>
+                    </div>  
+                  </div> 
                 </td>
+
                 <td class="party-box">
                   <div class="party-box-area">
-                      <div >
-                          <img src="assets/images/partylogo1.png" alt="">
-                      </div>
-                      <div>
-                          <h3>PPA</h3>
-                          <h4>Political Party Alliance</h4>
-                      </div>  
+                    <div >
+                      <img src="assets/images/partylogo1.png" alt="">
+                    </div>
+                    <div>
+                      <h3>PPA</h3>
+                      <h4>Political Party Alliance</h4>
+                    </div>  
                   </div>
                 </td>
               </tr>
+
               <tr>
-              </tr>
-              <tr>
-                  <td class="legislative"><div><h3>LEGISLATIVE</h3></div></td>
-                  <td class="legislative"><h3>SENATE</h3></td>
-                  <td class="candidate-box">
-                      <div class="candidate-box-area">
-                          <div >
-                              <img src="assets/images/politician1.jpg" alt="">
-                          </div>
-                          <div>
-                              <h3>Aishat Buhari</h3>
-                          </div>  
-                      </div>
-                  </td>
-                  <td class="candidate-box">
-                      <div class="party-box-area">
-                          <div >
-                              <img src="assets/images/partylogo1.png" alt="">
-                          </div>
-                          <div>
-                              <h3>PPA</h3>
-                              <h4>Political Party Alliance</h4>
-                          </div>  
-                      </div>
-                  </td>
-              </tr>
-              <tr>
-                  <td class="state"><h3>STATE</h3><div></div></td>
-                  <td class="state"><div><h3>GOVERNOR</h3></div></td>
-                  <td class="candidate-box">
-                      <div class="candidate-box-area">
-                          <div >
-                              <img src="assets/images/politician3.jpeg" alt="">
-                            </div>
-                          <div>
-                              <h3>John Stone</h3>
-                          </div>  
-                      </div>    
-                  </td>
-                  <td class="party-box">
-                      <div class="party-box-area">
-                          <div >
-                              <img src="assets/images/partylogo1.png" alt="">
-                          </div>
-                          <div>
-                              <h3>PPA</h3>
-                              <h4>Political Party Alliance</h4>
-                          </div>  
-                      </div>
+                <td class="legislative">
+                  <div>
+                    <h3>
+                      LEGISLATIVE
+                    </h3>
+                  </div>
+                </td>
+                <td class="legislative">
+                  <h3>
+                    SENATE
+                  </h3>
+                </td>
+                <td class="candidate-box">
+                  <div class="candidate-box-area">
+                    <div >
+                      <img src="assets/images/politician1.jpg" alt="">
+                    </div>
+                    <div>
+                      <h3>Aishat Buhari</h3>
+                    </div>  
+                  </div>
+                </td>
+                
+                <td class="candidate-box">
+                  <div class="party-box-area">
+                    <div >
+                      <img src="assets/images/partylogo1.png" alt="">
+                    </div>
+                    <div>
+                      <h3>PPA</h3>
+                      <h4>Political Party Alliance</h4>
+                    </div>  
+                  </div>
                   </td>
               </tr>
+              
               <tr>
-                  <td class="local"><div><h3>LOCAL GOVERNMENT</h3></div></td>
-                  <td class="local"><div><h3>CHAIRMAN</h3></div></td>
-                  <td class="candidate-box">
-                      <div class="candidate-box-area">
-                          <div >
-                              <img src="assets/images/politician2.jpg" alt="">
-                          </div>
-                          <div>
-                              <h3>Rotimi Amaechi</h3>
-                          </div>  
-                      </div>
-                  </td>
-                  <td class="party-box">
-                      <div class="party-box-area">
-                          <div >
-                              <img src="assets/images/partylogo2.jpeg" alt="">
-                          </div>
-                          <div>
-                              <h3>GTA</h3>
-                              <h4>Grand Team Alliance</h4>
-                          </div>  
-                      </div>
-                  </td>
+                <td class="state">
+                  <h3>
+                    STATE
+                  </h3>
+                </td>
+                <td class="state">
+                  <h3>
+                    GOVERNOR
+                  </h3>
+                </td>
+                <td class="candidate-box">
+                  <div class="candidate-box-area">
+                    <div>
+                      <img src="assets/images/politician3.jpeg" alt="">
+                    </div>
+                    <div>
+                      <h3>John Stone</h3>
+                    </div>  
+                  </div>    
+                </td>
+                <td class="party-box">
+                  <div class="party-box-area">
+                    <div >
+                      <img src="assets/images/partylogo1.png" alt="">
+                    </div>
+                    <div>
+                      <h3>PPA</h3>
+                      <h4>Political Party Alliance</h4>
+                    </div>  
+                  </div>
+                </td>
               </tr>
-          </table>
+
+              <tr>
+                <td class="local">
+                  <div>
+                    <h3>
+                      LOCAL GOVERNMENT
+                    </h3>
+                  </div>
+                </td>
+                <td class="local">
+                  <div>
+                    <h3>
+                      CHAIRMAN
+                    </h3>
+                  </div>
+                </td>
+                <td class="candidate-box">
+                  <div class="candidate-box-area">
+                    <div >
+                      <img src="assets/images/politician2.jpg" alt="">
+                    </div>
+                    <div>
+                      <h3>Rotimi Amaechi</h3>
+                    </div>  
+                  </div>
+                </td>
+                <td class="party-box">
+                  <div class="party-box-area">
+                    <div>
+                      <img src="assets/images/partylogo2.jpeg" alt="">
+                    </div>
+                    <div>
+                      <h3>GTA</h3>
+                      <h4>Grand Team Alliance</h4>
+                    </div>  
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
-    </div>
     </section>
     <!-- Footer -->
     <footer>
-        <div class="footer center">Copyright &copy; 2018 Martins Aloba</div>
+      <div class="footer center">Copyright &copy; 2018 Martins Aloba</div>
     </footer>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/users_js/getparties.js"></script>
   </body>
 </html>
