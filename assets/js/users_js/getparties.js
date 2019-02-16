@@ -1,5 +1,5 @@
 const baseUrl = 'https://mart-politico-app.herokuapp.com';
-const url = 'http://localhost:8000/api/v1/parties';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 document.addEventListener('DOMContentLoaded', () => {

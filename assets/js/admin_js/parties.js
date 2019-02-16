@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // Function to create parties
 const baseUrl = 'https://mart-politico-app.herokuapp.com';
-const url = 'http://localhost:8000/api/v1/parties';
+const url = 'http://localhost:8000';
 const token = localStorage.getItem('token');
 const createParty = document.getElementById('create_party');
 const editParty = document.getElementById('edit_party');
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 editParty.onsubmit = () => {
   event.preventDefault();
-  const url = `${baseUrl}/api/v1/parties/${id}/name`;
+  const editUrl = `${baseUrl}/api/v1/parties/${id}/name`;
   const editMsg = document.getElementById('edit_party');
 
   const name = document.getElementById('edit_name').value;
@@ -97,7 +97,7 @@ editParty.onsubmit = () => {
     name,
   };
 
-  fetch(url, {
+  fetch(editUrl, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -128,10 +128,10 @@ editParty.onsubmit = () => {
 };
 
 const deleteParty = () => {
-  const url = `${baseUrl}/api/v1/parties/${id}`;
+  const deleteUrl = `${baseUrl}/api/v1/parties/${id}`;
   const deleteMsg = document.getElementById('delete_message');
 
-  fetch(url, {
+  fetch(deleteUrl, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

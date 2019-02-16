@@ -1,5 +1,5 @@
 const baseUrl = 'https://mart-politico-app.herokuapp.com';
-const url = 'http://localhost:8000/api/v1/auth/login';
+const url = 'http://localhost:8000';
 const signinForm = document.getElementById('signin-form');
 
 signinForm.onsubmit = () => {
