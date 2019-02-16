@@ -13,7 +13,8 @@
     "create:tables": "babel-node ./app/model/createTables.js",
     "drop:tables": "babel-node ./app/model/dropTables.js",
     "local": "nyc --reporter=text --reporter=html mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "repository": {
     "type": "git",
@@ -64,5 +65,6 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.15.0",
     "nodemon": "^1.18.9"
-  }
+  },
+  "heroku-run-build-script": true
 }
