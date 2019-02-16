@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/Simplemart17/Politico.svg?branch=develop)](https://travis-ci.com/Simplemart17/Politico)
-[![Coverage Status](https://coveralls.io/repos/github/Simplemart17/Politico/badge.svg?branch=develop)](https://coveralls.io/github/Simplemart17/Politico?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/Simplemart17/Politico/badge.svg)](https://coveralls.io/github/Simplemart17/Politico)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5c29b768b40a1a380cd2/maintainability)](https://codeclimate.com/github/Simplemart17/Politico/maintainability)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
@@ -38,7 +38,7 @@ Navigate to the folder politico and run
 npm install
 ```
 
-setup environmental variable in this following format:
+setup environmental variable in this format:
 ```
 DATABASE_URL = postgres://{your_database_user_name}:{your_database_password}@localhost:5432/{your_database_name}
 SECRET = {'any_combination_of_your_choice'}
