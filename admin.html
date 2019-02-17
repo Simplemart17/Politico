@@ -43,6 +43,7 @@
         <div class="reg-btn admin-header-btn">
             <div class="inline"><input class="col-white bg-light-green" onclick="openPartyModal()" type="button" value="Create Party"></div>
             <div class="inline"><input class="col-white bg-light-green" onclick="openOfficeModal()" type="button" value="Create Office"></div>
+            <div class="inline"><input class="col-white bg-light-green" onclick="officeLists();" type="button" value="Office Lists"></div>
         </div>
       </div>
       
@@ -82,19 +83,31 @@
       <!-- Create Office Modal-->
       <div id="officeModal" class="officeModal">
         <span onclick="closeOfficeModal()" class="close" title="Close Modal">&times;</span>
-          <form class="modal-content">
+          <form method="POST" class="modal-content" id="create_office">
             <div class="modal-container">
               <h1>Create Political Office</h1>
                 <hr>
                   <label for="type"><b>Office Type<span class="col-red">*</span></b></label>
-                  <input type="text" placeholder="E.g Federal, Legislative, State, Local Government" name="type">
+                  <select id="office_type" name="office_type">
+                    <option value="0">Select Office Type</option>
+                    <option value="Federal">FEDERAL</option>
+                    <option value="Legislative">LEGISLATIVE</option>
+                    <option value="State">STATE</option>
+                    <option value="Local Government">LOCAL GOVERNMENT</option>
+                  </select>
         
                   <label for="offname"><b>Office Name<span class="col-red">*</span></b></label>
-                  <input type="text" placeholder="E.g President, Senate, Governor, Chairman" name="offname">
+                  <select id="office_name" name="office_name">
+                    <option value="0">Select Office Name</option>
+                    <option value="President">PRESIDENT</option>
+                    <option value="Senate">SENATE</option>
+                    <option value="Governor">GOVERNOR</option>
+                    <option value="Chairman">CHAIRMAN</option>
+                  </select>
         
                   <div class="reg-btn center">
                     <div class="inline">
-                      <input class="col-white bg-green" onclick="closeOfficeModal()" type="button" value="Create">
+                      <input class="col-white bg-green" name="submit" type="submit" value="Create">
                     </div>
                     <div class="inline ">
                       <input class="col-white bg-grey" onclick="closeOfficeModal()" type="button" value="Cancel">
@@ -102,6 +115,19 @@
                   </div>
               </div>
           </form>
+      </div>
+
+      <!-- Office Lists Modal -->
+      <div id="officeListModal" class="officeListModal">
+        <span onclick="closeOfficeListModal()" class="close" title="Close Modal">&times;</span>
+          <div class="modal-content offices">
+            <div class="modal-container">
+              <h1>Lists of Government Offices</h1>
+                <hr>
+              <div class="column" id="office_lists">
+                </div>
+            </div>    
+          </div>
       </div>
 
       <!-- Edit Modal Section -->

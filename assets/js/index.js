@@ -38,6 +38,15 @@ const closeOfficeModal = () => {
   document.getElementById('officeModal').style.display = 'none';
 };
 
+const openOfficeListModal = () => {
+  document.getElementById('officeListModal').style.display = 'block';
+};
+
+const closeOfficeListModal = () => {
+  document.getElementById('officeListModal').style.display = 'none';
+  window.location = 'admin.html';
+};
+
 const openEditModal = (partyId) => {
   id = partyId;
   document.getElementById('editModal').style.display = 'block';
