@@ -9,7 +9,7 @@
     "build": "babel app -d build",
     "lint": "eslint ./app --fix",
     "deploy": "gh-pages -d UI",
-    "test": "npm run drop:tables && npm run create:tables && NODE_ENV=test nyc mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
+    "test": "npm run drop:tables && npm run create:tables && nyc mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
     "create:tables": "babel-node ./app/model/createTables.js",
     "drop:tables": "babel-node ./app/model/dropTables.js",
     "local": "nyc --reporter=text --reporter=html mocha test/**/*.js --require babel-polyfill --require babel-register --exit",
