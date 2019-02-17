@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 // Function to create parties
-const baseUrl = 'https://mart-politico-app.herokuapp.com';
-const url = 'http://localhost:8000';
+const url = 'https://mart-politico-app.herokuapp.com';
+// const url = 'http://localhost:8000';
+
 const token = localStorage.getItem('token');
 const createParty = document.getElementById('create_party');
 const editParty = document.getElementById('edit_party');
@@ -16,7 +17,7 @@ createParty.onsubmit = () => {
     name,
     hqAddress,
   };
-  fetch(`${baseUrl}/api/v1/parties`, {
+  fetch(`${url}/api/v1/parties`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -53,7 +54,7 @@ createParty.onsubmit = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetch(`${baseUrl}/api/v1/parties`, {
+  fetch(`${url}/api/v1/parties`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 editParty.onsubmit = () => {
   event.preventDefault();
-  const editUrl = `${baseUrl}/api/v1/parties/${id}/name`;
+  const editUrl = `${url}/api/v1/parties/${id}/name`;
   const editMsg = document.getElementById('edit_party');
 
   const name = document.getElementById('edit_name').value;
@@ -128,7 +129,7 @@ editParty.onsubmit = () => {
 };
 
 const deleteParty = () => {
-  const deleteUrl = `${baseUrl}/api/v1/parties/${id}`;
+  const deleteUrl = `${url}/api/v1/parties/${id}`;
   const deleteMsg = document.getElementById('delete_message');
 
   fetch(deleteUrl, {
@@ -153,6 +154,96 @@ const deleteParty = () => {
         <h4>${resp.error}</h4>
         </div>
         `;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// Funtion to create offices
+const createOffice = document.getElementById('create_office');
+
+createOffice.onsubmit = () => {
+  event.preventDefault();
+
+  const type = document.getElementById('office_type').value;
+  const name = document.getElementById('office_name').value;
+
+  const officeForm = {
+    type,
+    name,
+  };
+  console.log(officeForm);
+  fetch(`${url}/api/v1/offices`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+    body: JSON.stringify(officeForm),
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        createOffice.innerHTML = `<div class="parties">
+        <h3>Government office was successfully created!<h3/>
+        </div>
+        `;
+        setTimeout(() => {
+          window.location.href = 'admin.html';
+        }, 2000);
+      }
+      if (resp.status === 400) {
+        createOffice.innerHTML = `<div class="parties">
+        <h3>${resp.message}<h3/>
+        <h4>The political party already exist!</h4>
+        </div>
+        `;
+        setTimeout(() => {
+          window.location.href = 'admin.html';
+        }, 2000);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// Function to get office lists
+const officeLists = () => {
+  const officeLists = document.getElementById('office_lists');
+
+  fetch(`${url}/api/v1/offices`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 200) {
+        openOfficeListModal();
+        resp.data.forEach((office) => {
+          officeLists.innerHTML += `
+          <div class="box">
+            <div class="box-office">
+              <div class="box-info"><h4>TYPE:
+              <p>${office.type}</p></h4></div>
+              <div class="box-info"><h4>NAME: ${office.name}</h4></div>
+            </div>
+          </div>
+          `;
+        });
+      } else {
+        officeLists.innerHTML = `<div class="parties">
+        <h4>${office.message}</h4>
+        </div>
+        `;
+        setTimeout(() => {
+          window.location.href = 'admin.html';
+        }, 2000);
       }
     })
     .catch((error) => {

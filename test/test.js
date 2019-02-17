@@ -179,6 +179,32 @@ describe('POLITICO APP TEST', () => {
         });
     });
   });
+
+  // Get user
+  describe('USER', () => {
+    it('should return user detail', (done) => {
+      chai.request(app)
+        .get('/api/v1/auth/profile')
+        .set('token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.message.should.equal('User successfully retrieved!');
+          done(err);
+        });
+    });
+    it('should return error for invalid credential', (done) => {
+      chai.request(app)
+        .get('/api/v1/auth/profile')
+        .set('token', invalidToken)
+        .end((err, res) => {
+          res.should.have.status(403);
+          res.should.be.json;
+          done(err);
+        });
+    });
+  });
+
   // party test
   describe('Party /GET', () => {
     it('should return error for empty database', (done) => {

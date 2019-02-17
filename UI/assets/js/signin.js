@@ -1,5 +1,6 @@
-const baseUrl = 'https://mart-politico-app.herokuapp.com';
-const url = 'http://localhost:8000';
+const url = 'https://mart-politico-app.herokuapp.com';
+// const url = 'http://localhost:8000';
+
 const signinForm = document.getElementById('signin-form');
 
 signinForm.onsubmit = () => {
@@ -13,7 +14,7 @@ signinForm.onsubmit = () => {
     email,
     password,
   };
-  fetch(`${baseUrl}/api/v1/auth/login`, {
+  fetch(`${url}/api/v1/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -22,7 +23,6 @@ signinForm.onsubmit = () => {
   })
     .then(response => response.json())
     .then((resp) => {
-      console.log(resp);
       const isadmin = resp.data[0].user.isadmin;
       if (resp.error === 'Incorrect email address') {
         emailError.innerHTML = 'Incorrect email address';
@@ -35,7 +35,6 @@ signinForm.onsubmit = () => {
         localStorage.setItem('token', token);
         localStorage.setItem('isadmin', isadmin);
         document.getElementById('success').style.display = 'block';
-        console.log(resp);
         setTimeout(() => {
           (isadmin === true) ? window.location.href = 'admin.html' : window.location.href = 'citizen-profile.html';
         }, 3000);

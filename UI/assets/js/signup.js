@@ -1,5 +1,6 @@
-const baseUrl = 'https://mart-politico-app.herokuapp.com';
-const url = 'http://localhost:8000';
+const url = 'https://mart-politico-app.herokuapp.com';
+// const url = 'http://localhost:8000';
+
 const signUpForm = document.getElementById('form_register');
 
 // Function to register an account
@@ -21,7 +22,7 @@ signUpForm.onsubmit = () => {
     phoneNumber,
     password,
   };
-  fetch(`${baseUrl}/api/v1/auth/signup`, {
+  fetch(`${url}/api/v1/auth/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
