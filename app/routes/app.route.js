@@ -1,7 +1,7 @@
 import express from 'express';
 import partyController from '../controllers/partyController';
 import officeController from '../controllers/officeController';
-import candidate from '../controllers/candidateController';
+import candidateController from '../controllers/candidateController';
 import vote from '../controllers/voteController';
 import Auth from '../middleware/Auth';
 import validation from '../middleware/validation';
@@ -25,11 +25,11 @@ router.get('/offices', Auth.verifyToken, officeController.getAllOffice);
 
 router.get('/offices/:id', Auth.verifyToken, validation.idParamsCheck, officeController.getOffice);
 
-router.post('/office/interest', Auth.verifyToken, validation.candidateInput, candidate.candidateInterest);
+router.post('/office/interest', Auth.verifyToken, validation.candidateInput, candidateController.candidateInterest);
 
-router.get('/candidates', Auth.verifyToken, Auth.verifyIsAdmin, candidate.getAllCandidates);
+router.get('/candidates', Auth.verifyToken, Auth.verifyIsAdmin, candidateController.getAllCandidates);
 
-router.post('/office/:id/register', Auth.verifyToken, Auth.verifyIsAdmin, validation.candidateInput, candidate.registerCandidate);
+router.post('/office/:id/register', Auth.verifyToken, Auth.verifyIsAdmin, validation.candidateInput, candidateController.registerCandidate);
 
 router.post('/votes', Auth.verifyToken, validation.voteInput, vote.voteCandidate);
 

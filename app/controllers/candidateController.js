@@ -1,9 +1,9 @@
 import dBase from '../model/db';
 import * as queries from '../model/queries';
 
-export default {
+const candidateController = {
   async registerCandidate(req, res) {
-    const candidate = req.params.id;
+    const candidate = req.params.userId;
     const { party, office } = req.body;
     const values = [
       party,
@@ -78,3 +78,5 @@ export default {
     }
   },
 };
+
+export default candidateController;
