@@ -3,7 +3,7 @@ import * as queries from '../model/queries';
 
 const candidateController = {
   async registerCandidate(req, res) {
-    const candidate = req.params.userId;
+    const candidate = req.params.id;
     const { party, office } = req.body;
     const values = [
       party,
