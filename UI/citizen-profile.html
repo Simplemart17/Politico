@@ -29,7 +29,7 @@
             <input type="checkbox" id="nav-check" />
             <div class="nav-links">
               <a href="citizen-profile.html">Dashboard</a>
-              <a href="citizen-signin.html">Sign Out</a>
+              <a href="citizen-signin.html" id="sign-out">Sign Out</a>
             </div>
         </div>
       </div>
@@ -41,9 +41,9 @@
       <div class="profile-header-info">
         <img src="assets/images/profile.jpg" alt="profile image" id="profile_image">
           <div class="profile-info">
-            <h2 id="profile_name">Chika John</h2>
-            <h4 id="profile_email">chika.john@gmail.com</h4>
-            <h4 id="profile_phone">+234 802 345 6789</h4>
+            <h2 id="profile_name"></h2>
+            <h4 id="profile_email"></h4>
+            <h4 id="profile_phone"></h4>
           </div>
       </div>
     </div>
@@ -91,21 +91,12 @@
         <span onclick="closeModal()" class="close" title="Close Modal">
           &times;
         </span>
-        <form class="modal-content">
+        <form method="POST" class="modal-content" id="express_interest">
             <div class="modal-container">
               <h1>
                 Expression of Interest Form
               </h1>
               <hr>
-              <label for="name">
-                <b>
-                  Full Name
-                  <span class="col-red">
-                    *
-                  </span>
-                </b>
-              </label>
-              <input type="text" placeholder="Enter Your Full Name" name="fname">
   
               <label for="party">
                 <b>
@@ -115,35 +106,25 @@
                   </span>
                 </b>
               </label>
-              <input type="text" placeholder="Enter Your Political Party" name="party" required>
-            
-              <label for="ptype">
-                <b>
-                  Position Type
-                  <span class="col-red">
-                    *
-                  </span>
-                </b>
-              </label>
-              <input type="text" placeholder="E.g Federal, Legislative, State or Local Governement" name="position">
+              <select id="pol_party" name="pol_party">
+                <option value="0">Select Your Political Party</option>
+              </select>
   
               <label for="ofname">
                 <b>
-                  Office Name
+                  Office Details
                   <span class="col-red">
                     *
                   </span>
                 </b>
               </label>
-              <input type="text" placeholder="Enter Office Name e.g President" name="name">
-                  
-              <label>
-                <input type="checkbox" checked="checked" name="confirm"> I confirm that the above details are correct
-              </label>
+              <select id="office_name" name="office_name">
+                <option value="0">Select Office Type & Name</option>
+              </select>
 
               <div class="reg-btn center">
                 <div class="inline">
-                    <input class="col-white bg-green" onclick="location.href='politician-profile.html';" type="button" value="Submit">
+                    <input class="col-white bg-green" name="submit" type="submit" value="Submit">
                 </div>
                       
                 <div class="inline ">
@@ -325,6 +306,6 @@
       <div class="footer center">Copyright &copy; 2018 Martins Aloba</div>
     </footer>
     <script src="assets/js/index.js"></script>
-    <script src="assets/js/users_js/getparties.js"></script>
+    <script src="assets/js/users_js/usersProfile.js"></script>
   </body>
 </html>

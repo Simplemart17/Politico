@@ -1,7 +1,7 @@
 const createUsersTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
           users(
-            id SERIAL PRIMARY KEY,
+            userid SERIAL PRIMARY KEY,
             firstname VARCHAR(128) NOT NULL,
             lastname VARCHAR(128) NOT NULL,
             othername VARCHAR(128) NOT NULL,
@@ -47,12 +47,26 @@ const createCandidateTable = () => {
                 createdon DATE DEFAULT CURRENT_DATE,
                 party INTEGER NOT NULL REFERENCES parties (id),
                 office INTEGER NOT NULL REFERENCES offices (id),
-                candidate INTEGER NOT NULL REFERENCES users (id),
+                candidate INTEGER NOT NULL REFERENCES users (userid),
                 PRIMARY KEY (office, candidate)
               )`;
   return text;
 };
 const dropCandidateTable = () => 'DROP TABLE IF EXISTS candidates';
+
+const createInterestTable = () => {
+  const text = `CREATE TABLE IF NOT EXISTS
+              interest(
+                interest_id SERIAL UNIQUE,
+                createdon DATE DEFAULT CURRENT_DATE,
+                party INTEGER NOT NULL REFERENCES parties (id),
+                office INTEGER NOT NULL REFERENCES offices (id),
+                candidate INTEGER UNIQUE NOT NULL REFERENCES users (userid),
+                PRIMARY KEY (office, candidate)
+              )`;
+  return text;
+};
+const dropInterestTable = () => 'DROP TABLE IF EXISTS interest';
 
 const createVoteTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
@@ -61,7 +75,7 @@ const createVoteTable = () => {
                 createdOn DATE DEFAULT CURRENT_DATE,
                 office INTEGER NOT NULL REFERENCES offices (id),
                 candidate INTEGER NOT NULL REFERENCES candidates (id),
-                voter INTEGER NOT NULL REFERENCES users (id),
+                voter INTEGER NOT NULL REFERENCES users (userid),
                 PRIMARY KEY (office, voter)
               )`;
   return text;
@@ -71,6 +85,8 @@ const dropVoteTable = () => 'DROP TABLE IF EXISTS votes';
 const addUser = () => 'INSERT INTO users(firstname, lastname, othername, email, phoneNumber, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
 
 const newCandidate = () => 'INSERT INTO candidates(party, office, candidate) VALUES($1, $2, $3) RETURNING *';
+
+const candidateInterest = () => 'INSERT INTO interest(party, office, candidate) VALUES($1, $2, $3) RETURNING *';
 
 const newVote = () => 'INSERT INTO votes(office, candidate, voter) VALUES($1, $2, $3) RETURNING *';
 
@@ -90,7 +106,11 @@ const deleteParty = () => 'DELETE FROM parties WHERE id = $1 returning *';
 
 const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING *';
 
-const getUsers = () => 'SELECT * FROM users WHERE id = $1';
+const getUsers = () => 'SELECT * FROM users WHERE userid = $1';
+
+const getInterestedCandidate = () => `SELECT userid, firstname, lastname, name, office
+FROM users, offices, interest
+WHERE users.userid = candidate`;
 
 const getResults = () => `SELECT candidate, COUNT (candidate) AS result
 FROM votes
@@ -106,10 +126,13 @@ export {
   dropOfficeTable,
   createCandidateTable,
   dropCandidateTable,
+  createInterestTable,
+  dropInterestTable,
   createVoteTable,
   dropVoteTable,
   addUser,
   newCandidate,
+  candidateInterest,
   newOffice,
   getOffices,
   getOffice,
@@ -121,4 +144,5 @@ export {
   newVote,
   getUsers,
   getResults,
+  getInterestedCandidate,
 };

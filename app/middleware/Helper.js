@@ -8,12 +8,12 @@ const generateHashPassword = password => bcrypt.hashSync(password, bcrypt.genSal
 
 const comparePassword = (hashPassword, password) => bcrypt.compareSync(password, hashPassword);
 
-const generateToken = (id, isAdmin) => {
+const generateToken = (userid, isAdmin) => {
   const token = jwt.sign({
-    id,
+    userid,
     isAdmin,
   },
-  process.env.SECRET, { expiresIn: '2d' });
+  process.env.SECRET, { expiresIn: '1d' });
   return token;
 };
 

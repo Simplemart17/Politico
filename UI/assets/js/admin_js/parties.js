@@ -7,6 +7,16 @@ const token = localStorage.getItem('token');
 const createParty = document.getElementById('create_party');
 const editParty = document.getElementById('edit_party');
 
+document.addEventListener('DOMContentLoaded', () => {
+  const signOut = document.getElementById('sign-out');
+  signOut.addEventListener('click', () => {
+    localStorage.clear();
+  });
+  if (!token) {
+    window.location = 'citizen-signin.html';
+  }
+});
+
 createParty.onsubmit = () => {
   event.preventDefault();
 
@@ -85,6 +95,35 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((error) => {
       console.log(error);
     });
+
+  fetch(`${url}/api/v1/candidates`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      const interestList = document.getElementById('interest_table');
+      console.log(resp);
+      if (resp.status === 200) {
+        resp.data.forEach((candidate) => {
+          interestList.innerHTML += `
+          <table>  
+            <tr>
+              <td>${candidate.firstname} ${candidate.lastname}</td>
+              <td>${candidate.name}</td>
+              <td>New Nigeria party</td>
+              <td><button key=${candidate.userid}>Register</button></td>
+            </tr>
+          </table>
+        `;
+          console.log(candidate.userid);
+        });
+      }
+    })
+    .catch(error => console.log(error));
 });
 
 editParty.onsubmit = () => {
@@ -174,7 +213,6 @@ createOffice.onsubmit = () => {
     type,
     name,
   };
-  console.log(officeForm);
   fetch(`${url}/api/v1/offices`, {
     method: 'POST',
     headers: {
@@ -225,6 +263,7 @@ const officeLists = () => {
     .then((resp) => {
       if (resp.status === 200) {
         openOfficeListModal();
+        officeLists.innerHTML = '';
         resp.data.forEach((office) => {
           officeLists.innerHTML += `
           <div class="box">

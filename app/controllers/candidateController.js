@@ -3,7 +3,7 @@ import * as queries from '../model/queries';
 
 export default {
   async registerCandidate(req, res) {
-    const candidate = req.params.id;
+    const candidate = req.params.userId;
     const { party, office } = req.body;
     const values = [
       party,
@@ -24,6 +24,57 @@ export default {
       return res.status(422).json({
         status: 422,
         message: 'The submission was not accepted!',
+      });
+    }
+  },
+
+  async candidateInterest(req, res) {
+    const candidate = req.user.userid;
+    const { party, office } = req.body;
+    const values = [
+      party,
+      office,
+      candidate,
+    ];
+    try {
+      const { rows } = await dBase.query(queries.candidateInterest(), values);
+      return res.status(201).json({
+        status: 201,
+        message: 'You have successfully submitted your interest!',
+        data: [
+          rows[0],
+        ],
+      });
+    } catch (error) {
+      return res.status(422).json({
+        status: 422,
+        message: 'You are allowed to register only once!',
+      });
+    }
+  },
+
+  async getAllCandidates(req, res) {
+    try {
+      const { rows } = await dBase.query(queries.getInterestedCandidate());
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          message: 'No record found!',
+          data: [
+            {},
+          ],
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        message: 'Lists of candidates successfully retrieved!',
+        data: rows,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(422).json({
+        status: 422,
+        message: 'Candidates lists cannot be fecthed',
       });
     }
   },

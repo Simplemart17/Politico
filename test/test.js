@@ -7,8 +7,10 @@ import {
   createPartyTable,
   createOfficeTable,
   createCandidateTable,
+  createInterestTable,
   createVoteTable,
   dropCandidateTable,
+  dropInterestTable,
   dropOfficeTable,
   dropPartyTable,
   dropUsersTable,
@@ -27,6 +29,7 @@ describe('POLITICO APP TEST', () => {
       await db.query(createPartyTable());
       await db.query(createOfficeTable());
       await db.query(createCandidateTable());
+      await db.query(createInterestTable());
       await db.query(createVoteTable());
       console.log('created tables');
     } catch (error) {
@@ -38,6 +41,7 @@ describe('POLITICO APP TEST', () => {
     try {
       await db.query(dropVoteTable());
       await db.query(dropCandidateTable());
+      await db.query(dropInterestTable());
       await db.query(dropOfficeTable());
       await db.query(dropPartyTable());
       await db.query(dropUsersTable());
