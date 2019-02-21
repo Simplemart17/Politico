@@ -3,7 +3,7 @@ import * as queries from '../model/queries';
 
 const voteController = {
   async voteCandidate(req, res) {
-    const voter = req.user.id;
+    const voter = req.user.userid;
     const { office, candidate } = req.body;
     const values = [
       office,

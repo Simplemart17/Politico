@@ -46,7 +46,7 @@ const officeController = {
     } catch (error) {
       return res.status(422).json({
         status: 422,
-        message: 'Office list was was fecthed',
+        message: 'Office list was not fecthed',
       });
     }
   },
@@ -70,7 +70,7 @@ const officeController = {
     } catch (error) {
       return res.status(422).json({
         status: 422,
-        message: 'Office list was was fecthed',
+        message: 'Office list was not fecthed',
       });
     }
   },
