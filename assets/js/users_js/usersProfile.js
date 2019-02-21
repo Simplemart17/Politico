@@ -2,7 +2,17 @@ const url = 'https://mart-politico-app.herokuapp.com';
 // const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
+const registerInterest = document.getElementById('express_interest');
+
 document.addEventListener('DOMContentLoaded', () => {
+  const signOut = document.getElementById('sign-out');
+  signOut.addEventListener('click', () => {
+    localStorage.clear();
+  });
+  if (!token) {
+    window.location.href = 'citizen-signin.html';
+  }
+
   fetch(`${url}/api/v1/parties`, {
     method: 'GET',
     headers: {
@@ -39,9 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((error) => {
       console.log(error);
     });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
   fetch(`${url}/api/v1/auth/profile`, {
     method: 'GET',
     headers: {
@@ -60,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(resp);
       }
       if (resp.status === 200) {
-        console.log(resp.data[0].user);
         const userData = resp.data[0].user;
 
         userName.innerHTML = `${userData.firstname} ${userData.lastname}`;
@@ -71,10 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((error) => {
       console.log(error);
     });
-});
 
-// Function to get office
-document.addEventListener('DOMContentLoaded', () => {
+  // Function to get office
   const candidateLists = document.getElementById('candidate_lists');
   fetch(`${url}/api/v1/offices`, {
     method: 'GET',
@@ -120,4 +125,96 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((error) => {
       console.log(error);
     });
+
+  // Select party dropdown
+  fetch(`${url}/api/v1/parties`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      const partyLists = document.getElementById('pol_party');
+      if (resp.status === 200) {
+        resp.data.forEach((party) => {
+          partyLists.innerHTML += `
+          <option value="${party.id}">${party.name}</option>
+            `;
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Select office dropdown
+  fetch(`${url}/api/v1/offices`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      const officeInfo = document.getElementById('office_name');
+      if (resp.status === 200) {
+        resp.data.forEach((office) => {
+          console.log(office.id);
+          officeInfo.innerHTML += `
+          <option value="${office.id}">${office.type} / ${office.name}</option>
+            `;
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
+
+registerInterest.onsubmit = () => {
+  event.preventDefault();
+
+  const party = document.getElementById('pol_party').value;
+  const office = document.getElementById('office_name').value;
+
+  const form = {
+    party,
+    office,
+  };
+
+  fetch(`${url}/api/v1/office/interest`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+    body: JSON.stringify(form),
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      console.log(resp);
+      if (resp.status === 201) {
+        registerInterest.innerHTML = `<div class="parties">
+        <h4>${resp.message}</h4>
+        </div>
+        `;
+        setTimeout(() => {
+          window.location.href = 'citizen-profile.html';
+        }, 2000);
+      } else {
+        registerInterest.innerHTML = `<div class="parties">
+        <h4>${resp.message}</h4>
+        </div>
+        `;
+        setTimeout(() => {
+          window.location.href = 'citizen-profile.html';
+        }, 2000);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

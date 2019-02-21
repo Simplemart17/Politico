@@ -24,6 +24,7 @@ signinForm.onsubmit = () => {
     .then(response => response.json())
     .then((resp) => {
       const isadmin = resp.data[0].user.isadmin;
+
       if (resp.error === 'Incorrect email address') {
         emailError.innerHTML = 'Incorrect email address';
       }
@@ -32,8 +33,12 @@ signinForm.onsubmit = () => {
       }
       if (resp.message === 'You have successfully signed in!') {
         const token = resp.data[0].token;
+        const userid = resp.data[0].user.userid;
+
         localStorage.setItem('token', token);
         localStorage.setItem('isadmin', isadmin);
+        localStorage.setItem('userid', userid);
+
         document.getElementById('success').style.display = 'block';
         setTimeout(() => {
           (isadmin === true) ? window.location.href = 'admin.html' : window.location.href = 'citizen-profile.html';
