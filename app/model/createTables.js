@@ -1,5 +1,10 @@
 import {
-  createUsersTable, createPartyTable, createOfficeTable, createCandidateTable, createVoteTable,
+  createUsersTable,
+  createPartyTable,
+  createOfficeTable,
+  createCandidateTable,
+  createInterestTable,
+  createVoteTable,
 } from './queries';
 import { generateHashPassword } from '../middleware/Helper';
 import db from './db';
@@ -22,6 +27,7 @@ async function createAllTables() {
   await db.query(createPartyTable());
   await db.query(createOfficeTable());
   await db.query(createCandidateTable());
+  await db.query(createInterestTable());
   await db.query(createVoteTable());
   await db.query(addAdmin());
   await db.query(addTestAdmin());

@@ -44,7 +44,6 @@ const openOfficeListModal = () => {
 
 const closeOfficeListModal = () => {
   document.getElementById('officeListModal').style.display = 'none';
-  window.location = 'admin.html';
 };
 
 const openEditModal = (partyId) => {
@@ -72,12 +71,6 @@ const openResultModal = () => {
 const closeResultModal = () => {
   document.getElementById('resultModal').style.display = 'none';
 };
-
-// const removeParty = () => {
-//   const elem = document.getElementById('remove');
-//   elem.parentNode.removeChild(elem);
-//   closeDeleteModal();
-// };
 
 const passwordCheck = () => {
   const password1 = document.getElementById('user_password').value;

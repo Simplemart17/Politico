@@ -30,7 +30,7 @@
             <input type="checkbox" id="nav-check" />
             <div class="nav-links">
               <a href="admin.html">Admin</a>
-              <a href="citizen-signin.html">Sign Out</a>
+              <a href="citizen-signin.html" id="sign-out">Sign Out</a>
             </div>
         </div>
       </div>
@@ -44,18 +44,41 @@
             <div class="inline"><input class="col-white bg-light-green" onclick="openPartyModal()" type="button" value="Create Party"></div>
             <div class="inline"><input class="col-white bg-light-green" onclick="openOfficeModal()" type="button" value="Create Office"></div>
             <div class="inline"><input class="col-white bg-light-green" onclick="officeLists();" type="button" value="Office Lists"></div>
+            <div class="inline"><input class="col-white bg-light-green" onclick="openPartyModal();" type="button" value="Candidate"></div>
         </div>
       </div>
       
-      <div class="main-area bg-white">
-        <div>
-          <h2>Political Parties</h2>
+      <div class="party-column main-area">
+        <div class="bg-white">
+          <div>
+            <h2>Political Parties</h2>
+          </div>
+          <div class="center" id="empty_list">
+            </div>
+          <div class="column" id="party_lists">
+            </div>
         </div>
-        <div class="center" id="empty_list">
-          </div>
-        <div class="column" id="party_lists">
-          </div>
+        <div id="interest_table">
+          <table>
+            <caption>
+              Interested Candidates for Government Office
+            </caption>
+            <tr>
+              <th>Name</th>
+              <th>Office Name</th>
+              <th>Party Name</th>
+              <th>Action</th>
+            </tr>
+            <!-- <tr>
+              <td>Matthew Abbey</td>
+              <td>President</td>
+              <td>New Nigeria party</td>
+              <td><button>Register</button></td>
+            </tr> -->
+          </table>
+        </div>
       </div>
+      
       <!-- Create Party Modal Section -->
       <div id="partyModal" class="partyModal">
         <span onclick="closePartyModal()" class="close" title="Close Modal">&times;</span>

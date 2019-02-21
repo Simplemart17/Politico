@@ -432,7 +432,9 @@ a {
 
 /* party list */
 .main-area {
-    margin-bottom: 20px;
+    padding-bottom: 20px;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .main-area h2 {
@@ -444,7 +446,7 @@ a {
 
 .column {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     margin: 20px 50px;
     padding: 10px;
     grid-column-gap: 10px;
@@ -458,6 +460,11 @@ a {
     padding: 10px;
     grid-column-gap: 10px;
     grid-row-gap: 15px;
+}
+
+.party-column {
+    display: grid;
+    grid-template-columns: 60% 40%;
 }
 
 .box {
@@ -632,7 +639,7 @@ th.col-20 {
       width: 20%;
 } 
   
-  th.col-30 {
+th.col-30 {
     width: 30%;
 }
 
@@ -667,22 +674,6 @@ th.col-20 {
     border-radius: 100%;
     height: 80%;
     width: 80%;
-}
-
-.federal {
-    background: #6a966dd8;
-}
-
-.legislative {
-    background: #1e3f0f88;
-}
-
-.state {
-    background: #7d977188;
-}
-
-.local {
-    background: #5b855ed8
 }
 
 /* voting table */
@@ -724,7 +715,7 @@ th.col-20 {
 .admin-header-btn {
     margin-top: 20px;
     margin-bottom: -20px;
-    margin-left: 67%;
+    margin-left: 47%;
 }
 
 .admin-header-btn input {

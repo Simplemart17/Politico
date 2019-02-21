@@ -19,7 +19,7 @@ const Users = {
     ];
     try {
       const { rows } = await dBase.query(queries.addUser(), values);
-      const token = generateToken(rows[0].id, rows[0].isadmin);
+      const token = generateToken(rows[0].userid, rows[0].isadmin);
       delete rows[0].password;
       return res.status(201).json({
         status: 201,
@@ -57,7 +57,7 @@ const Users = {
           error: 'Incorrect password!',
         });
       }
-      const token = generateToken(rows[0].id, rows[0].isadmin);
+      const token = generateToken(rows[0].userid, rows[0].isadmin);
       delete rows[0].password;
       return res.status(200).json({
         status: 200,
@@ -77,8 +77,8 @@ const Users = {
 
   async getUser(req, res) {
     try {
-      const { rows } = await dBase.query(queries.getUsers(), [req.user.id]);
-      const token = generateToken(rows[0].id, rows[0].isadmin);
+      const { rows } = await dBase.query(queries.getUsers(), [req.user.userid]);
+      const token = generateToken(rows[0].userid, rows[0].isadmin);
       delete rows[0].password;
       return res.status(200).json({
         status: 200,

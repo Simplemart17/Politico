@@ -7,8 +7,10 @@ import {
   createPartyTable,
   createOfficeTable,
   createCandidateTable,
+  createInterestTable,
   createVoteTable,
   dropCandidateTable,
+  dropInterestTable,
   dropOfficeTable,
   dropPartyTable,
   dropUsersTable,
@@ -27,6 +29,7 @@ describe('POLITICO APP TEST', () => {
       await db.query(createPartyTable());
       await db.query(createOfficeTable());
       await db.query(createCandidateTable());
+      await db.query(createInterestTable());
       await db.query(createVoteTable());
       console.log('created tables');
     } catch (error) {
@@ -38,6 +41,7 @@ describe('POLITICO APP TEST', () => {
     try {
       await db.query(dropVoteTable());
       await db.query(dropCandidateTable());
+      await db.query(dropInterestTable());
       await db.query(dropOfficeTable());
       await db.query(dropPartyTable());
       await db.query(dropUsersTable());
@@ -576,6 +580,58 @@ describe('POLITICO APP TEST', () => {
           res.should.have.status(201);
           res.should.be.json;
           res.body.message.should.equal('You have successfully registered as candidate!');
+          done(err);
+        });
+    });
+    it('should return error for empty list of interested candidates', (done) => {
+      chai.request(app)
+        .get('/api/v1/candidates')
+        .set('token', token)
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.should.be.json;
+          res.body.message.should.equal('No record found!');
+          done(err);
+        });
+    });
+    it('should register candidate interest for offices', (done) => {
+      chai.request(app)
+        .post('/api/v1/office/interest')
+        .set('token', userToken)
+        .send({
+          party: 2,
+          office: 1,
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.should.be.json;
+          res.body.message.should.equal('You have successfully submitted your interest!');
+          done(err);
+        });
+    });
+    it('should return an error for registering twice', (done) => {
+      chai.request(app)
+        .post('/api/v1/office/interest')
+        .set('token', userToken)
+        .send({
+          party: 2,
+          office: 1,
+        })
+        .end((err, res) => {
+          res.should.have.status(422);
+          res.should.be.json;
+          res.body.message.should.equal('You are allowed to register only once!');
+          done(err);
+        });
+    });
+    it('should return the list of all interested candidates', (done) => {
+      chai.request(app)
+        .get('/api/v1/candidates')
+        .set('token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.message.should.equal('Lists of candidates successfully retrieved!');
           done(err);
         });
     });

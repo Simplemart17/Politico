@@ -25,7 +25,11 @@ router.get('/offices', Auth.verifyToken, officeController.getAllOffice);
 
 router.get('/offices/:id', Auth.verifyToken, validation.idParamsCheck, officeController.getOffice);
 
-router.post('/office/:id/register', Auth.verifyToken, Auth.verifyIsAdmin, validation.idParamsCheck, validation.candidateInput, candidate.registerCandidate);
+router.post('/office/interest', Auth.verifyToken, validation.candidateInput, candidate.candidateInterest);
+
+router.get('/candidates', Auth.verifyToken, Auth.verifyIsAdmin, candidate.getAllCandidates);
+
+router.post('/office/:id/register', Auth.verifyToken, Auth.verifyIsAdmin, validation.candidateInput, candidate.registerCandidate);
 
 router.post('/votes', Auth.verifyToken, validation.voteInput, vote.voteCandidate);
 
