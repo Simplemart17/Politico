@@ -108,7 +108,7 @@ const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING 
 
 const getUsers = () => 'SELECT * FROM users WHERE userid = $1';
 
-const getInterestedCandidate = () => `SELECT interest.interest, users.userid, users.firstname, users.lastname, offices.name, offices.id
+const getInterestedCandidate = () => `SELECT interest.interest, users.userid, users.firstname, users.lastname, offices.id AS officeId, offices.name AS officeName, parties.id AS partyId, parties.name AS partyName
 FROM interest
 INNER JOIN users ON users.userid = interest.candidate
 INNER JOIN parties ON parties.id = interest.party
