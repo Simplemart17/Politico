@@ -3,7 +3,7 @@ import * as queries from '../model/queries';
 
 const candidateController = {
   async registerCandidate(req, res) {
-    const candidate = req.params.userid;
+    const candidate = req.params.id;
     const { party, office } = req.body;
     const values = [
       party,
@@ -21,6 +21,7 @@ const candidateController = {
         }],
       });
     } catch (error) {
+      console.log(error);
       return res.status(422).json({
         status: 422,
         message: 'The submission was not accepted!',
