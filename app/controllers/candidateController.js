@@ -3,7 +3,7 @@ import * as queries from '../model/queries';
 
 const candidateController = {
   async registerCandidate(req, res) {
-    const candidate = req.params.id;
+    const candidate = req.params.userid;
     const { party, office } = req.body;
     const values = [
       party,
@@ -71,6 +71,7 @@ const candidateController = {
         data: rows,
       });
     } catch (error) {
+      console.log(error);
       return res.status(422).json({
         status: 422,
         message: 'Candidates lists cannot be fecthed',

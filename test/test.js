@@ -22,6 +22,8 @@ chai.use(chaiHttp);
 
 const should = chai.should();
 
+process.env.NODE_ENV === 'test';
+
 describe('POLITICO APP TEST', () => {
   before(async () => {
     try {

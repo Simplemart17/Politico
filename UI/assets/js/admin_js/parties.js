@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // Function to create parties
-const url = 'https://mart-politico-app.herokuapp.com';
-// const url = 'http://localhost:8000';
+// const url = 'https://mart-politico-app.herokuapp.com';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const createParty = document.getElementById('create_party');
@@ -110,16 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (resp.status === 200) {
         resp.data.forEach((candidate) => {
           interestList.innerHTML += `
-          <table>  
+          <table>
             <tr>
               <td>${candidate.firstname} ${candidate.lastname}</td>
-              <td>${candidate.name}</td>
-              <td>New Nigeria party</td>
-              <td><button key=${candidate.userid}>Register</button></td>
+              <td id="candidate_office">${candidate.name}</td>
+              <td id="candidate_party">New Nigeria party</td>
+              <td><button id="interest_btn" onclick="registerCandidate(${candidate.userid})">Register</button></td>
             </tr>
           </table>
         `;
-          console.log(candidate.userid);
         });
       }
     })
@@ -289,3 +288,31 @@ const officeLists = () => {
       console.log(error);
     });
 };
+
+// Function to register candidate for office
+// const registerCandidate = (userid) => {
+//   event.preventDefault();
+
+//   const party = document.getElementById('candidate_party').innerText;
+//   const office = document.getElementById('candidate_office').innerText;
+
+//   const candidateForm = {
+//     party,
+//     office,
+//   };
+//   console.log(candidateForm);
+//   // fetch(`${url}/api/v1/office/${userid}/register`, {
+//   //   method: 'POST',
+//   //   headers: {
+//   //     'Content-Type': 'application/json; charset=utf-8',
+//   //     token,
+//   //   },
+//   //   body: JSON.stringify(candidateForm),
+//   // })
+//   //   .then(response => response.json())
+//   //   .then((resp) => {
+//   //   })
+//   //   .catch((error) => {
+//   //     console.log(error);
+//   //   });
+// };

@@ -1,5 +1,5 @@
-const url = 'https://mart-politico-app.herokuapp.com';
-// const url = 'http://localhost:8000';
+// const url = 'https://mart-politico-app.herokuapp.com';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const registerInterest = document.getElementById('express_interest');

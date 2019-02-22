@@ -108,9 +108,11 @@ const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING 
 
 const getUsers = () => 'SELECT * FROM users WHERE userid = $1';
 
-const getInterestedCandidate = () => `SELECT userid, firstname, lastname, name, office
-FROM users, offices, interest
-WHERE users.userid = candidate`;
+const getInterestedCandidate = () => `SELECT interest.interest, users.userid, users.firstname, users.lastname, offices.name, offices.id
+FROM interest
+INNER JOIN users ON users.userid = interest.candidate
+INNER JOIN parties ON parties.id = interest.party
+INNER JOIN offices ON offices.id = interest.office`;
 
 const getResults = () => `SELECT candidate, COUNT (candidate) AS result
 FROM votes
