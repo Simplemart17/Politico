@@ -16,7 +16,7 @@ const Auth = {
     }
     try {
       const decoded = await jwt.verify(token, process.env.SECRET);
-      const { rows } = await dbase.query(queries.getUsers(), [decoded.userid]);
+      const { rows } = await dbase.query(queries.getUsers(), [decoded.id]);
       if (!rows[0]) {
         return res.status(403).json({
           error: 'The token you provided is invalid',

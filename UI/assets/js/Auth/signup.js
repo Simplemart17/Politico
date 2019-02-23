@@ -33,10 +33,10 @@ signUpForm.onsubmit = () => {
     .then((resp) => {
       if (resp.status === 201) {
         const token = resp.data[0].token;
-        const userid = resp.data[0].user.userid;
+        const id = resp.data[0].user.id;
 
         localStorage.setItem('token', token);
-        localStorage.setItem('userid', userid);
+        localStorage.setItem('userid', id);
 
         setTimeout(() => {
           window.location.href = 'citizen-profile.html';

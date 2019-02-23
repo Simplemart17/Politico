@@ -29,7 +29,7 @@ const candidateController = {
   },
 
   async candidateInterest(req, res) {
-    const candidate = req.user.userid;
+    const candidate = req.user.id;
     const { party, office } = req.body;
     const values = [
       party,

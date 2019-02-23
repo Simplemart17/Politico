@@ -113,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <table>
             <tr>
               <td>${candidate.firstname} ${candidate.lastname}</td>
-              <td id="candidate_office">${candidate.name}</td>
-              <td id="candidate_party">New Nigeria party</td>
-              <td><button id="interest_btn" onclick="registerCandidate(${candidate.userid})">Register</button></td>
+              <td id="candidate_office">${candidate.officename}</td>
+              <td id="candidate_party">${candidate.partyname}</td>
+              <td><input id="interest" class="bg-white" onclick="registerCandidate(${candidate.userid}, ${candidate.partyid}, ${candidate.officeid})" type="button" value="Register"></td>
             </tr>
           </table>
         `;
@@ -290,29 +290,32 @@ const officeLists = () => {
 };
 
 // Function to register candidate for office
-// const registerCandidate = (userid) => {
-//   event.preventDefault();
+const registerCandidate = (userid, partyid, officeid) => {
+  const btnValue = document.getElementById('interest');
+  const id = userid;
+  const party = partyid;
+  const office = officeid;
 
-//   const party = document.getElementById('candidate_party').innerText;
-//   const office = document.getElementById('candidate_office').innerText;
+  const candidateForm = {
+    party,
+    office,
+  };
 
-//   const candidateForm = {
-//     party,
-//     office,
-//   };
-//   console.log(candidateForm);
-//   // fetch(`${url}/api/v1/office/${userid}/register`, {
-//   //   method: 'POST',
-//   //   headers: {
-//   //     'Content-Type': 'application/json; charset=utf-8',
-//   //     token,
-//   //   },
-//   //   body: JSON.stringify(candidateForm),
-//   // })
-//   //   .then(response => response.json())
-//   //   .then((resp) => {
-//   //   })
-//   //   .catch((error) => {
-//   //     console.log(error);
-//   //   });
-// };
+  fetch(`${url}/api/v1/office/${id}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+    body: JSON.stringify(candidateForm),
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        btnValue.value = 'Registered';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

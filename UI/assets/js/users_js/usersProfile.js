@@ -195,7 +195,6 @@ registerInterest.onsubmit = () => {
   })
     .then(response => response.json())
     .then((resp) => {
-      console.log(resp);
       if (resp.status === 201) {
         registerInterest.innerHTML = `<div class="parties">
         <h4>${resp.message}</h4>

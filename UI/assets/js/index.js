@@ -72,6 +72,14 @@ const closeResultModal = () => {
   document.getElementById('resultModal').style.display = 'none';
 };
 
+const openRegisterModal = () => {
+  document.getElementById('registerModal').style.display = 'block';
+};
+
+const closeRegisterModal = () => {
+  document.getElementById('registerModal').style.display = 'none';
+};
+
 const passwordCheck = () => {
   const password1 = document.getElementById('user_password').value;
   const password2 = document.getElementById('user_confirm_password').value;

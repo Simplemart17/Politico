@@ -33,11 +33,11 @@ signinForm.onsubmit = () => {
       }
       if (resp.message === 'You have successfully signed in!') {
         const token = resp.data[0].token;
-        const userid = resp.data[0].user.userid;
+        const id = resp.data[0].user.id;
 
         localStorage.setItem('token', token);
         localStorage.setItem('isadmin', isadmin);
-        localStorage.setItem('userid', userid);
+        localStorage.setItem('userid', id);
 
         document.getElementById('success').style.display = 'block';
         setTimeout(() => {
