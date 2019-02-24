@@ -12,6 +12,7 @@ const candidateController = {
     ];
     try {
       const { rows } = await dBase.query(queries.newCandidate(), values);
+      await dBase.query(queries.updateInterestStatus(), [rows[0].office, rows[0].candidate]);
       return res.status(201).json({
         status: 201,
         message: 'You have successfully registered as candidate!',
@@ -30,13 +31,11 @@ const candidateController = {
 
   async candidateInterest(req, res) {
     const candidate = req.user.id;
-    const status = 'Pending';
     const { party, office } = req.body;
     const values = [
       party,
       office,
       candidate,
-      status,
     ];
     try {
       const { rows } = await dBase.query(queries.candidateInterest(), values);
@@ -73,7 +72,6 @@ const candidateController = {
         data: rows,
       });
     } catch (error) {
-      console.log(error);
       return res.status(422).json({
         status: 422,
         message: 'Candidates lists cannot be fecthed',

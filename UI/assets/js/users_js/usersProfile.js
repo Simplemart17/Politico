@@ -79,9 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const userEmail = document.getElementById('profile_email');
       const userphone = document.getElementById('profile_phone');
 
-      if (resp.status === 404) {
-        console.log(resp);
-      }
       if (resp.status === 200) {
         const userData = resp.data[0].user;
 

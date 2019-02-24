@@ -109,15 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(resp);
       if (resp.status === 200) {
         resp.data.forEach((candidate) => {
-          console.log(candidate);
           interestList.innerHTML += `
           <table>
             <tr>
               <td>${candidate.firstname} ${candidate.lastname}</td>
               <td id="candidate_office">${candidate.officename}</td>
               <td id="candidate_party">${candidate.partyname}</td>
-              <td>${candidate.status}</td>
-              <td><input id="interest" class="bg-white" onclick="registerCandidate(${candidate.userid}, ${candidate.partyid}, ${candidate.officeid})" type="button" value="Register"></td>
+              <td><input id="interest" class="bg-white" 
+                onclick="registerCandidate(${candidate.userid}, ${candidate.partyid}, ${candidate.officeid})" 
+                type="button" value=${candidate.status === 'pending' ? 'Register' : 'Registered'} ${candidate.status === 'pending' ? '' : 'disabled'}></td>
             </tr>
           </table>
         `;
