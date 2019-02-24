@@ -30,6 +30,15 @@ const closePartyModal = () => {
   document.getElementById('partyModal').style.display = 'none';
 };
 
+const openDetailsModal = (partyId) => {
+  id = partyId;
+  document.getElementById('detailsModal').style.display = 'block';
+};
+
+const closeDetailsModal = () => {
+  document.getElementById('detailsModal').style.display = 'none';
+};
+
 const openOfficeModal = () => {
   document.getElementById('officeModal').style.display = 'block';
 };
@@ -70,6 +79,14 @@ const openResultModal = () => {
 
 const closeResultModal = () => {
   document.getElementById('resultModal').style.display = 'none';
+};
+
+const openRegisterModal = () => {
+  document.getElementById('registerModal').style.display = 'block';
+};
+
+const closeRegisterModal = () => {
+  document.getElementById('registerModal').style.display = 'none';
 };
 
 const passwordCheck = () => {

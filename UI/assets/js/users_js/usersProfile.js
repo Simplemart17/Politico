@@ -1,8 +1,9 @@
-const url = 'https://mart-politico-app.herokuapp.com';
-// const url = 'http://localhost:8000';
+// const url = 'https://mart-politico-app.herokuapp.com';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const registerInterest = document.getElementById('express_interest');
+const partyDetail = document.getElementById('party_details');
 
 document.addEventListener('DOMContentLoaded', () => {
   const signOut = document.getElementById('sign-out');
@@ -31,13 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (resp.status === 200) {
         resp.data.forEach((party) => {
           partyLists.innerHTML += `
-            <div class="box">
-             <div class="box-inner">
+            <div class="box" onclick="openDetailsModal(${party.id})">
+             <div class="box-inner center">
               <div class="logo-center">
                 <img src="assets/images/ballot-box.png" class="box-logo">
               </div>
-              <div class="box-name"></div>
-              <div class="center box-info">
+              <div class="box-info">
                 <h4>${party.name}</h4>
               </div>
             </div>
@@ -49,6 +49,21 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((error) => {
       console.log(error);
     });
+
+  // fetch(`${url}/api/v1/parties/${id}`, {
+  //   method: 'GET',
+  //   headers: {
+  //     'Content-Type': 'application/json; charset=utf-8',
+  //     token,
+  //   },
+  // })
+  //   .then(response => response.json())
+  //   .then((resp) => {
+  //     console.log(resp);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
   fetch(`${url}/api/v1/auth/profile`, {
     method: 'GET',
@@ -64,9 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const userEmail = document.getElementById('profile_email');
       const userphone = document.getElementById('profile_phone');
 
-      if (resp.status === 404) {
-        console.log(resp);
-      }
       if (resp.status === 200) {
         const userData = resp.data[0].user;
 
@@ -162,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const officeInfo = document.getElementById('office_name');
       if (resp.status === 200) {
         resp.data.forEach((office) => {
-          console.log(office.id);
           officeInfo.innerHTML += `
           <option value="${office.id}">${office.type} / ${office.name}</option>
             `;
@@ -195,7 +206,6 @@ registerInterest.onsubmit = () => {
   })
     .then(response => response.json())
     .then((resp) => {
-      console.log(resp);
       if (resp.status === 201) {
         registerInterest.innerHTML = `<div class="parties">
         <h4>${resp.message}</h4>

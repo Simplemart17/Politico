@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // Function to create parties
-const url = 'https://mart-politico-app.herokuapp.com';
-// const url = 'http://localhost:8000';
+// const url = 'https://mart-politico-app.herokuapp.com';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const createParty = document.getElementById('create_party');
@@ -110,16 +110,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (resp.status === 200) {
         resp.data.forEach((candidate) => {
           interestList.innerHTML += `
-          <table>  
+          <table>
             <tr>
               <td>${candidate.firstname} ${candidate.lastname}</td>
-              <td>${candidate.name}</td>
-              <td>New Nigeria party</td>
-              <td><button key=${candidate.userid}>Register</button></td>
+              <td id="candidate_office">${candidate.officename}</td>
+              <td id="candidate_party">${candidate.partyname}</td>
+              <td><input id="interest" class="bg-white" 
+                onclick="registerCandidate(${candidate.userid}, ${candidate.partyid}, ${candidate.officeid})" 
+                type="button" value=${candidate.status === 'pending' ? 'Register' : 'Registered'} ${candidate.status === 'pending' ? '' : 'disabled'}></td>
             </tr>
           </table>
         `;
-          console.log(candidate.userid);
         });
       }
     })
@@ -283,6 +284,37 @@ const officeLists = () => {
         setTimeout(() => {
           window.location.href = 'admin.html';
         }, 2000);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// Function to register candidate for office
+const registerCandidate = (userid, partyid, officeid) => {
+  const btnValue = document.getElementById('interest');
+  const id = userid;
+  const party = partyid;
+  const office = officeid;
+
+  const candidateForm = {
+    party,
+    office,
+  };
+
+  fetch(`${url}/api/v1/office/${id}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+    body: JSON.stringify(candidateForm),
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        btnValue.value = 'Registered';
       }
     })
     .catch((error) => {

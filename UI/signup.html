@@ -42,7 +42,7 @@
       <div class="center">
           <h1>Register Here</h1>
       </div>
-        <p class="center col-red" id="error_header"></p>
+        <p class="center bg-green col-white" id="signup_success">Sign up successful!</p>
         <form id="form_register" role="form" method="POST">
           <label for="name">
             First Name
@@ -60,14 +60,6 @@
           </label>
           <input type="text" name="lastname" id="user_lastname">
 
-          <label for="name">
-            Other Name
-            <span class="col-red">
-              *
-            </span>
-          </label>
-          <input type="text" name="othername" id="user_othername">
-
           <label for="email">
             Email Address
             <span class="col-red">
@@ -75,9 +67,7 @@
             </span>
           </label>
           <input type="email" name="email" id="user_email">
-            <p id="err_msg" class="col-red error">
-
-            </p>
+          <div id="email_error" class="col-red error"></div>
 
           <label for="phone">
             Phone Number

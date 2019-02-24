@@ -12,6 +12,7 @@ const candidateController = {
     ];
     try {
       const { rows } = await dBase.query(queries.newCandidate(), values);
+      await dBase.query(queries.updateInterestStatus(), [rows[0].office, rows[0].candidate]);
       return res.status(201).json({
         status: 201,
         message: 'You have successfully registered as candidate!',
@@ -29,7 +30,7 @@ const candidateController = {
   },
 
   async candidateInterest(req, res) {
-    const candidate = req.user.userid;
+    const candidate = req.user.id;
     const { party, office } = req.body;
     const values = [
       party,

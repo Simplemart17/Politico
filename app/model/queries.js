@@ -1,12 +1,12 @@
 const createUsersTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
           users(
-            userid SERIAL PRIMARY KEY,
+            id SERIAL PRIMARY KEY,
             firstname VARCHAR(128) NOT NULL,
             lastname VARCHAR(128) NOT NULL,
-            othername VARCHAR(128) NOT NULL,
+            othername VARCHAR(128),
             email VARCHAR(128) UNIQUE NOT NULL,
-            phoneNumber BIGINT,
+            phoneNumber VARCHAR(128),
             registered DATE DEFAULT CURRENT_DATE,
             password VARCHAR(128) NOT NULL,
             passportUrl VARCHAR(128),
@@ -47,7 +47,7 @@ const createCandidateTable = () => {
                 createdon DATE DEFAULT CURRENT_DATE,
                 party INTEGER NOT NULL REFERENCES parties (id),
                 office INTEGER NOT NULL REFERENCES offices (id),
-                candidate INTEGER NOT NULL REFERENCES users (userid),
+                candidate INTEGER NOT NULL REFERENCES users (id),
                 PRIMARY KEY (office, candidate)
               )`;
   return text;
@@ -57,11 +57,12 @@ const dropCandidateTable = () => 'DROP TABLE IF EXISTS candidates';
 const createInterestTable = () => {
   const text = `CREATE TABLE IF NOT EXISTS
               interest(
-                interest SERIAL UNIQUE,
+                id SERIAL UNIQUE,
                 createdon DATE DEFAULT CURRENT_DATE,
+                status TEXT DEFAULT 'pending',
                 party INTEGER NOT NULL REFERENCES parties (id),
                 office INTEGER NOT NULL REFERENCES offices (id),
-                candidate INTEGER UNIQUE NOT NULL REFERENCES users (userid),
+                candidate INTEGER UNIQUE NOT NULL REFERENCES users (id),
                 PRIMARY KEY (office, candidate)
               )`;
   return text;
@@ -75,7 +76,7 @@ const createVoteTable = () => {
                 createdOn DATE DEFAULT CURRENT_DATE,
                 office INTEGER NOT NULL REFERENCES offices (id),
                 candidate INTEGER NOT NULL REFERENCES candidates (id),
-                voter INTEGER NOT NULL REFERENCES users (userid),
+                voter INTEGER NOT NULL REFERENCES users (id),
                 PRIMARY KEY (office, voter)
               )`;
   return text;
@@ -106,11 +107,27 @@ const deleteParty = () => 'DELETE FROM parties WHERE id = $1 returning *';
 
 const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING *';
 
-const getUsers = () => 'SELECT * FROM users WHERE userid = $1';
+const getUsers = () => 'SELECT * FROM users WHERE id = $1';
 
-const getInterestedCandidate = () => `SELECT userid, firstname, lastname, name, office
-FROM users, offices, interest
-WHERE users.userid = candidate`;
+const getInterestedCandidate = () => `
+SELECT interest.id, 
+  users.id AS userid, 
+  users.firstname, 
+  users.lastname, 
+  offices.id AS officeId, 
+  offices.name AS officeName, 
+  parties.id AS partyId, 
+  parties.name AS partyName, 
+  interest.status
+FROM interest
+INNER JOIN users ON users.id = interest.candidate
+INNER JOIN parties ON parties.id = interest.party
+INNER JOIN offices ON offices.id = interest.office`;
+
+const updateInterestStatus = () => `
+  UPDATE interest 
+  SET status = 'registered'
+  WHERE office = $1 AND candidate = $2`;
 
 const getResults = () => `SELECT candidate, COUNT (candidate) AS result
 FROM votes
@@ -145,4 +162,5 @@ export {
   getUsers,
   getResults,
   getInterestedCandidate,
+  updateInterestStatus,
 };

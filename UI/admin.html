@@ -29,7 +29,7 @@
           </div>
             <input type="checkbox" id="nav-check" />
             <div class="nav-links">
-              <a href="admin.html">Admin</a>
+              <a href="admin.html">Dashboard</a>
               <a href="citizen-signin.html" id="sign-out">Sign Out</a>
             </div>
         </div>
@@ -38,17 +38,17 @@
       
     <section>
     <!-- Profile Section -->
-      <div class="profile-header center">
-        <div><h2>Admin Panel</h2></div>
-        <div class="reg-btn admin-header-btn">
+      <div class="profile-header">
+        <div class="reg-btn admin-header-btn page-width">
             <div class="inline"><input class="col-white bg-light-green" onclick="openPartyModal()" type="button" value="Create Party"></div>
             <div class="inline"><input class="col-white bg-light-green" onclick="openOfficeModal()" type="button" value="Create Office"></div>
             <div class="inline"><input class="col-white bg-light-green" onclick="officeLists();" type="button" value="Office Lists"></div>
-            <div class="inline"><input class="col-white bg-light-green" onclick="openPartyModal();" type="button" value="Candidate"></div>
+            <div class="inline"><input class="col-white bg-light-green" onclick="openRegisterModal();" type="button" value="Candidates"></div>
         </div>
+        <div class="center"><h2>Admin Panel</h2></div>
       </div>
       
-      <div class="party-column main-area">
+      <div class="main-area">
         <div class="bg-white">
           <div>
             <h2>Political Parties</h2>
@@ -58,26 +58,8 @@
           <div class="column" id="party_lists">
             </div>
         </div>
-        <div id="interest_table">
-          <table>
-            <caption>
-              Interested Candidates for Government Office
-            </caption>
-            <tr>
-              <th>Name</th>
-              <th>Office Name</th>
-              <th>Party Name</th>
-              <th>Action</th>
-            </tr>
-            <!-- <tr>
-              <td>Matthew Abbey</td>
-              <td>President</td>
-              <td>New Nigeria party</td>
-              <td><button>Register</button></td>
-            </tr> -->
-          </table>
-        </div>
       </div>
+      
       
       <!-- Create Party Modal Section -->
       <div id="partyModal" class="partyModal">
@@ -174,30 +156,52 @@
             </div>
           </form>
       </div>
-          <!-- Delete Party Modal -->
-          <div id="deleteModal" class="deleteModal">
-            <span onclick="closeDeleteModal()" class="close" title="Close Modal">
-              &times;
-            </span>
-            <form class="modal-content" id="delete_message">
-              <div class="modal-container">
-                <h1>You are about to delete this Political Party</h1>
-                  <hr>
-                <div>
-                  <h3>Click Delete to proceed and Cancel to Abort</h3>
-                </div>
-                    
-                <div class="reg-btn center">
-                  <div class="inline">
-                    <input class="col-white bg-red" onclick="deleteParty()" type="button" value="Delete">
-                  </div>
-                  <div class="inline ">
-                    <input class="col-white bg-grey" onclick="closeDeleteModal()" type="button" value="Cancel">
-                  </div> 
-                </div>
+      <!-- Delete Party Modal -->
+      <div id="deleteModal" class="deleteModal">
+        <span onclick="closeDeleteModal()" class="close" title="Close Modal">
+          &times;
+        </span>
+        <form class="modal-content" id="delete_message">
+          <div class="modal-container">
+            <h1>You are about to delete this Political Party</h1>
+              <hr>
+            <div>
+              <h3>Click Delete to proceed and Cancel to Abort</h3>
+            </div>
+                
+            <div class="reg-btn center">
+              <div class="inline">
+                <input class="col-white bg-red" onclick="deleteParty()" type="button" value="Delete">
               </div>
-            </form>
+              <div class="inline ">
+              <input class="col-white bg-grey" onclick="closeDeleteModal()" type="button" value="Cancel">
+              </div> 
+            </div>
           </div>
+        </form>
+      </div>
+
+      <!-- Register Candidate Modal -->
+      <div id="registerModal" class="registerModal">
+        <span onclick="closeRegisterModal()" class="close" title="Close Modal">
+          &times;
+        </span>
+        <div class="modal-content">
+          <div id="interest_table" class="bg-green">
+            <table>
+              <caption>
+                Interested Candidates for Government Office
+              </caption>
+              <tr>
+                <th>Name</th>
+                <th>Office Name</th>
+                <th>Party Name</th>
+                <th>Action</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- Footer -->
     <footer>

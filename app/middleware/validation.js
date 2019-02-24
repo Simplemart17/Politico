@@ -39,7 +39,6 @@ const middleware = {
     inputCheck('firstname'),
     inputCheck('password'),
     inputCheck('lastname'),
-    inputCheck('othername'),
     integerCheck('phoneNumber', 11, 13),
     check('email').trim().isEmail().normalizeEmail()
       .withMessage('email is required!'),
