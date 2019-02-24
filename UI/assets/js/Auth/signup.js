@@ -9,15 +9,14 @@ signUpForm.onsubmit = () => {
 
   const firstname = document.getElementById('user_firstname').value;
   const lastname = document.getElementById('user_lastname').value;
-  const othername = document.getElementById('user_othername').value;
   const email = document.getElementById('user_email').value;
   const phoneNumber = document.getElementById('user_phonenumber').value;
   const password = document.getElementById('user_password').value;
+  const emailError = document.getElementById('email_error');
 
   const regForm = {
     firstname,
     lastname,
-    othername,
     email,
     phoneNumber,
     password,
@@ -38,15 +37,16 @@ signUpForm.onsubmit = () => {
         localStorage.setItem('token', token);
         localStorage.setItem('userid', id);
 
+        document.getElementById('signup_success').style.display = 'block';
         setTimeout(() => {
           window.location.href = 'citizen-profile.html';
         }, 3000);
       }
       if (resp.error === 'Email already exist!') {
-        console.log(resp.error);
-      }
-      if (resp.status === 400) {
-        console.log(resp.status);
+        emailError.innerHTML = 'Email already exist!';
+        setTimeout(() => {
+          emailError.innerHTML = '';
+        }, 3000);
       }
     })
     .catch((error) => {

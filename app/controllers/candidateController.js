@@ -30,11 +30,13 @@ const candidateController = {
 
   async candidateInterest(req, res) {
     const candidate = req.user.id;
+    const status = 'Pending';
     const { party, office } = req.body;
     const values = [
       party,
       office,
       candidate,
+      status,
     ];
     try {
       const { rows } = await dBase.query(queries.candidateInterest(), values);

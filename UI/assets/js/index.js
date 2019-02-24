@@ -30,6 +30,15 @@ const closePartyModal = () => {
   document.getElementById('partyModal').style.display = 'none';
 };
 
+const openDetailsModal = (partyId) => {
+  id = partyId;
+  document.getElementById('detailsModal').style.display = 'block';
+};
+
+const closeDetailsModal = () => {
+  document.getElementById('detailsModal').style.display = 'none';
+};
+
 const openOfficeModal = () => {
   document.getElementById('officeModal').style.display = 'block';
 };

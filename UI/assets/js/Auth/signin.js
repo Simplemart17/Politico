@@ -9,7 +9,6 @@ signinForm.onsubmit = () => {
   const password = document.getElementById('password').value;
   const emailError = document.getElementById('email_error');
   const passwordError = document.getElementById('password_error');
-  const errHeader = document.getElementById('error_header');
   const login = {
     email,
     password,
@@ -23,15 +22,32 @@ signinForm.onsubmit = () => {
   })
     .then(response => response.json())
     .then((resp) => {
-      const isadmin = resp.data[0].user.isadmin;
-
+      if (resp.status === 401) {
+        document.getElementById('error_header').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('error_header').style.display = 'none';
+        }, 3000);
+      }
+      if (resp.status === 400) {
+        document.getElementById('error-header').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('error-header').style.display = 'none';
+        }, 3000);
+      }
       if (resp.error === 'Incorrect email address') {
         emailError.innerHTML = 'Incorrect email address';
+        setTimeout(() => {
+          emailError.innerHTML = '';
+        }, 3000);
       }
       if (resp.error === 'Incorrect password!') {
         passwordError.innerHTML = 'Incorrect password';
+        setTimeout(() => {
+          passwordError.innerHTML = '';
+        }, 3000);
       }
       if (resp.message === 'You have successfully signed in!') {
+        const isadmin = resp.data[0].user.isadmin;
         const token = resp.data[0].token;
         const id = resp.data[0].user.id;
 
@@ -43,8 +59,6 @@ signinForm.onsubmit = () => {
         setTimeout(() => {
           (isadmin === true) ? window.location.href = 'admin.html' : window.location.href = 'citizen-profile.html';
         }, 3000);
-      } else {
-        errHeader.innerHTML = 'You cannot be logged in, try again!';
       }
     })
     .catch((error) => {
