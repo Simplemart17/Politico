@@ -637,6 +637,17 @@ describe('POLITICO APP TEST', () => {
           done(err);
         });
     });
+    it('should return the list of all registered candidates', (done) => {
+      chai.request(app)
+        .get('/api/v1/registered')
+        .set('token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.message.should.equal('Lists of registered candidates successfully retrieved!');
+          done(err);
+        });
+    });
     it('should return error when token is not provided', (done) => {
       const newCandidate = {
         party: 1,

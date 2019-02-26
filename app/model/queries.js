@@ -124,6 +124,21 @@ INNER JOIN users ON users.id = interest.candidate
 INNER JOIN parties ON parties.id = interest.party
 INNER JOIN offices ON offices.id = interest.office`;
 
+const getRegisteredCandidates = () => `
+SELECT candidates.id, 
+  users.id AS userid, 
+  users.firstname, 
+  users.lastname, 
+  offices.id AS officeId, 
+  offices.name AS officeName,
+  offices.type AS officeType, 
+  parties.id AS partyId, 
+  parties.name AS partyName
+FROM candidates
+INNER JOIN users ON users.id = candidates.candidate
+INNER JOIN parties ON parties.id = candidates.party
+INNER JOIN offices ON offices.id = candidates.office`;
+
 const updateInterestStatus = () => `
   UPDATE interest 
   SET status = 'registered'
@@ -163,4 +178,5 @@ export {
   getResults,
   getInterestedCandidate,
   updateInterestStatus,
+  getRegisteredCandidates,
 };

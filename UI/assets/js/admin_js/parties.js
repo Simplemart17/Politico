@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // Function to create parties
 // const url = 'https://mart-politico-app.herokuapp.com';
 const url = 'http://localhost:8000';
@@ -106,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then((resp) => {
       const interestList = document.getElementById('interest_table');
-      console.log(resp);
       if (resp.status === 200) {
         resp.data.forEach((candidate) => {
           interestList.innerHTML += `

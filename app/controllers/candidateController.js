@@ -78,6 +78,22 @@ const candidateController = {
       });
     }
   },
+
+  async getRegisteredCandidate(req, res) {
+    try {
+      const { rows } = await dBase.query(queries.getRegisteredCandidates());
+      return res.status(200).json({
+        status: 200,
+        message: 'Lists of registered candidates successfully retrieved!',
+        data: rows,
+      });
+    } catch (error) {
+      return res.status(422).json({
+        status: 422,
+        message: 'Candidates lists cannot be fecthed',
+      });
+    }
+  },
 };
 
 export default candidateController;

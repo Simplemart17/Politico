@@ -29,6 +29,8 @@ router.post('/office/interest', Auth.verifyToken, validation.candidateInput, can
 
 router.get('/candidates', Auth.verifyToken, Auth.verifyIsAdmin, candidateController.getAllCandidates);
 
+router.get('/registered', Auth.verifyToken, candidateController.getRegisteredCandidate);
+
 router.post('/office/:id/register', Auth.verifyToken, Auth.verifyIsAdmin, candidateController.registerCandidate);
 
 router.post('/votes', Auth.verifyToken, validation.voteInput, vote.voteCandidate);
