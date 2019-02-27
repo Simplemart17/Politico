@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <td>${candidates.firstname} ${candidates.lastname}</td>
               <td>${candidates.partyname}</td>
               <td><input id="vote_btn" class="bg-white" onclick="voteCandidate(${candidates.userid}, ${candidates.officeid})"
-              type="button" value="VOTE"></td>
+              type="button" value="${candidate.status === '' ? 'VOTE' : 'VOTED'}"></td>
             </tr>
           </table>
           `;
@@ -260,7 +260,6 @@ const voteCandidate = (userid, officeid) => {
   })
     .then(response => response.json())
     .then((resp) => {
-      console.log(resp);
       if (resp.status === 201) {
         voteBtn.value = 'VOTED';
       }

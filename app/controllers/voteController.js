@@ -31,6 +31,7 @@ const voteController = {
   async voteResult(req, res) {
     try {
       const { rows } = await dBase.query(queries.getResults(), [req.params.id]);
+      await dBase.query(queries.updateVoteStatus(), [rows[0].office, rows[0].voter]);
       if (!rows[0]) {
         return res.status(404).json({
           status: 404,
@@ -40,9 +41,7 @@ const voteController = {
       return res.status(201).json({
         status: 201,
         message: 'Election results was successfully retrieved',
-        data: [
-          rows[0],
-        ],
+        data: rows,
       });
     } catch (error) {
       return res.status(404).json({

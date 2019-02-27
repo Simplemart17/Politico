@@ -314,6 +314,7 @@ const registerCandidate = (userid, partyid, officeid) => {
       if (resp.status === 201) {
         btnValue.value = 'Registered';
       }
+      location.reload();
     })
     .catch((error) => {
       console.log(error);

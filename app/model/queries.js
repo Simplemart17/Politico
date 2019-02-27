@@ -59,7 +59,7 @@ const createInterestTable = () => {
               interest(
                 id SERIAL UNIQUE,
                 createdon DATE DEFAULT CURRENT_DATE,
-                status TEXT DEFAULT 'pending',
+                status VARCHAR(128) DEFAULT 'pending',
                 party INTEGER NOT NULL REFERENCES parties (id),
                 office INTEGER NOT NULL REFERENCES offices (id),
                 candidate INTEGER UNIQUE NOT NULL REFERENCES users (id),
@@ -74,8 +74,9 @@ const createVoteTable = () => {
               votes(
                 id SERIAL,
                 createdOn DATE DEFAULT CURRENT_DATE,
+                status VARCHAR(128),
                 office INTEGER NOT NULL REFERENCES offices (id),
-                candidate INTEGER NOT NULL REFERENCES candidates (id),
+                candidate INTEGER NOT NULL REFERENCES users (id),
                 voter INTEGER NOT NULL REFERENCES users (id),
                 PRIMARY KEY (office, voter)
               )`;
@@ -144,6 +145,11 @@ const updateInterestStatus = () => `
   SET status = 'registered'
   WHERE office = $1 AND candidate = $2`;
 
+const updateVoteStatus = () => `
+  UPDATE votes
+  SET status = 'voted'
+  WHERE office = $1 AND voter =$2`;
+
 const getResults = () => `SELECT candidate, COUNT (candidate) AS result
 FROM votes
 WHERE office = $1
@@ -179,4 +185,5 @@ export {
   getInterestedCandidate,
   updateInterestStatus,
   getRegisteredCandidates,
+  updateVoteStatus,
 };
