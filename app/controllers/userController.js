@@ -44,9 +44,8 @@ const Users = {
   },
 
   async userSignIn(req, res) {
-    const text = 'SELECT * FROM users WHERE EMAIL = $1';
     try {
-      const { rows } = await dBase.query(text, [req.body.email]);
+      const { rows } = await dBase.query(queries.newSignIn(), [req.body.email]);
       if (!rows[0]) {
         return res.status(406).json({
           error: 'Incorrect email address',
@@ -89,10 +88,7 @@ const Users = {
         }],
       });
     } catch (error) {
-      return res.status(401).json({
-        status: 401,
-        message: 'Account cannot be found!',
-      });
+      console.log(error);
     }
   },
 };
