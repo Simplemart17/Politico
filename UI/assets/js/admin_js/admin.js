@@ -135,7 +135,6 @@ editParty.onsubmit = () => {
   const editForm = {
     name,
   };
-
   fetch(editUrl, {
     method: 'PATCH',
     headers: {
@@ -169,7 +168,6 @@ editParty.onsubmit = () => {
 const deleteParty = () => {
   const deleteUrl = `${url}/api/v1/parties/${id}`;
   const deleteMsg = document.getElementById('delete_message');
-
   fetch(deleteUrl, {
     method: 'DELETE',
     headers: {
@@ -201,13 +199,10 @@ const deleteParty = () => {
 
 // Funtion to create offices
 const createOffice = document.getElementById('create_office');
-
 createOffice.onsubmit = () => {
   event.preventDefault();
-
   const type = document.getElementById('office_type').value;
   const name = document.getElementById('office_name').value;
-
   const officeForm = {
     type,
     name,

@@ -47,14 +47,10 @@ const Users = {
     try {
       const { rows } = await dBase.query(queries.newSignIn(), [req.body.email]);
       if (!rows[0]) {
-        return res.status(406).json({
-          error: 'Incorrect email address',
-        });
+        return res.status(406).json({ error: 'Incorrect email address' });
       }
       if (!comparePassword(rows[0].password, req.body.password)) {
-        return res.status(406).json({
-          error: 'Incorrect password!',
-        });
+        return res.status(406).json({ error: 'Incorrect password!' });
       }
       const token = generateToken(rows[0].id, rows[0].isadmin);
       delete rows[0].password;
