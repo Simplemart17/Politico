@@ -18,7 +18,7 @@ app.use(cors());
 app.set('appVersion', '/api/v1');
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(app.get('appVersion'), router);
 app.use(app.get('appVersion'), userRouter);

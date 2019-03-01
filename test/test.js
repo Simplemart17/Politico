@@ -70,7 +70,7 @@ describe('POLITICO APP TEST', () => {
   let userToken;
   let token;
   const fakeToken = { token: null };
-  const invalidToken = 'qwqeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU0OTcwNDcxNCwiZXhwIjoxNTQ5ODc3NTE0fQ.nogWAR5assT1LrObdk2a-1tgXA1tCUSKkrG8DNJw_Yw';
+  const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTE0NDM4NDQsImV4cCI6MTU1MTUzMDI0NH0.Wf-C74JZ2m_b3pccXGIs2SKhH6BBdcE3honkSlGT-8k';
 
   // Homepage test
   describe('HOMEPAGE', () => {
@@ -170,6 +170,19 @@ describe('POLITICO APP TEST', () => {
           done(err);
         });
     });
+    it('should return error for incomplete credentials', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send({
+          email: 'simplemart@gmail.com',
+        })
+        .end((err, res) => {
+          res.should.have.status(401);
+          res.should.be.json;
+          res.body.message.should.equal('You are denied access!');
+          done(err);
+        });
+    });
     it('should sign admin in to an account', (done) => {
       chai.request(app)
         .post('/api/v1/auth/login')
@@ -191,7 +204,7 @@ describe('POLITICO APP TEST', () => {
     it('should return user detail', (done) => {
       chai.request(app)
         .get('/api/v1/auth/profile')
-        .set('token', token)
+        .set('token', userToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.should.be.json;
@@ -328,7 +341,7 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.should.be.a.json;
-          res.body.error.should.equal('Authentication fails!');
+          res.body.error.should.equal('The token you provided is invalid');
           done(err);
         });
     });
@@ -637,6 +650,17 @@ describe('POLITICO APP TEST', () => {
           done(err);
         });
     });
+    it('should return the list of all registered candidates', (done) => {
+      chai.request(app)
+        .get('/api/v1/registered')
+        .set('token', token)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.message.should.equal('Lists of registered candidates successfully retrieved!');
+          done(err);
+        });
+    });
     it('should return error when token is not provided', (done) => {
       const newCandidate = {
         party: 1,
@@ -691,6 +715,7 @@ describe('POLITICO APP TEST', () => {
     it('submit vote for a candidate', (done) => {
       const newVote = {
         office: 1,
+        party: 2,
         candidate: 1,
       };
       chai.request(app)

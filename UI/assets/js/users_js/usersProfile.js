@@ -1,9 +1,8 @@
-// const url = 'https://mart-politico-app.herokuapp.com';
-const url = 'http://localhost:8000';
+const url = 'https://mart-politico-app.herokuapp.com';
+// const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const registerInterest = document.getElementById('express_interest');
-const partyDetail = document.getElementById('party_details');
 
 document.addEventListener('DOMContentLoaded', () => {
   const signOut = document.getElementById('sign-out');
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (resp.status === 200) {
         resp.data.forEach((party) => {
           partyLists.innerHTML += `
-            <div class="box" onclick="openDetailsModal(${party.id})">
+            <div class="box" onclick="openDetailsModal(${party.id}); getDetails();">
              <div class="box-inner center">
               <div class="logo-center">
                 <img src="assets/images/ballot-box.png" class="box-logo">
@@ -49,21 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((error) => {
       console.log(error);
     });
-
-  // fetch(`${url}/api/v1/parties/${id}`, {
-  //   method: 'GET',
-  //   headers: {
-  //     'Content-Type': 'application/json; charset=utf-8',
-  //     token,
-  //   },
-  // })
-  //   .then(response => response.json())
-  //   .then((resp) => {
-  //     console.log(resp);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
 
   fetch(`${url}/api/v1/auth/profile`, {
     method: 'GET',
@@ -91,9 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(error);
     });
 
-  // Function to get office
   const candidateLists = document.getElementById('candidate_lists');
-  fetch(`${url}/api/v1/offices`, {
+  const voteLists = document.getElementById('vote_lists');
+  fetch(`${url}/api/v1/registered`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
@@ -103,35 +87,169 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(response => response.json())
     .then((resp) => {
       if (resp.status === 200) {
-        resp.data.forEach((office) => {
-          candidateLists.innerHTML += `
-          <tr>
-            <td rowspan="2" class="federal"><div><h3>${office.type}</h3></div></td>
-            <td rowspan="2" class="federal"><div><h3>${office.name}</h3></div></td>
-            <td class="candidate-box">
-              <div class="candidate-box-area">
-                <div >
-                  <img src="assets/images/politician1.jpg" alt="">
-                </div>
-                <div>
-                  <h3>Raji Fashola</h3>
-                </div>  
-              </div>   
-            </td>
-            <td class="party-box">
-              <div class="party-box-area">
-                <div >
-                  <img src="assets/images/partylogo1.png" alt="">
-                </div>
-                <div>
-                  <h3>PPA</h3>
-                  <h4>Political Party Alliance</h4>
-                </div>  
-              </div>
-            </td>
-          </tr>
-        `;
+        if (candidateLists) {
+          resp.data.forEach((candidates) => {
+            candidateLists.innerHTML += `
+          <table>
+            <tr>
+              <td>${candidates.firstname} ${candidates.lastname}</td>
+              <td>${candidates.officetype}</td>
+              <td>${candidates.officename}</td>
+              <td>${candidates.partyname}</td>
+            </tr>
+          </table>
+          `;
+          });
+        }
+        if (voteLists) {
+          resp.data.forEach((candidates) => {
+            voteLists.innerHTML += `
+          <table>
+            <tr>
+              <td>${candidates.officetype}</td>
+              <td>${candidates.officename}</td>
+              <td>${candidates.firstname} ${candidates.lastname}</td>
+              <td>${candidates.partyname}</td>
+              <td><input id="vote_btn" class="bg-white" onclick="voteCandidate(${candidates.userid}, ${candidates.officeid}, ${candidates.partyid})"
+              type="button" value=${candidates.status === 'vote' ? 'VOTE' : 'VOTED'}></td>
+            </tr>
+          </table>
+          `;
+          });
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Election Results for Federal Office
+  const federalResult = document.getElementById('federal_results');
+  const legislativeResult = document.getElementById('legislative_results');
+  const stateResult = document.getElementById('state_results');
+  const localResult = document.getElementById('local_results');
+
+  fetch(`${url}/api/v1/office/1/result`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        resp.data.forEach((result) => {
+          federalResult.innerHTML += `
+          <table>
+            <tr>
+              <td>${result.firstname} ${result.lastname}</td>
+              <td>${result.officename}</td>
+              <td>${result.logourl}</td>
+              <td>${result.result}</td>
+            </tr>
+          </table>
+          `;
         });
+      }
+      if (resp.status === 404) {
+        document.getElementById('federal_error').innerHTML = 'Result for Federal Government Office not found!';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Election results for Legislative offices
+  fetch(`${url}/api/v1/office/2/result`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        resp.data.forEach((result) => {
+          legislativeResult.innerHTML += `
+          <table>
+            <tr>
+              <td>${result.firstname} ${result.lastname}</td>
+              <td>${result.officename}</td>
+              <td>${result.logourl}</td>
+              <td>${result.result}</td>
+            </tr>
+          </table>
+          `;
+        });
+      }
+      if (resp.status === 404) {
+        document.getElementById('legislative_error').innerHTML = 'Result for Legislative Government Office not found!';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Election result for State Government Office
+  fetch(`${url}/api/v1/office/3/result`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        resp.data.forEach((result) => {
+          stateResult.innerHTML += `
+          <table>
+            <tr>
+              <td>${result.firstname} ${result.lastname}</td>
+              <td>${result.officename}</td>
+              <td>${result.logourl}</td>
+              <td>${result.result}</td>
+            </tr>
+          </table>
+          `;
+        });
+      }
+      if (resp.status === 404) {
+        document.getElementById('state_error').innerHTML = 'Result for State Government Office not found!';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Election result for Local Government Office
+  fetch(`${url}/api/v1/office/4/result`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        resp.data.forEach((result) => {
+          localResult.innerHTML += `
+          <table>
+            <tr>
+              <td>${result.firstname} ${result.lastname}</td>
+              <td>${result.officename}</td>
+              <td>${result.logourl}</td>
+              <td>${result.result}</td>
+            </tr>
+          </table>
+          `;
+        });
+      }
+      if (resp.status === 404) {
+        document.getElementById('local_error').innerHTML = 'Result for State Government Office not found!';
       }
     })
     .catch((error) => {
@@ -185,6 +303,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const getDetails = () => {
+  fetch(`${url}/api/v1/parties/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      const partyDetails = resp.data[0];
+
+      const partyLogo = document.getElementById('party-logo');
+      const partyName = document.getElementById('party-name');
+      const partyAddress = document.getElementById('party-address');
+
+      partyLogo.innerHTML = partyDetails.logourl;
+      partyName.innerHTML = partyDetails.name;
+      partyAddress.innerHTML = partyDetails.hqaddress;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 registerInterest.onsubmit = () => {
   event.preventDefault();
 
@@ -222,6 +365,38 @@ registerInterest.onsubmit = () => {
         setTimeout(() => {
           window.location.href = 'citizen-profile.html';
         }, 2000);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// Function to vote candidate
+const voteCandidate = (userid, officeid, partyid) => {
+  const voteBtn = document.getElementById('vote_btn');
+  const candidate = userid;
+  const office = officeid;
+  const party = partyid;
+
+  const voteForm = {
+    office,
+    party,
+    candidate,
+  };
+
+  fetch(`${url}/api/v1/votes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+    body: JSON.stringify(voteForm),
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        voteBtn.value = 'VOTED';
       }
     })
     .catch((error) => {

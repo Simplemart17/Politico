@@ -45,6 +45,7 @@ const createCandidateTable = () => {
               candidates(
                 id SERIAL UNIQUE,
                 createdon DATE DEFAULT CURRENT_DATE,
+                status VARCHAR(128) DEFAULT 'vote',
                 party INTEGER NOT NULL REFERENCES parties (id),
                 office INTEGER NOT NULL REFERENCES offices (id),
                 candidate INTEGER NOT NULL REFERENCES users (id),
@@ -59,7 +60,7 @@ const createInterestTable = () => {
               interest(
                 id SERIAL UNIQUE,
                 createdon DATE DEFAULT CURRENT_DATE,
-                status TEXT DEFAULT 'pending',
+                status VARCHAR(128) DEFAULT 'pending',
                 party INTEGER NOT NULL REFERENCES parties (id),
                 office INTEGER NOT NULL REFERENCES offices (id),
                 candidate INTEGER UNIQUE NOT NULL REFERENCES users (id),
@@ -75,7 +76,8 @@ const createVoteTable = () => {
                 id SERIAL,
                 createdOn DATE DEFAULT CURRENT_DATE,
                 office INTEGER NOT NULL REFERENCES offices (id),
-                candidate INTEGER NOT NULL REFERENCES candidates (id),
+                party INTEGER REFERENCES parties(id),
+                candidate INTEGER NOT NULL REFERENCES users (id),
                 voter INTEGER NOT NULL REFERENCES users (id),
                 PRIMARY KEY (office, voter)
               )`;
@@ -89,7 +91,7 @@ const newCandidate = () => 'INSERT INTO candidates(party, office, candidate) VAL
 
 const candidateInterest = () => 'INSERT INTO interest(party, office, candidate) VALUES($1, $2, $3) RETURNING *';
 
-const newVote = () => 'INSERT INTO votes(office, candidate, voter) VALUES($1, $2, $3) RETURNING *';
+const newVote = () => 'INSERT INTO votes(office, party, candidate, voter) VALUES($1, $2, $3, $4) RETURNING *';
 
 const newOffice = () => 'INSERT INTO offices(type, name) VALUES($1, $2) RETURNING *';
 
@@ -109,6 +111,8 @@ const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING 
 
 const getUsers = () => 'SELECT * FROM users WHERE id = $1';
 
+const newSignIn = () => 'SELECT * FROM users WHERE EMAIL = $1';
+
 const getInterestedCandidate = () => `
 SELECT interest.id, 
   users.id AS userid, 
@@ -124,15 +128,48 @@ INNER JOIN users ON users.id = interest.candidate
 INNER JOIN parties ON parties.id = interest.party
 INNER JOIN offices ON offices.id = interest.office`;
 
+const getRegisteredCandidates = () => `
+SELECT candidates.id, 
+  users.id AS userid, 
+  users.firstname, 
+  users.lastname, 
+  offices.id AS officeId, 
+  offices.name AS officeName,
+  offices.type AS officeType, 
+  parties.id AS partyId, 
+  parties.name AS partyName,
+  candidates.status
+FROM candidates
+INNER JOIN users ON users.id = candidates.candidate
+INNER JOIN parties ON parties.id = candidates.party
+INNER JOIN offices ON offices.id = candidates.office`;
+
 const updateInterestStatus = () => `
   UPDATE interest 
   SET status = 'registered'
   WHERE office = $1 AND candidate = $2`;
 
-const getResults = () => `SELECT candidate, COUNT (candidate) AS result
-FROM votes
+const updateVoteStatus = () => `
+  UPDATE candidates
+  SET status = 'voted'
+  WHERE office = $1 AND candidate =$2`;
+
+const getResults = () => `
+SELECT candidate,
+  users.id,
+  users.firstname, 
+  users.lastname,
+  offices.name AS officename,
+  offices.id AS officeid,
+  parties.id AS partiesid,
+  parties.logourl,
+COUNT (candidate) AS result
+FROM votes 
+INNER JOIN users ON users.id = votes.candidate
+INNER JOIN offices ON offices.id = votes.office
+INNER JOIN parties ON parties.id = votes.party
 WHERE office = $1
-GROUP BY candidate`;
+GROUP BY candidate, users.id, offices.name, offices.id, parties.id`;
 
 export {
   createUsersTable,
@@ -163,4 +200,7 @@ export {
   getResults,
   getInterestedCandidate,
   updateInterestStatus,
+  getRegisteredCandidates,
+  updateVoteStatus,
+  newSignIn,
 };

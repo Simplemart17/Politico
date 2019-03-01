@@ -81,6 +81,14 @@ const closeResultModal = () => {
   document.getElementById('resultModal').style.display = 'none';
 };
 
+const openVoteModal = () => {
+  document.getElementById('voteModal').style.display = 'block';
+};
+
+const closeVoteModal = () => {
+  document.getElementById('voteModal').style.display = 'none';
+};
+
 const openRegisterModal = () => {
   document.getElementById('registerModal').style.display = 'block';
 };

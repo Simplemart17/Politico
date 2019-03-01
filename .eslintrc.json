@@ -12,6 +12,7 @@
         "no-unused-expressions": "off",
         "prefer-destructuring": "off",
         "no-restricted-globals": "off",
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "no-undef": "off"
     }
 }
