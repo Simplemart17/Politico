@@ -11,7 +11,7 @@ body {
     font-size: 18px;
 }
 
-#success {
+#success, #error_header, #error-header {
     display: none;
     margin: auto;
     margin-top: 78px;
@@ -19,11 +19,16 @@ body {
     padding: 8px;
     border-radius: 3px;
     width: 50%;
-    background-color: #86ca91;
+}
+
+#signup_success {
+    width: 90%;
+    display: none;
+    padding: 8px;
 }
 
 .error {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 ul, li {
@@ -233,12 +238,12 @@ a {
     padding: 2% 0 2% 4%;
     border: 1px solid #dcdcdc;
     box-shadow: 1px 1px 1px #888888;
-    background: #ffffff;
+    background: #f7f4f4;
 }
 
 .form-wrapper label {
     display: block;
-    margin-top: 3%;
+    margin-top: 0.5%;
 }
 
 .form-wrapper input, .modal-content input, .modal-content select {
@@ -246,8 +251,7 @@ a {
     width: 90%;
     border: 1px solid #ccc;
     border-radius: 3px;
-    margin-top: 1%;
-    padding: 2%;
+    padding: 1.5%;
     border-left: 2px solid #888888;
     font-size: 16px;
 }
@@ -404,9 +408,15 @@ a {
 
 .profile-content {
     display: grid;
-    grid-template-columns: 18% 82%;
+    grid-template-columns: 20% 80%;
     height: 10%;
     margin: auto;
+}
+
+.party_details {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-column-gap: 8%;
 }
 
 .sidebar {
@@ -446,15 +456,6 @@ a {
 
 .column {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: 20px 50px;
-    padding: 10px;
-    grid-column-gap: 10px;
-    grid-row-gap: 15px;
-}
-
-.column-profile {
-    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 20px 50px;
     padding: 10px;
@@ -462,16 +463,10 @@ a {
     grid-row-gap: 15px;
 }
 
-.party-column {
-    display: grid;
-    grid-template-columns: 60% 40%;
-}
-
 .box {
     height: 90%;
     border: 3px solid #f4f4f4;
     border-radius: 6px;
-    margin: 5px;
     box-shadow: 2px 3px;
 }
 
@@ -548,7 +543,7 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
   padding: 60px;
 }
 
-.partyModal, .modal, .officeModal, .editModal, .petitionModal, .resultModal, .deleteModal, .officeListModal {
+.partyModal, .modal, .officeModal, .editModal, .petitionModal, .resultModal, .deleteModal, .officeListModal, .registerModal, .detailsModal, .voteModal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -570,6 +565,10 @@ input[type=text]:focus, input[type=password]:focus, textarea:focus, select:focus
 
 .offices {
   width: 90%;  
+}
+
+.partyDetails {
+    width: 70%;
 }
 
 .table-modal {
@@ -713,9 +712,8 @@ th.col-30 {
 }
 
 .admin-header-btn {
-    margin-top: 20px;
-    margin-bottom: -20px;
-    margin-left: 47%;
+    margin-top: -44px;
+    margin-bottom: 30px;
 }
 
 .admin-header-btn input {
