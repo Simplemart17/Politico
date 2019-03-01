@@ -702,6 +702,7 @@ describe('POLITICO APP TEST', () => {
     it('submit vote for a candidate', (done) => {
       const newVote = {
         office: 1,
+        party: 2,
         candidate: 1,
       };
       chai.request(app)

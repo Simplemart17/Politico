@@ -4,14 +4,16 @@ import * as queries from '../model/queries';
 const voteController = {
   async voteCandidate(req, res) {
     const voter = req.user.id;
-    const { office, candidate } = req.body;
+    const { office, party, candidate } = req.body;
     const values = [
       office,
+      party,
       candidate,
       voter,
     ];
     try {
       const { rows } = await dBase.query(queries.newVote(), values);
+      await dBase.query(queries.updateVoteStatus(), [rows[0].office, rows[0].candidate]);
       return res.status(201).json({
         status: 201,
         message: 'Your vote successfully submitted!',
@@ -31,7 +33,6 @@ const voteController = {
   async voteResult(req, res) {
     try {
       const { rows } = await dBase.query(queries.getResults(), [req.params.id]);
-      await dBase.query(queries.updateVoteStatus(), [rows[0].office, rows[0].voter]);
       if (!rows[0]) {
         return res.status(404).json({
           status: 404,

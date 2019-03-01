@@ -313,8 +313,8 @@ const registerCandidate = (userid, partyid, officeid) => {
     .then((resp) => {
       if (resp.status === 201) {
         btnValue.value = 'Registered';
+        location.reload();
       }
-      location.reload();
     })
     .catch((error) => {
       console.log(error);

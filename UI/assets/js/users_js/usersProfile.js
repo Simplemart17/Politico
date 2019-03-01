@@ -110,13 +110,146 @@ document.addEventListener('DOMContentLoaded', () => {
               <td>${candidates.officename}</td>
               <td>${candidates.firstname} ${candidates.lastname}</td>
               <td>${candidates.partyname}</td>
-              <td><input id="vote_btn" class="bg-white" onclick="voteCandidate(${candidates.userid}, ${candidates.officeid})"
-              type="button" value="${candidate.status === '' ? 'VOTE' : 'VOTED'}"></td>
+              <td><input id="vote_btn" class="bg-white" onclick="voteCandidate(${candidates.userid}, ${candidates.officeid}, ${candidates.partyid})"
+              type="button" value=${candidates.status === 'vote' ? 'VOTE' : 'VOTED'}></td>
             </tr>
           </table>
           `;
           });
         }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Election Results for Federal Office
+  const federalResult = document.getElementById('federal_results');
+  const legislativeResult = document.getElementById('legislative_results');
+  const stateResult = document.getElementById('state_results');
+  const localResult = document.getElementById('local_results');
+
+  fetch(`${url}/api/v1/office/1/result`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        resp.data.forEach((result) => {
+          federalResult.innerHTML += `
+          <table>
+            <tr>
+              <td>${result.firstname} ${result.lastname}</td>
+              <td>${result.officename}</td>
+              <td>${result.logourl}</td>
+              <td>${result.result}</td>
+            </tr>
+          </table>
+          `;
+        });
+      }
+      if (resp.status === 404) {
+        document.getElementById('federal_error').innerHTML = 'Result for Federal Government Office not found!';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Election results for Legislative offices
+  fetch(`${url}/api/v1/office/2/result`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        resp.data.forEach((result) => {
+          legislativeResult.innerHTML += `
+          <table>
+            <tr>
+              <td>${result.firstname} ${result.lastname}</td>
+              <td>${result.officename}</td>
+              <td>${result.logourl}</td>
+              <td>${result.result}</td>
+            </tr>
+          </table>
+          `;
+        });
+      }
+      if (resp.status === 404) {
+        document.getElementById('legislative_error').innerHTML = 'Result for Legislative Government Office not found!';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Election result for State Government Office
+  fetch(`${url}/api/v1/office/3/result`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        resp.data.forEach((result) => {
+          stateResult.innerHTML += `
+          <table>
+            <tr>
+              <td>${result.firstname} ${result.lastname}</td>
+              <td>${result.officename}</td>
+              <td>${result.logourl}</td>
+              <td>${result.result}</td>
+            </tr>
+          </table>
+          `;
+        });
+      }
+      if (resp.status === 404) {
+        document.getElementById('state_error').innerHTML = 'Result for State Government Office not found!';
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // Election result for Local Government Office
+  fetch(`${url}/api/v1/office/4/result`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      token,
+    },
+  })
+    .then(response => response.json())
+    .then((resp) => {
+      if (resp.status === 201) {
+        resp.data.forEach((result) => {
+          localResult.innerHTML += `
+          <table>
+            <tr>
+              <td>${result.firstname} ${result.lastname}</td>
+              <td>${result.officename}</td>
+              <td>${result.logourl}</td>
+              <td>${result.result}</td>
+            </tr>
+          </table>
+          `;
+        });
+      }
+      if (resp.status === 404) {
+        document.getElementById('local_error').innerHTML = 'Result for State Government Office not found!';
       }
     })
     .catch((error) => {
@@ -240,13 +373,15 @@ registerInterest.onsubmit = () => {
 };
 
 // Function to vote candidate
-const voteCandidate = (userid, officeid) => {
+const voteCandidate = (userid, officeid, partyid) => {
   const voteBtn = document.getElementById('vote_btn');
   const candidate = userid;
   const office = officeid;
+  const party = partyid;
 
   const voteForm = {
     office,
+    party,
     candidate,
   };
 
