@@ -50,8 +50,8 @@ const middleware = {
     validatorFunction,
   ],
   createParty: [
-    inputCheck('name'),
-    inputCheck('hqAddress'),
+    inputCheck('name', 8),
+    inputCheck('hqAddress', 8),
     validatorFunction,
   ],
   createOffice: [

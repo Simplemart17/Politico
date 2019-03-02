@@ -91,12 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
           resp.data.forEach((candidates) => {
             candidateLists.innerHTML += `
           <table>
-            <tr>
-              <td>${candidates.firstname} ${candidates.lastname}</td>
-              <td>${candidates.officetype}</td>
-              <td>${candidates.officename}</td>
-              <td>${candidates.partyname}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>${candidates.firstname} ${candidates.lastname}</td>
+                <td>${candidates.officetype}</td>
+                <td>${candidates.officename}</td>
+                <td>${candidates.partyname}</td>
+              </tr>
+            </tbody>
           </table>
           `;
           });
@@ -105,14 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
           resp.data.forEach((candidates) => {
             voteLists.innerHTML += `
           <table>
-            <tr>
-              <td>${candidates.officetype}</td>
-              <td>${candidates.officename}</td>
-              <td>${candidates.firstname} ${candidates.lastname}</td>
-              <td>${candidates.partyname}</td>
-              <td><input id="vote_btn" class="bg-white" onclick="voteCandidate(${candidates.userid}, ${candidates.officeid}, ${candidates.partyid})"
-              type="button" value=${candidates.status === 'vote' ? 'VOTE' : 'VOTED'}></td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>${candidates.officetype}</td>
+                <td>${candidates.officename}</td>
+                <td>${candidates.firstname} ${candidates.lastname}</td>
+                <td>${candidates.partyname}</td>
+                <td><input id="vote_btn" class="vote-btn bg-white" onclick="voteCandidate(${candidates.userid}, ${candidates.officeid}, ${candidates.partyid})" type="button" value=${candidates.status === 'vote' ? 'VOTE' : 'VOTED'}></td>
+              </tr>
+            </tbody>
           </table>
           `;
           });

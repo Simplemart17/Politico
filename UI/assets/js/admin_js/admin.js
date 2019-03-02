@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
           partyLists.innerHTML += `
           <div class="box" id="remove">
               <div class="box-inner center">
-                <img src="assets/images/ballot-box.png" alt="logo" class="box-logo"><span class="mt"><div><i class="fas fa-trash-alt" onclick="openDeleteModal(${party.id}); "></i></div></span> <span class="mt"><div><i class="far fa-edit" onclick="openEditModal(${party.id})"></i></div></span><span><br><div class="admin-box-name"></div></span>
+                <img src="assets/images/ballot-box.png" alt="logo" class="box-logo"><span class="mt"><div><i class="fas fa-trash-alt" onclick="openDeleteModal(${party.id}); "></i></div></span> <span class="mt"><div><i class="far fa-edit" onclick="openEditModal(${party.id})"></i></div></span>
                 <div class="box-info"><h4>${party.name}</h4></div>
                 <div class="box-info"><h5>${party.hqaddress}</h5></div>
               </div>
@@ -94,35 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch((error) => {
       console.log(error);
     });
-
-  fetch(`${url}/api/v1/candidates`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      token,
-    },
-  })
-    .then(response => response.json())
-    .then((resp) => {
-      const interestList = document.getElementById('interest_table');
-      if (resp.status === 200) {
-        resp.data.forEach((candidate) => {
-          interestList.innerHTML += `
-          <table>
-            <tr>
-              <td>${candidate.firstname} ${candidate.lastname}</td>
-              <td id="candidate_office">${candidate.officename}</td>
-              <td id="candidate_party">${candidate.partyname}</td>
-              <td><input id="interest" class="bg-white" 
-                onclick="registerCandidate(${candidate.userid}, ${candidate.partyid}, ${candidate.officeid})" 
-                type="button" value=${candidate.status === 'pending' ? 'Register' : 'Registered'} ${candidate.status === 'pending' ? '' : 'disabled'}></td>
-            </tr>
-          </table>
-        `;
-        });
-      }
-    })
-    .catch(error => console.log(error));
 });
 
 editParty.onsubmit = () => {
@@ -277,38 +248,6 @@ const officeLists = () => {
         setTimeout(() => {
           window.location.href = 'admin.html';
         }, 2000);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-// Function to register candidate for office
-const registerCandidate = (userid, partyid, officeid) => {
-  const btnValue = document.getElementById('interest');
-  const id = userid;
-  const party = partyid;
-  const office = officeid;
-
-  const candidateForm = {
-    party,
-    office,
-  };
-
-  fetch(`${url}/api/v1/office/${id}/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      token,
-    },
-    body: JSON.stringify(candidateForm),
-  })
-    .then(response => response.json())
-    .then((resp) => {
-      if (resp.status === 201) {
-        btnValue.value = 'Registered';
-        location.reload();
       }
     })
     .catch((error) => {
