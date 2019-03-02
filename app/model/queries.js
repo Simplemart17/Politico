@@ -109,6 +109,8 @@ const deleteParty = () => 'DELETE FROM parties WHERE id = $1 returning *';
 
 const updateParty = () => 'UPDATE parties SET name = $1 WHERE id = $2 RETURNING *';
 
+// const uploadProfileImage = () => 'UPDATE users SET passporturl = $1 RETURNING *';
+
 const getUsers = () => 'SELECT * FROM users WHERE id = $1';
 
 const newSignIn = () => 'SELECT * FROM users WHERE EMAIL = $1';
@@ -203,4 +205,5 @@ export {
   getRegisteredCandidates,
   updateVoteStatus,
   newSignIn,
+  // uploadProfileImage,
 };

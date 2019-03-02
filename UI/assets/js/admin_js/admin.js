@@ -1,6 +1,6 @@
 // Function to create parties
-const url = 'https://mart-politico-app.herokuapp.com';
-// const url = 'http://localhost:8000';
+// const url = 'https://mart-politico-app.herokuapp.com';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const createParty = document.getElementById('create_party');

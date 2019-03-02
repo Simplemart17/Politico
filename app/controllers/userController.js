@@ -87,6 +87,27 @@ const Users = {
       console.log(error);
     }
   },
+
+  // async uploadImage(req, res) {
+  //   try {
+  //     const values = [
+  //       req.file.path,
+  //     ];
+  //     const { rows } = await dBase.query(queries.uploadProfileImage(), values);
+  //     return res.status(200).json({
+  //       status: 200,
+  //       message: 'Profile pix was successfully uploaded!',
+  //       data: [{
+  //         user: rows[0].passporturl,
+  //       }],
+  //     });
+  //   } catch (error) {
+  //     return res.status(400).json({
+  //       status: 400,
+  //       message: 'Profile picture cannot be uploaded!',
+  //     });
+  //   }
+  // },
 };
 
 export default Users;

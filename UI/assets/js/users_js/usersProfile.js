@@ -1,5 +1,5 @@
-const url = 'https://mart-politico-app.herokuapp.com';
-// const url = 'http://localhost:8000';
+// const url = 'https://mart-politico-app.herokuapp.com';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const registerInterest = document.getElementById('express_interest');
@@ -58,17 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
   })
     .then(response => response.json())
     .then((resp) => {
-      // const userPassport = document.getElementById('profile_image');
-      const userName = document.getElementById('profile_name');
-      const userEmail = document.getElementById('profile_email');
-      const userphone = document.getElementById('profile_phone');
-
+      const userProfile = document.getElementById('user_profile');
       if (resp.status === 200) {
         const userData = resp.data[0].user;
-
-        userName.innerHTML = `${userData.firstname} ${userData.lastname}`;
-        userEmail.innerHTML = userData.email;
-        userphone.innerHTML = userData.phonenumber;
+        userProfile.innerHTML = `
+          <img src="assets/images/profile.jpg" alt="profile-pic">
+          <div class="profile-info">
+            <h2>${userData.firstname} ${userData.lastname}</h2>
+            <h4>${userData.email}</h4>
+            <h4>${userData.phonenumber}</h4>
+          </div>
+          `;
       }
     })
     .catch((error) => {
