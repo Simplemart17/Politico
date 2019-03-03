@@ -101,11 +101,6 @@ a {
     background-color: grey;
 }
 
-/* Nav bar */
-/* .nav-wrapper {
-    padding-top: 30px;
-} */
-
 .nav {
     background-color: #86ca91;
     color: #ffffff;
@@ -609,7 +604,7 @@ hr {
   cursor: pointer;
 }
 
-/* candidate table */
+/* Table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -635,38 +630,11 @@ th, td {
     padding: 30px;
 }
 
-/* .party-box:nth-child(even) {
-      background: #cfe9c4;
-  }
-
-.party-box:nth-child(odd) {
-      background: #c8dacd;
-} */
-
-/* .candidate-box-area, .party-box-area {
-    display: grid;
-    grid-template-columns: 30% 70%;
-} */
-
-/* .party-box-area  {
-    padding: 20px 0;
+.federal, .legislative, .state, .local {
+    margin-bottom: 50px;
 }
-
-.candidate-box-area h3, .party-box-area h3 {
-    font-size: 25px;
-}
-
-.candidate-box-area img, .party-box-area img {
-    border-radius: 100%;
-    height: 80%;
-    width: 80%;
-} */
 
 /* voting table */
-
-/* .vote-btn-area {
-    padding: 20px 0px;
-} */
 .vote-area {
     width: 100%;
     height: 70vh;
@@ -689,15 +657,6 @@ th, td {
     opacity: 0.6;
     transition: 0.6s;
 }
-
-/* Admin Panel */
-/* .admin-box-name {
-    float: right;
-    margin-right: 40px;
-    margin-top: -20px;
-    font-size: 30px;
-    letter-spacing: 3px;
-} */
 
 .admin-create-btn {
     background: #f7f4f4;
@@ -754,52 +713,6 @@ th, td {
 .logo-center {
     text-align: center;
 }
-
-/* .loader {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 1;
-    width: 150px;
-    height: 150px;
-    margin: -75px 0 0 -75px;
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-  } */
-  
-  /* @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  } */
-  
-  /* Add animation to "page content" */
-  /* .animate-bottom {
-    position: relative;
-    -webkit-animation-name: animatebottom;
-    -webkit-animation-duration: 1s;
-    animation-name: animatebottom;
-    animation-duration: 1s
-  }
-  
-  @-webkit-keyframes animatebottom {
-    from { bottom:-100px; opacity:0 } 
-    to { bottom:0px; opacity:1 }
-  }
-  
-  @keyframes animatebottom { 
-    from{ bottom:-100px; opacity:0 } 
-    to{ bottom:0; opacity:1 }
-  } */
   
 @media (max-width:670px) {
     .nav .nav-center .nav-btn {
@@ -828,23 +741,22 @@ th, td {
       position: absolute;
       display: block;
       width: 100%;
-      background-color: rgba(77, 99, 79, 0.5);
+      background-color: #4d634ff1;
       transition: all 0.3s ease-in;
       overflow-y: hidden;
       left: 0px;
     }
-    .nav .nav-center .nav-links a {
+    .nav-links a {
       display: block;
       width: 100%;
-      color: #eceaea;
+      color: #ffffff;
       background: none;
       border: none;
       height: 35px;
     }
-    .nav .nav-center .nav-links a:hover {
+    .nav-links a:hover {
         color: #60fa19;
-        transition: 0.8s;
-        background: none;
+        transition: all 0.8s;
     }
     .nav .nav-center  #nav-check:not(:checked) + .nav-links {
       height: 0px;
@@ -932,7 +844,7 @@ th, td {
     }
 
     .main-area h2 {
-        margin-top: 25px;
+        margin-top: 20px;
         text-align: center;
         font-size: 25px;
     }
@@ -977,37 +889,49 @@ th, td {
         display: none;
     }
 
-    table {
-        table-layout: fixed;
-        width: 100%;
+    thead, tbody, th, td, tr {
+        display: block;
     }
 
-    .candidate-box-area img, .party-box-area img {
-        border-radius: 50%;
-        height: 50%;
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
     }
 
-    .candidate th {
-        font-size: 15px;
+    tr {
+        border: 1.5px solid #cccccc;
+        margin-bottom: 10px;
     }
 
-    .candidate-box-area, .party-box-area {
-        display: grid;
-        grid-template-columns: 100%;
+    td {
+        border: none;
+        border-bottom: 2px solid #eeeeee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td::before {
+        content: attr(data-label);
+        text-transform: uppercase;
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        width: 45px;
+        font-weight: bold;
+        white-space: nowrap;
     }
     
-    .party-box-area  {
-        padding: 10px 0;
-    }
-    
-    .candidate-box-area h3, h4, .party-box-area h3, .federal h3, .legislative h3, .local h3, .state h3 {
+    h4 {
         font-size: 16px;
     }
-    
-    .candidate-box-area img, .party-box-area img {
-        border-radius: 60%;
-        height: 60%;
-        width: 60%;
+
+    .party_details {
+        display: block;
+    }
+
+    .party_details h2 {
+        margin-top: 25px;
     }
 
     .modal-container {
@@ -1045,6 +969,4 @@ th, td {
     .form-header {
         margin-top: 15%
     }
-
-
 }

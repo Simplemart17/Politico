@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <table>
               <tbody>
                 <tr>
-                  <td>${candidate.firstname} ${candidate.lastname}</td>
-                  <td id="candidate_office">${candidate.officename}</td>
-                  <td id="candidate_party">${candidate.partyname}</td>
-                  <td><input id="interest" class="admin-reg-btn bg-white" 
+                  <td data-label="Candidate Names:">${candidate.firstname} ${candidate.lastname}</td>
+                  <td data-label="Office Name:">${candidate.officename}</td>
+                  <td data-label="Party Name:"">${candidate.partyname}</td>
+                  <td data-label="Action:"><input id="interest" class="admin-reg-btn bg-white" 
                   onclick="registerCandidate(${candidate.userid}, ${candidate.partyid}, ${candidate.officeid})" 
                   type="button" value=${candidate.status === 'pending' ? 'Register' : 'Registered'} ${candidate.status === 'pending' ? '' : 'disabled'}></td>
                 </tr>
