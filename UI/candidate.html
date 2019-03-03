@@ -29,6 +29,9 @@
             <input type="checkbox" id="nav-check" />
             <div class="nav-links">
               <a href="citizen-profile.html">Dashboard</a>
+              <a onclick='window.location="candidate.html";' class="hidden">The Candidates</a>
+              <a onclick="openVoteModal()" class="hidden">Give Your Mandate</a>
+              <a onclick="openModal()" class="hidden">Interest Form</a>
               <a href="citizen-signin.html" id="sign-out">Sign Out</a>
             </div>
         </div>
@@ -36,33 +39,103 @@
     </div>
       
     <section>
-    <!-- Profile Section -->
+    <!-- Candidate table Section -->
       <div class="profile-header">
-            <div class="main-area center">
-                    <div>
-                      <h2>Candidates For Government Offices</h2>
-                    </div>
-                  </div>
+        <div class="main-area center">
+          <div>
+            <h2>Candidates For Government Offices</h2>
+          </div>
+        </div>
       </div>
       <div class="profile-content">
         <div class="sidebar">
           <div class="sidebar-menu">
             <ul>
-              <li><a href="citizen-profile.html">Dashboard</a></li>
-              <li class="active"><a href="candidate.html">The Candidates</a></li>
-              <li><a href="vote.html">Give Your Mandate</a></li>
+              <li class="profile-nav"><a href="citizen-profile.html">Back To Dashboard</a></li>
+              <li class="active profile-nav"><a href="candidate.html">The Candidates</a></li>
+              <li class="modal-link profile-nav" onclick="openVoteModal()">Give Your Mandate</li>
+              <li class="modal-link profile-nav" onclick="openModal()">Interest Form</li>
             </ul>
           </div>
         </div>
-        <div class="main-area table-area bg-white">
-            <table class="candidate" id="candidate_lists">
+        <div class="table-area bg-white">
+          <table id="candidate_lists">
+            <thead>
+              <tr>
+                <th scope="col">Candidate</th>
+                <th scope="col">Office Type</th>
+                <th scope="col">Office Name</th>
+                <th scope="col">Political Party</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    
+    <!-- Interest form -->
+    <div id="modal" class="modal">
+        <span onclick="closeModal()" class="close" title="Close Modal">
+          &times;
+        </span>
+        <form method="POST" class="modal-content" id="express_interest">
+          <div class="modal-container">
+            <h1>Expression of Interest Form</h1>
+            <hr>
+  
+            <label for="party">
+              <b>Political Party<span class="col-red">*</span></b>
+            </label>
+            <select id="pol_party" name="pol_party">
+              <option value="0">Select Your Political Party</option>
+            </select>
+  
+            <label for="ofname">
+              <b>Office Details<span class="col-red">*</span></b>
+            </label>
+            <select id="office_name" name="office_name">
+              <option value="0">Select Office Type & Name</option>
+            </select>
+
+            <div class="reg-btn center">
+              <div class="inline">
+                <input class="col-white bg-green" name="submit" type="submit" value="Submit">
+              </div>
+                      
+              <div class="inline ">
+                <input class="col-white bg-grey" onclick="closeModal()" type="button" value="Cancel">
+              </div> 
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Vote Modal -->
+      <div id="voteModal" class="voteModal">
+        <span onclick="closeVoteModal()" class="close" title="Close Modal">
+            &times;
+        </span>
+        <div class="profile-header">
+          <div class="main-area center">
+            <div>
+              <h2>Vote Your Candidate</h2>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="vote-area table-area bg-white">
+            <table id="vote_lists">
+                <caption><span class="col-red">*</span>Click vote button to vote. <u><b>NOTE:</b></u> You are allowed to vote once!</caption>
+              <thead>
                 <tr>
-                  <th>Candidate</th>
-                  <th>Office Type</th>
-                  <th>Office Name</th>
-                  <th>Party</th>
+                  <th scope="col">Office Type</th>
+                  <th scope="col">Office Name</th>
+                  <th scope="col">Candidate</th>
+                  <th scope="col">Political Party</th>
+                  <th scope="col">Action</th>
                 </tr>
+              </thead>
             </table>
+          </div>
         </div>
       </div>
     </section>

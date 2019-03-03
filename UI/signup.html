@@ -43,64 +43,41 @@
           <h1>Register Here</h1>
       </div>
         <p class="center bg-green col-white" id="signup_success">Sign up successful!</p>
-        <form id="form_register" role="form" method="POST">
-          <label for="name">
-            First Name
-            <span class="col-red">
-              *
-            </span>
+        <form id="form_register" role="form" method="POST" enctype="multipart/form-data">
+          <label for="name">First Name
+            <span class="col-red">*</span>
           </label>
           <input type="text" name="firstname" id="user_firstname">
 
-          <label for="name">
-            Last Name
-            <span class="col-red">
-              *
-            </span>
+          <label for="name">Last Name
+            <span class="col-red">*</span>
           </label>
           <input type="text" name="lastname" id="user_lastname">
 
-          <label for="email">
-            Email Address
-            <span class="col-red">
-              *
-            </span>
+          <label for="email">Email Address
+            <span class="col-red">*</span>
           </label>
           <input type="email" name="email" id="user_email">
           <div id="email_error" class="col-red error"></div>
 
-          <label for="phone">
-            Phone Number
-            <span class="col-red">
-              *
-            </span>
+          <label for="phone">Phone Number
+            <span class="col-red">*</span>
           </label>
           <input type="number" name="phoneNumber" id="user_phonenumber">
 
-          <label for="password">
-            Password
-            <span class="col-red">
-              *
-            </span>
+          <label for="password">Password
+            <span class="col-red">*</span>
           </label>
           <input type="password" name="password" id="user_password" onkeyup="passwordCheck()">
 
-          <label for="confirm">
-            Confirm Password
-            <span class="col-red">
-              *
-            </span>
+          <label for="confirm">Confirm Password
+            <span class="col-red">*</span>
           </label>
           <input type="password" name="confirm_pass" id="user_confirm_password" onkeyup="passwordCheck()">
-            <p id="password_error_msg" class="error col-red">
-
-            </p>
+            <p id="password_error_msg" class="error col-red"></p>
           
-          <label for="media">
-            Upload Passport
-            <span class="col-red">
-              *
-            </span>
+          <label for="media">Upload Passport
+            <span class="col-red">*</span>
           </label>
           <input type="file" accept="image/*" name="passportUrl" id="passportUrl">
 

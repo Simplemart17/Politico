@@ -89,13 +89,6 @@ const closeVoteModal = () => {
   document.getElementById('voteModal').style.display = 'none';
 };
 
-const openRegisterModal = () => {
-  document.getElementById('registerModal').style.display = 'block';
-};
-
-const closeRegisterModal = () => {
-  document.getElementById('registerModal').style.display = 'none';
-};
 
 const passwordCheck = () => {
   const password1 = document.getElementById('user_password').value;

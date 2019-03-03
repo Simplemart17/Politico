@@ -341,7 +341,7 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.should.be.a.json;
-          res.body.error.should.equal('The token you provided is invalid');
+          res.body.error.should.equal('Authentication fails!');
           done(err);
         });
     });

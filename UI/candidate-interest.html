@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Politico is a platform designed for politicans and citizens">
+    <meta name="keywords" content="election, mandate, vote, government">
+    <meta name="author" content="Martins Aloba">
+    <title>Politico|Admin</title>
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+  <body>
+    <!-- Nav bar -->
+    <div>
+      <div class="nav">
+        <div class="nav-center">
+          <div class="nav-header">
+            <div class="nav-title">
+              <a href="index.html">Politico</a>
+            </div>
+          </div>
+          <div class="nav-btn">
+            <label for="nav-check">
+              <span></span> <span></span> <span></span>
+            </label>
+          </div>
+            <input type="checkbox" id="nav-check" />
+            <div class="nav-links">
+              <a href="admin.html">Back To Dashboard</a>
+              <a href="citizen-signin.html" id="sign-out">Sign Out</a>
+            </div>
+        </div>
+      </div>
+    </div>
+      
+    <section>
+    <!-- Table for interested candidates -->
+      <div class="profile-header">
+        <div class="center"><h2>ADMIN PANEL</h2></div>
+      </div>
+      
+      <div class="main-area">
+        <div class="page-width">
+          <h2>Lists of Interested Candidates</h2>
+        </div>
+        <div>
+          <table id="interest_table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Office Name</th>
+                <th scope="col">Party Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="center" id="empty_list">
+          </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer center">Copyright &copy; 2018 Martins Aloba</div>
+    </footer>
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/admin_js/interestCandidate.js"></script>
+  </body>
+</html>

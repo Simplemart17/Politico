@@ -29,6 +29,10 @@
             <input type="checkbox" id="nav-check" />
             <div class="nav-links">
               <a href="citizen-profile.html">Dashboard</a>
+              <a onclick='window.location="candidate.html";' class="hidden">The Candidates</a>
+              <a onclick="openVoteModal()" class="hidden">Give Your Mandate</a>
+              <a onclick="openModal()" class="hidden">Interest Form</a>
+              <a onclick="openResultModal()" class="hidden">Election Result</a>
               <a href="citizen-signin.html" id="sign-out">Sign Out</a>
             </div>
         </div>
@@ -38,25 +42,19 @@
     <section>
     <!-- Profile Section -->
     <div class="profile-header">
-      <div class="profile-header-info">
-        <img src="assets/images/profile.jpg" alt="profile image" id="profile_image">
-          <div class="profile-info">
-            <h2 id="profile_name"></h2>
-            <h4 id="profile_email"></h4>
-            <h4 id="profile_phone"></h4>
-          </div>
-      </div>
+      <div id="user_profile">
+        </div>
     </div>
 
     <div class="profile-content">
       <div class="sidebar">
         <div class="sidebar-menu">
           <ul>
-            <li class="active"><a href="#">Dashboard</a></li>
-            <li class="modal-link" onclick='window.location="candidate.html";'>The Candidates</li>
-            <li class="modal-link" onclick="openVoteModal()">Give Your Mandate</li>
-            <li class="modal-link" onclick="openModal()">Interest Form</li>
-            <li class="modal-link" onclick="openResultModal()">Election Result</li>
+            <li class="active profile-nav"><a href="#">Dashboard</a></li>
+            <li class="modal-link profile-nav" onclick='window.location="candidate.html";'>The Candidates</li>
+            <li class="modal-link profile-nav" onclick="openVoteModal()">Give Your Mandate</li>
+            <li class="modal-link profile-nav" onclick="openModal()">Interest Form</li>
+            <li class="modal-link profile-nav" onclick="openResultModal()">Election Result</li>
           </ul>
         </div>
       </div>
@@ -77,46 +75,34 @@
           &times;
         </span>
         <form method="POST" class="modal-content" id="express_interest">
-            <div class="modal-container">
-              <h1>
-                Expression of Interest Form
-              </h1>
-              <hr>
+          <div class="modal-container">
+            <h1>Expression of Interest Form</h1>
+            <hr>
   
-              <label for="party">
-                <b>
-                  Political Party
-                  <span class="col-red">
-                    *
-                  </span>
-                </b>
-              </label>
-              <select id="pol_party" name="pol_party">
-                <option value="0">Select Your Political Party</option>
-              </select>
+            <label for="party">
+              <b>Political Party<span class="col-red">*</span></b>
+            </label>
+            <select id="pol_party" name="pol_party">
+              <option value="0">Select Your Political Party</option>
+            </select>
   
-              <label for="ofname">
-                <b>
-                  Office Details
-                  <span class="col-red">
-                    *
-                  </span>
-                </b>
-              </label>
-              <select id="office_name" name="office_name">
-                <option value="0">Select Office Type & Name</option>
-              </select>
+            <label for="ofname">
+              <b>Office Details<span class="col-red">*</span></b>
+            </label>
+            <select id="office_name" name="office_name">
+              <option value="0">Select Office Type & Name</option>
+            </select>
 
-              <div class="reg-btn center">
-                <div class="inline">
-                    <input class="col-white bg-green" name="submit" type="submit" value="Submit">
-                </div>
-                      
-                <div class="inline ">
-                  <input class="col-white bg-grey" onclick="closeModal()" type="button" value="Cancel">
-                </div> 
+            <div class="reg-btn center">
+              <div class="inline">
+                <input class="col-white bg-green" name="submit" type="submit" value="Submit">
               </div>
+                      
+              <div class="inline ">
+                <input class="col-white bg-grey" onclick="closeModal()" type="button" value="Cancel">
+              </div> 
             </div>
+          </div>
         </form>
       </div>
 
@@ -130,54 +116,64 @@
             <div>
               <h2>See Election Results</h2>
             </div>
-            <div class="federal">
-              <table id="federal_results">
-                <caption><b>Results for Federal Government Offices</b></caption>
+          </div>
+        </div>
+        <div class="table-area bg-white">
+          <div class="federal">
+            <table id="federal_results">
+              <caption><b>Results for Federal Government Offices</b></caption>
+              <thead>
                 <tr>
-                  <th>Candidate Name(s)</th>
-                  <th>Office Name</th>
-                  <th>Party Logo</th>
-                  <th>Result</th>
+                  <th scope="col">Candidate Name(s)</th>
+                  <th scope="col">Office Name</th>
+                  <th scope="col">Party Logo</th>
+                  <th scope="col">Result</th>
                 </tr>
-              </table>
-              <div id="federal_error"></div>
-            </div>
-            <div class="legislative">
-              <table id="legislative_results">
-                <caption><b>Election Results for Legislative Government Offices</b></caption>
+              </thead>
+            </table>
+            <div id="federal_error"></div>
+          </div>
+          <div class="legislative">
+            <table id="legislative_results">
+              <caption><b>Election Results for Legislative Government Offices</b></caption>
+              <thead>
                 <tr>
-                  <th>Candidate Name(s)</th>
-                  <th>Office Name</th>
-                  <th>Party Logo</th>
-                  <th>Result</th>
+                  <th scope="col">Candidate Name(s)</th>
+                  <th scope="col">Office Name</th>
+                  <th scope="col">Party Logo</th>
+                  <th scope="col">Result</th>
                 </tr>
-              </table>
-              <div id="legislative_error"></div>
-            </div>
-            <div class="state">
-              <table id="state_results">
-                <caption><b>Election Results for State Government Offices</b></caption>
+              </thead>
+            </table>
+            <div id="legislative_error"></div>
+          </div>
+          <div class="state">
+            <table id="state_results">
+              <caption><b>Election Results for State Government Offices</b></caption>
+              <thead>
                 <tr>
-                  <th>Candidate Name(s)</th>
-                  <th>Office Name</th>
-                  <th>Party Logo</th>
-                  <th>Result</th>
+                  <th scope="col">Candidate Name(s)</th>
+                  <th scope="col">Office Name</th>
+                  <th scope="col">Party Logo</th>
+                  <th scope="col">Result</th>
                 </tr>
-              </table>
-              <div id="state_error"></div>
-            </div>
-            <div class="local">
-              <table id="local_results">
-                <caption><b>Election Results for Local Government Offices</b></caption>
+              </thead>
+            </table>
+            <div id="state_error"></div>
+          </div>
+          <div class="local">
+            <table id="local_results">
+              <caption><b>Election Results for Local Government Offices</b></caption>
+              <thead>
                 <tr>
-                  <th>Candidate Name(s)</th>
-                  <th>Office Name</th>
-                  <th>Party Logo</th>
-                  <th>Result</th>
+                  <th scope="col">Candidate Name(s)</th>
+                  <th scope="col">Office Name</th>
+                  <th scope="col">Party Logo</th>
+                  <th scope="col">Result</th>
                 </tr>
-              </table>
-              <div id="local_error"></div>
-            </div>
+              </thead>
+            </table>
+            <div id="local_error"></div>
           </div>
         </div>
       </div>
@@ -214,17 +210,19 @@
           </div>
         </div>
       </div>
-      <div class="vote-area">
-        <div class="main-area table-area bg-white">
-          <table class="candidate" id="vote_lists">
-            <caption><span class="col-red">*</span>Click vote button to vote. NOTE: You are allowed to vote once!</caption>
-            <tr>
-              <th>Office Type</th>
-              <th>Office Name</th>
-              <th>Candidate</th>
-              <th>Party</th>
-              <th>Action</th>
-            </tr>
+      <div>
+        <div class="vote-area table-area bg-white">
+          <table id="vote_lists">
+            <caption><span class="col-red">*</span>Click vote button to vote. <u><b>NOTE:</b></u> You are allowed to vote once!</caption>
+            <thead>
+              <tr>
+                <th scope="col">Office Type</th>
+                <th scope="col">Office Name</th>
+                <th scope="col">Candidate</th>
+                <th scope="col">Political Party</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
           </table>
         </div>
       </div>

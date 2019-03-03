@@ -8,6 +8,8 @@ const userRouter = express.Router();
 
 userRouter.post('/auth/signup', validation.signUp, users.signUpUsers);
 
+// userRouter.patch('/auth/profileUpload', upload.single('passportUrl'), users.uploadImage);
+
 userRouter.post('/auth/login', validation.signIn, users.userSignIn);
 
 userRouter.get('/auth/profile', Auth.verifyToken, users.getUser);

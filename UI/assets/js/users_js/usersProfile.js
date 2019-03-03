@@ -58,17 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
   })
     .then(response => response.json())
     .then((resp) => {
-      // const userPassport = document.getElementById('profile_image');
-      const userName = document.getElementById('profile_name');
-      const userEmail = document.getElementById('profile_email');
-      const userphone = document.getElementById('profile_phone');
-
+      const userProfile = document.getElementById('user_profile');
       if (resp.status === 200) {
         const userData = resp.data[0].user;
-
-        userName.innerHTML = `${userData.firstname} ${userData.lastname}`;
-        userEmail.innerHTML = userData.email;
-        userphone.innerHTML = userData.phonenumber;
+        userProfile.innerHTML = `
+          <img src="assets/images/profile.jpg" alt="profile-pic">
+          <div class="profile-info">
+            <h2>${userData.firstname} ${userData.lastname}</h2>
+            <h4>${userData.email}</h4>
+            <h4>${userData.phonenumber}</h4>
+          </div>
+          `;
       }
     })
     .catch((error) => {
@@ -91,12 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
           resp.data.forEach((candidates) => {
             candidateLists.innerHTML += `
           <table>
-            <tr>
-              <td>${candidates.firstname} ${candidates.lastname}</td>
-              <td>${candidates.officetype}</td>
-              <td>${candidates.officename}</td>
-              <td>${candidates.partyname}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td data-label="Candidate:">${candidates.firstname} ${candidates.lastname}</td>
+                <td data-label="Office Type:">${candidates.officetype}</td>
+                <td data-label="Office Name:">${candidates.officename}</td>
+                <td data-label="Political Party:">${candidates.partyname}</td>
+              </tr>
+            </tbody>
           </table>
           `;
           });
@@ -105,14 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
           resp.data.forEach((candidates) => {
             voteLists.innerHTML += `
           <table>
-            <tr>
-              <td>${candidates.officetype}</td>
-              <td>${candidates.officename}</td>
-              <td>${candidates.firstname} ${candidates.lastname}</td>
-              <td>${candidates.partyname}</td>
-              <td><input id="vote_btn" class="bg-white" onclick="voteCandidate(${candidates.userid}, ${candidates.officeid}, ${candidates.partyid})"
-              type="button" value=${candidates.status === 'vote' ? 'VOTE' : 'VOTED'}></td>
-            </tr>
+            <tbody>
+              <tr>
+                <td data-label="Office Type:">${candidates.officetype}</td>
+                <td data-label="Office Name:">${candidates.officename}</td>
+                <td data-label="Candidate:">${candidates.firstname} ${candidates.lastname}</td>
+                <td data-label="Political Party:">${candidates.partyname}</td>
+                <td data-label="Action:"><input id="vote_btn" class="vote-btn bg-white" onclick="voteCandidate(${candidates.userid}, ${candidates.officeid}, ${candidates.partyid})" type="button" value=${candidates.status === 'vote' ? 'VOTE' : 'VOTED'}></td>
+              </tr>
+            </tbody>
           </table>
           `;
           });
@@ -142,12 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
         resp.data.forEach((result) => {
           federalResult.innerHTML += `
           <table>
-            <tr>
-              <td>${result.firstname} ${result.lastname}</td>
-              <td>${result.officename}</td>
-              <td>${result.logourl}</td>
-              <td>${result.result}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td data-label="Candidate Names:">${result.firstname} ${result.lastname}</td>
+                <td data-label="Office Name:">${result.officename}</td>
+                <td data-label="Party Logo:">${result.logourl}</td>
+                <td data-label="Result:">${result.result}</td>
+              </tr>
+            </tbody>
           </table>
           `;
         });
@@ -174,12 +179,14 @@ document.addEventListener('DOMContentLoaded', () => {
         resp.data.forEach((result) => {
           legislativeResult.innerHTML += `
           <table>
-            <tr>
-              <td>${result.firstname} ${result.lastname}</td>
-              <td>${result.officename}</td>
-              <td>${result.logourl}</td>
-              <td>${result.result}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td data-label="Candidate Names:">${result.firstname} ${result.lastname}</td>
+                <td data-label="Office Name:">${result.officename}</td>
+                <td data-label="Party Logo:">${result.logourl}</td>
+                <td data-label="Result:">${result.result}</td>
+              </tr>
+            </tbody>
           </table>
           `;
         });
@@ -206,12 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
         resp.data.forEach((result) => {
           stateResult.innerHTML += `
           <table>
-            <tr>
-              <td>${result.firstname} ${result.lastname}</td>
-              <td>${result.officename}</td>
-              <td>${result.logourl}</td>
-              <td>${result.result}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td data-label="Candidate Names:">${result.firstname} ${result.lastname}</td>
+                <td data-label="Office Name:">${result.officename}</td>
+                <td data-label="Party Logo:">${result.logourl}</td>
+                <td data-label="Result:">${result.result}</td>
+              </tr>
+            </tbody>
           </table>
           `;
         });
@@ -238,12 +247,14 @@ document.addEventListener('DOMContentLoaded', () => {
         resp.data.forEach((result) => {
           localResult.innerHTML += `
           <table>
-            <tr>
-              <td>${result.firstname} ${result.lastname}</td>
-              <td>${result.officename}</td>
-              <td>${result.logourl}</td>
-              <td>${result.result}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td data-label="Candidate Names:">${result.firstname} ${result.lastname}</td>
+                <td data-label="Office Name:">${result.officename}</td>
+                <td data-label="Party Logo:">${result.logourl}</td>
+                <td data-label="Result:">${result.result}</td>
+              </tr>
+            </tbody>
           </table>
           `;
         });
