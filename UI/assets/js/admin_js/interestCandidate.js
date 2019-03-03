@@ -38,17 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Function to register candidate for office
+
 const registerCandidate = (userid, partyid, officeid) => {
-  const btnValue = document.getElementById('interest');
   const id = userid;
   const party = partyid;
   const office = officeid;
-
   const candidateForm = {
     party,
     office,
   };
-
   fetch(`${url}/api/v1/office/${id}/register`, {
     method: 'POST',
     headers: {
@@ -60,7 +58,7 @@ const registerCandidate = (userid, partyid, officeid) => {
     .then(response => response.json())
     .then((resp) => {
       if (resp.status === 201) {
-        btnValue.value = 'Registered';
+        document.getElementById('interest').value = 'Registered';
         location.reload();
       }
     })
