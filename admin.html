@@ -30,6 +30,10 @@
             <input type="checkbox" id="nav-check" />
             <div class="nav-links">
               <a href="admin.html">Dashboard</a>
+              <a onclick="openPartyModal()" class="hidden">Create Party</a>
+              <a onclick="openOfficeModal()" class="hidden">Create Office</a>
+              <a onclick="officeLists()" class="hidden">Office Lists</a>
+              <a onclick='window.location="candidate-interest.html";' class="hidden">Candidates</a>
               <a href="citizen-signin.html" id="sign-out">Sign Out</a>
             </div>
         </div>
@@ -39,13 +43,13 @@
     <section>
     <!-- Profile Section -->
       <div class="profile-header">
-        <div class="reg-btn admin-header-btn page-width">
-            <div class="inline"><input class="col-white bg-light-green" onclick="openPartyModal()" type="button" value="Create Party"></div>
-            <div class="inline"><input class="col-white bg-light-green" onclick="openOfficeModal()" type="button" value="Create Office"></div>
-            <div class="inline"><input class="col-white bg-light-green" onclick="officeLists();" type="button" value="Office Lists"></div>
-            <div class="inline"><input class="col-white bg-light-green" onclick="openRegisterModal();" type="button" value="Candidates"></div>
+        <div class="admin-header-btn page-width">
+            <div class="inline"><input class="admin-create-btn" onclick="openPartyModal()" type="button" value="Create Party"></div>
+            <div class="inline"><input class="admin-create-btn" onclick="openOfficeModal()" type="button" value="Create Office"></div>
+            <div class="inline"><input class="admin-create-btn" onclick="officeLists();" type="button" value="Office Lists"></div>
+            <div class="inline"><input class="admin-create-btn" onclick='window.location="candidate-interest.html";' type="button" value="Candidates"></div>
         </div>
-        <div class="center"><h2>Admin Panel</h2></div>
+        <div class="center"><h2>ADMIN PANEL</h2></div>
       </div>
       
       <div class="main-area">
@@ -71,11 +75,12 @@
                 <label for="name"><b>Registered Party Name<span class="col-red">*</span></b></label>
                 <input type="text" name="name" id="party_name">
 
+                <label for="padd"><b>Headquarter Address<span class="col-red">*</span></b></label>
+                <input type="text" name="hqAddress" id="party_hq">
+                
                 <label for="party"><b>Party Logo<span class="col-red">*</span></b></label>
                 <input type="file" name="logoUrl" id="party_logo">
           
-                <label for="padd"><b>Headquarter Address<span class="col-red">*</span></b></label>
-                <input type="text" name="hqAddress" id="party_hq">
                 <div class="reg-btn center">
                     <div class="inline">
                         <input class="col-white bg-green" name="submit"  type="submit" value="Create">
@@ -179,28 +184,6 @@
             </div>
           </div>
         </form>
-      </div>
-
-      <!-- Register Candidate Modal -->
-      <div id="registerModal" class="registerModal">
-        <span onclick="closeRegisterModal()" class="close" title="Close Modal">
-          &times;
-        </span>
-        <div class="modal-content">
-          <div id="interest_table" class="bg-green">
-            <table>
-              <caption>
-                Interested Candidates for Government Office
-              </caption>
-              <tr>
-                <th>Name</th>
-                <th>Office Name</th>
-                <th>Party Name</th>
-                <th>Action</th>
-              </tr>
-            </table>
-          </div>
-        </div>
       </div>
     </section>
     <!-- Footer -->
