@@ -1,5 +1,5 @@
-const url = 'https://mart-politico-app.herokuapp.com';
-// const url = 'http://localhost:8000';
+// const url = 'https://mart-politico-app.herokuapp.com';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const registerInterest = document.getElementById('express_interest');
@@ -61,8 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const userProfile = document.getElementById('user_profile');
       if (resp.status === 200) {
         const userData = resp.data[0].user;
+        console.log(userData);
         userProfile.innerHTML = `
-          <img src="assets/images/profile.jpg" alt="profile-pic">
+          <img src="/uploads/${userData.passporturl}" alt="profile-pic">
           <div class="profile-info">
             <h2>${userData.firstname} ${userData.lastname}</h2>
             <h4>${userData.email}</h4>

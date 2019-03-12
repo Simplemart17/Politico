@@ -1,6 +1,6 @@
 // Function to create parties
-const url = 'https://mart-politico-app.herokuapp.com';
-// const url = 'http://localhost:8000';
+// const url = 'https://mart-politico-app.herokuapp.com';
+const url = 'http://localhost:8000';
 
 const token = localStorage.getItem('token');
 const createParty = document.getElementById('create_party');
@@ -19,20 +19,22 @@ document.addEventListener('DOMContentLoaded', () => {
 createParty.onsubmit = () => {
   event.preventDefault();
 
-  const name = document.getElementById('party_name').value;
-  const hqAddress = document.getElementById('party_hq').value;
+  const logo = document.querySelector('#party_logo');
+  const name = document.getElementById('party_name').value.trim();
+  const hqAddress = document.getElementById('party_hq').value.trim();
 
-  const partyForm = {
-    name,
-    hqAddress,
-  };
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('hqAddress', hqAddress);
+  formData.append('logoUrl', logo.files[0]);
+
   fetch(`${url}/api/v1/parties`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json; charset=utf-8',
+      Accept: 'application/json, text/plain, */*',
       token,
     },
-    body: JSON.stringify(partyForm),
+    body: formData,
   })
     .then(response => response.json())
     .then((resp) => {
@@ -82,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
           partyLists.innerHTML += `
           <div class="box" id="remove">
               <div class="box-inner center">
-                <img src="assets/images/ballot-box.png" alt="logo" class="box-logo"><span class="mt"><div><i class="fas fa-trash-alt" onclick="openDeleteModal(${party.id}); "></i></div></span> <span class="mt"><div><i class="far fa-edit" onclick="openEditModal(${party.id})"></i></div></span>
+                <img src="/uploads/${party.logourl}" alt="logo" class="box-logo"><span class="mt"><div><i class="fas fa-trash-alt" onclick="openDeleteModal(${party.id}); "></i></div></span> <span class="mt"><div><i class="far fa-edit" onclick="openEditModal(${party.id})"></i></div></span>
                 <div class="box-info"><h4>${party.name}</h4></div>
                 <div class="box-info"><h5>${party.hqaddress}</h5></div>
               </div>
@@ -240,11 +242,13 @@ const officeLists = () => {
           </div>
           `;
         });
-      } else {
+      }
+      if (resp.status === 404) {
+        openOfficeListModal();
         officeLists.innerHTML = `<div class="parties">
-        <h4>${office.message}</h4>
-        </div>
-        `;
+          <h4>${resp.message}</h4>
+          </div>
+          `;
         setTimeout(() => {
           window.location.href = 'admin.html';
         }, 2000);

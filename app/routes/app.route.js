@@ -13,7 +13,7 @@ router.get('/parties', Auth.verifyToken, partyController.getAllParty);
 
 router.get('/parties/:id', Auth.verifyToken, validation.idParamsCheck, partyController.getParty);
 
-router.post('/parties', Auth.verifyToken, Auth.verifyIsAdmin, validation.createParty, partyController.createParty);
+router.post('/parties', Auth.verifyToken, Auth.verifyIsAdmin, validation.createParty, upload.single('logoUrl'), partyController.createParty);
 
 router.delete('/parties/:id', Auth.verifyToken, validation.idParamsCheck, Auth.verifyIsAdmin, partyController.deleteParty);
 
