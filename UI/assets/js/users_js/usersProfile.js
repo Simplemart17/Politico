@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const userProfile = document.getElementById('user_profile');
       if (resp.status === 200) {
         const userData = resp.data[0].user;
-        console.log(userData);
         userProfile.innerHTML = `
           <img src="/uploads/${userData.passporturl}" alt="profile-pic">
           <div class="profile-info">
