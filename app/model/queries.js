@@ -10,6 +10,8 @@ const createUsersTable = () => {
             registered DATE DEFAULT CURRENT_DATE,
             password VARCHAR(128) NOT NULL,
             passportUrl VARCHAR(128),
+            passwordResetToken TEXT,
+            passwordResetExpires DATE, 
             isAdmin BOOLEAN DEFAULT FALSE
           )`;
   return text;
@@ -113,6 +115,12 @@ const getUsers = () => 'SELECT * FROM users WHERE id = $1';
 
 const newSignIn = () => 'SELECT * FROM users WHERE EMAIL = $1';
 
+const forgotPassword = () => 'UPDATE users SET passwordResetToken = $1, passwordResetExpires = $2 WHERE email = $3 RETURNING *';
+
+const resetPassword = () => 'SELECT * FROM users WHERE passwordResetToken = $1';
+
+const updatePassword = () => 'UPDATE users SET password = $1 WHERE passwordResetToken = $2 RETURNING *';
+
 const getInterestedCandidate = () => `
 SELECT interest.id, 
   users.id AS userid, 
@@ -203,4 +211,7 @@ export {
   getRegisteredCandidates,
   updateVoteStatus,
   newSignIn,
+  forgotPassword,
+  resetPassword,
+  updatePassword,
 };

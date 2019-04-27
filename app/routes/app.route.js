@@ -5,7 +5,6 @@ import candidateController from '../controllers/candidateController';
 import vote from '../controllers/voteController';
 import Auth from '../middleware/Auth';
 import validation from '../middleware/validation';
-import upload from '../middleware/multer';
 
 const router = express.Router();
 
@@ -13,7 +12,7 @@ router.get('/parties', Auth.verifyToken, partyController.getAllParty);
 
 router.get('/parties/:id', Auth.verifyToken, validation.idParamsCheck, partyController.getParty);
 
-router.post('/parties', Auth.verifyToken, Auth.verifyIsAdmin, validation.createParty, upload.single('logoUrl'), partyController.createParty);
+router.post('/parties', Auth.verifyToken, Auth.verifyIsAdmin, validation.createParty, partyController.createParty);
 
 router.delete('/parties/:id', Auth.verifyToken, validation.idParamsCheck, Auth.verifyIsAdmin, partyController.deleteParty);
 

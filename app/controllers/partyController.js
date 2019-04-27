@@ -54,8 +54,7 @@ const PartyController = {
   },
 
   async createParty(req, res) {
-    const logoUrl = req.file.filename;
-    const { name, hqAddress } = req.body;
+    const { name, hqAddress, logoUrl } = req.body;
     const values = [
       name,
       hqAddress,

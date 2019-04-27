@@ -16,24 +16,17 @@ const port = (process.env.PORT || 8000);
 app.use(cors());
 
 app.set('appVersion', '/api/v1');
-app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(app.get('appVersion'), router);
 app.use(app.get('appVersion'), userRouter);
 
-app.get('/api/v1', (req, res) => {
-  res.status(200).json({
-    message: 'Welcome to politico',
-  });
-});
+app.get('/api/v1', (req, res) => { res.status(200).json({ message: 'Welcome to politico' }); });
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
 
-app.get('*', (req, res) => {
-  res.status(404).json({ error: 'The page cannot be found!' });
-});
+app.get('*', (req, res) => { res.status(404).json({ error: 'The page cannot be found!' }); });
 
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
