@@ -9,16 +9,8 @@ const generateHashPassword = password => bcrypt.hashSync(password, bcrypt.genSal
 const comparePassword = (hashPassword, password) => bcrypt.compareSync(password, hashPassword);
 
 const generateToken = (id, isAdmin) => {
-  const token = jwt.sign({
-    id,
-    isAdmin,
-  },
-  process.env.SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ id, isAdmin }, process.env.SECRET, { expiresIn: '1d' });
   return token;
 };
 
-export {
-  generateHashPassword,
-  comparePassword,
-  generateToken,
-};
+export { generateHashPassword, comparePassword, generateToken };

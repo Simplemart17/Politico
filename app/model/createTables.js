@@ -11,6 +11,7 @@ import db from './db';
 
 const adminPassword = generateHashPassword('admin');
 const testPassword = generateHashPassword('test');
+const resetToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU1NjM1MjMwMiwiZXhwIjoxNTU2NDM4NzAyfQ.Si4OxmwLZxzOp3fcebjRSM4YkTAV0xMtgZ_3FnbWshw';
 
 const addAdmin = () => ({
   text: 'INSERT INTO users(firstname, lastname, othername, phoneNumber, email, isAdmin, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
@@ -22,6 +23,11 @@ const addTestAdmin = () => ({
   values: ['Test', 'Database', 'Tester', '08012345678', 'test@politico.com', 'True', testPassword, 'wwww.image.com'],
 });
 
+const addTestDetails = () => ({
+  text: 'INSERT INTO users(firstname, lastname, othername, phoneNumber, email, isAdmin, password, passportUrl, passwordResetToken) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+  values: ['Test', 'Database', 'Tester', '08012345678', 'reset@politico.com', 'false', testPassword, 'wwww.image.com', resetToken],
+});
+
 async function createAllTables() {
   await db.query(createUsersTable());
   await db.query(createPartyTable());
@@ -31,6 +37,7 @@ async function createAllTables() {
   await db.query(createVoteTable());
   await db.query(addAdmin());
   await db.query(addTestAdmin());
+  await db.query(addTestDetails());
 }
 
 createAllTables()

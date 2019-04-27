@@ -71,6 +71,7 @@ describe('POLITICO APP TEST', () => {
   let token;
   const fakeToken = { token: null };
   const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTE0NDM4NDQsImV4cCI6MTU1MTUzMDI0NH0.Wf-C74JZ2m_b3pccXGIs2SKhH6BBdcE3honkSlGT-8k';
+  const resetToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU1NjM1MjMwMiwiZXhwIjoxNTU2NDM4NzAyfQ.Si4OxmwLZxzOp3fcebjRSM4YkTAV0xMtgZ_3FnbWshw';
 
   // Homepage test
   describe('HOMEPAGE', () => {
@@ -819,6 +820,55 @@ describe('POLITICO APP TEST', () => {
         .end((err, res) => {
           res.should.have.status(403);
           res.should.be.json;
+          done(err);
+        });
+    });
+  });
+
+  // Test for forgot password
+  describe('FORGOT PASSWORD /POST', () => {
+    it('should send password reset instruction', (done) => {
+      const payload = { email: 'test@politico.com' };
+      chai.request(app)
+        .post('/api/v1/auth/forgot-password')
+        .send(payload)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.message.should.equal(`Password reset instruction was sent to ${payload.email}`);
+          done(err);
+        });
+    });
+    it('should return error when email does not exist', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/forgot-password')
+        .send({ email: 'mymail@mail.com' })
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.error.should.equal('There is no account with this email address');
+          done(err);
+        });
+    });
+  });
+
+  // Test for password reset
+  describe('RESET PASSWORD /GET', () => {
+    it('should return error for invalid token', (done) => {
+      chai.request(app)
+        .get('/api/v1/auth/reset-password/49876jkghdfvghj-dguye89063478-efdvuk789')
+        .send({ password: 'newpassword' })
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.error.should.equal('Invalid verification token, kindly re-authenticate!');
+          done(err);
+        });
+    });
+    it('should reset password with right credentials', (done) => {
+      chai.request(app)
+        .get(`/api/v1/auth/reset-password/${resetToken}`)
+        .send({ password: 'mynewpassword1' })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.message.should.equal('Password was successfully reset');
           done(err);
         });
     });

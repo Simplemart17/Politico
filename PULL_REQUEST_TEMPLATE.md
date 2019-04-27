@@ -1,18 +1,15 @@
-#### What does this PR do?
-it adds route to edit the name of a specific political party
-it add unit-tests for the API endpoints
-
-#### Description of Task to be completed?
-* Have the following api endpoints working
-```POST /api/v1/party/```
-```GET /api/v1/party```
-```GET/api/v1/party/:id```
-```PATCH/api/v1/party/:id/name```
-
-#### How should this be manually tested?
-*Clone this repository and run ```npm install``` followed by ```npm start``` to start the server*
-* Use Postman to test the endpoints above and use the following header
-*key*: Content-type
-*value*: Application/json
-
-#### What are the relevant pivotal tracker stories?
+#### Description
+Notifications give users to opportunity to know what they may have missed which may be important to them.
+#### Type of change
+- [ ] Bug Fix (a non-breaking change which fixes an issue)
+- [x] New Feature (a non-breaking change that adds functionality)
+- [ ] New Chore (a non-breaking change that adds functionality)
+- [ ] Breaking Change (a fix or feature which would cause existing functionality not to work as expected)
+- [ ] This change requires a documentation update
+#### How Has This Been Tested?
+- [ ] End to End
+- [x] Integration
+#### Checklist:
+- [x] Unit test
+- [ ] Code coverage
+#### PT
