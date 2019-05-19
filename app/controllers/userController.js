@@ -1,3 +1,4 @@
+import uuid from 'uuidv4';
 import sendMail from '../middleware/email';
 import dBase from '../model/db';
 import { generateToken, generateHashPassword, comparePassword } from '../middleware/Helper';
@@ -52,7 +53,7 @@ const Users = {
       const date = new Date(new Date().setDate(new Date().getDate() + 1));
       const { rows } = await dBase.query(queries.newSignIn(), [email]);
       if (!rows[0]) { return res.status(404).json({ error: 'There is no account with this email address' }); }
-      const passwordResetToken = generateToken(rows[0].email);
+      const passwordResetToken = uuid();
       const values = [passwordResetToken, date, email];
       const message = content(passwordResetToken);
       const passwordResetInstruction = { email, subject, message };
