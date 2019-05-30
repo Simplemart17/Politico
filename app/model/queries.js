@@ -87,7 +87,7 @@ const createVoteTable = () => {
 };
 const dropVoteTable = () => 'DROP TABLE IF EXISTS votes';
 
-const addUser = () => 'INSERT INTO users(firstname, lastname, othername, email, phoneNumber, password, passportUrl) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+const addUser = () => 'INSERT INTO users(firstname, lastname, email, password) VALUES($1, $2, $3, $4) RETURNING *';
 
 const newCandidate = () => 'INSERT INTO candidates(party, office, candidate) VALUES($1, $2, $3) RETURNING *';
 

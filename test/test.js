@@ -55,11 +55,8 @@ describe('POLITICO APP TEST', () => {
   const newUser = {
     firstname: 'Martins',
     lastname: 'Aloba',
-    othername: 'Crown',
     email: 'testmail@gmail.com',
-    phoneNumber: '08012345678',
     password: 'mypassword',
-    passportUrl: 'www.image1.com',
   };
 
   const loginUser = {
@@ -109,11 +106,8 @@ describe('POLITICO APP TEST', () => {
         .send({
           firstname: 'Martins',
           lastname: 'Aloba',
-          othername: 'Crown',
           email: 'testmail@gmail.com',
-          phoneNumber: '08012345678',
           password: 'mypassword',
-          passportUrl: 'www.image1.com',
         })
         .end((err, res) => {
           res.should.have.status(400);
@@ -127,11 +121,8 @@ describe('POLITICO APP TEST', () => {
         .post('/api/v1/auth/signup')
         .send({
           lastname: 'Aloba',
-          othername: 'Crown',
           email: 'testmail@gmail.com',
-          phoneNumber: '08012345678',
           password: 'mypassword',
-          passportUrl: 'www.image1.com',
         })
         .end((err, res) => {
           res.should.have.status(400);
