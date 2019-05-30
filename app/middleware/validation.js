@@ -21,13 +21,6 @@ const idCheck = (arg, min, max) => check(arg)
   .isInt()
   .withMessage('Id should be an integer');
 
-const integerCheck = (arg, min, max) => check(arg)
-  .trim()
-  .isLength({ min, max })
-  .withMessage(`Phone number must be between ${min} - ${max}`)
-  .isInt()
-  .withMessage('The field must be an integer');
-
 const inputCheck = (arg, min, max) => check(arg)
   .trim()
   .isLength({ min, max })
@@ -36,10 +29,9 @@ const inputCheck = (arg, min, max) => check(arg)
   .withMessage('This field is required!');
 const middleware = {
   signUp: [
-    inputCheck('firstname'),
-    inputCheck('password'),
-    inputCheck('lastname'),
-    integerCheck('phoneNumber', 11, 13),
+    inputCheck('firstname', 3),
+    inputCheck('lastname', 3),
+    inputCheck('password', 6),
     check('email').trim().isEmail().normalizeEmail()
       .withMessage('email is required!'),
     validatorFunction,

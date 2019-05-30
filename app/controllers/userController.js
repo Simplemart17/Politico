@@ -9,9 +9,9 @@ const Users = {
   async signUpUsers(req, res) {
     const hashPassword = generateHashPassword(req.body.password);
     const {
-      firstname, lastname, othername, email, phoneNumber, passportUrl,
+      firstname, lastname, email,
     } = req.body;
-    const values = [firstname, lastname, othername, email, phoneNumber, hashPassword, passportUrl];
+    const values = [firstname, lastname, email, hashPassword];
     try {
       const { rows } = await dBase.query(queries.addUser(), values);
       const token = generateToken(rows[0].id, rows[0].isadmin);
