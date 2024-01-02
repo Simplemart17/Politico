@@ -96,7 +96,7 @@ const Users = {
       const message = content(passwordResetToken);
       const passwordResetInstruction = { email, subject, message };
       await dBase.query(queries.forgotPassword(), values);
-      console.log(passwordResetToken, '<><><><><><><><><><><><><><><');
+
       sendMail(passwordResetInstruction);
       res
         .status(200)
@@ -124,8 +124,8 @@ const Users = {
             error: 'Invalid verification token, kindly re-authenticate!',
           });
       }
-      // console.log(rows[0].passwordResetExpires, date, '><><><><><><>');
-      if (rows[0].passwordResetExpires <= date) {
+
+      if (rows[0].passwordresetexpires < date) {
         res
           .status(401)
           .json({ status: 401, error: 'Token has expired!' });
