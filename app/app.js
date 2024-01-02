@@ -3,8 +3,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import dotenv from 'dotenv';
-import router from './routes/app.route';
+import partyRouter from './routes/parties.route';
 import userRouter from './routes/users.route';
+import candidateRouter from './routes/candidates.route';
+import voteRouter from './routes/votes.route';
+import officeRouter from './routes/offices.route';
 import docs from '../swagger.json';
 
 dotenv.config();
@@ -19,8 +22,11 @@ app.set('appVersion', '/api/v1');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(app.get('appVersion'), router);
 app.use(app.get('appVersion'), userRouter);
+app.use(app.get('appVersion'), partyRouter);
+app.use(app.get('appVersion'), candidateRouter);
+app.use(app.get('appVersion'), voteRouter);
+app.use(app.get('appVersion'), officeRouter);
 
 app.get('/api/v1', (req, res) => { res.status(200).json({ message: 'Welcome to politico' }); });
 
