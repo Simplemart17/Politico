@@ -11,7 +11,7 @@ const sendMail = (payload) => {
     subject: payload.subject,
     text: payload.message,
   };
-  return sgMail.send(options);
+  return process.env.NODE_ENV === 'test' ? 'Message sent' : sgMail.send(options);
 };
 
 export default sendMail;
