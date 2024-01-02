@@ -52,23 +52,52 @@ npm test
 ## Testing the API Endpoints
 
 The following API's can be tested locally using Postman. Check API documentation for further information.
+### Authentication
 ```
 POST /api/v1/auth/signup
 POST /api/v1/auth/login
-POST /api/v1/parties/
-GET /api/v1/parties
-GET /api/v1/partes/:id
-PATCH /api/v1/partes/:id/name
-POST /api/v1/offices/
-GET /api/v1/offices/
+```
+
+### Users
+```
+GET /api/v1/auth/profile
+POST /api/v1/auth/forgot-password
+GET /api/v1/auth/reset-password/:resetToken
+```
+
+### Candidates
+```
+GET /api/v1/candidates
+POST /api/v1/candidate/interest
+GET /api/v1/auth/candidate/registered
+POST /api/v1/auth/candidate/:id/register
+```
+
+### Offices
+```
+POST /api/v1/offices
+GET /api/v1/offices
 GET /api/v1/offices/:id
-POST /api/v1/office/{user_id}/register
+```
+
+### Parties
+```
+POST /api/v1/parties
+GET /api/v1/parties
+GET /api/v1/parties/:id
+DELETE /api/v1/parties/:id
+PATCH /api/v1/parties/:id/name
+```
+
+### Votes
+```
 POST /api/v1/votes
+GET /api/v1/vote/:id/result
 ```
 
 ## Deployment
 
-The app is depolyed on heroku. [App link](https://mart-politico-app.herokuapp.com/)
+The app is deployed on heroku. [App link](https://mart-politico-app.herokuapp.com/)
 
 ## Documentation
 https://mart-politico-app.herokuapp.com/docs
