@@ -48,7 +48,7 @@ async function createAllTables() {
   await db.query(addAdmin());
   await db.query(addTestAdmin());
   await db.query(addTestDetails());
-  await db.query(passwordResetTestDetails());
+  process.env.NODE_ENV === 'test' && await db.query(passwordResetTestDetails());
 }
 
 createAllTables()
